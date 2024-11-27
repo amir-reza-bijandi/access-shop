@@ -24,6 +24,7 @@ body {
 		'Open Sans',
 		'Helvetica Neue',
 		sans-serif;
+	font-weight: 500;
 	background: hsl(var(--bg-primary));
 	color: hsl(var(--fg-primary));
 }

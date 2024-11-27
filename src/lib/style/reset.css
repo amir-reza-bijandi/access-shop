@@ -5,6 +5,7 @@
 	-moz-osx-font-smoothing: grayscale;
 	line-height: inherit;
 	box-sizing: inherit;
+	font-weight: inherit;
 	margin: 0;
 	padding: 0;
 }
@@ -15,10 +16,6 @@ html {
 	text-size-adjust: none;
 	box-sizing: border-box;
 	font-size: 62.5%;
-	line-height: 1;
-}
-
-body {
 	line-height: 1;
 }
 
