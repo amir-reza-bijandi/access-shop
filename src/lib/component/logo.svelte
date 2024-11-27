@@ -19,7 +19,7 @@
 	}
 
 	.icon {
-		background: var(--accent);
+		background: hsl(var(--accent));
 		padding: 0.8rem;
 		border-radius: 0.8rem;
 	}
