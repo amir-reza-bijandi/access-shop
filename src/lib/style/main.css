@@ -29,4 +29,5 @@ body {
 	font-weight: 500;
 	background: hsl(var(--bg-primary));
 	color: hsl(var(--fg-primary));
+	overflow-x: hidden;
 }
