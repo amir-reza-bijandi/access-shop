@@ -55,11 +55,14 @@
 
 	li:hover::before,
 	li.active::before {
-		opacity: 1;
 		transform: translateY(0.8rem) scale(1);
 	}
 
 	li:hover::before {
 		opacity: 0.5;
+	}
+
+	li.active::before {
+		opacity: 1;
 	}
 </style>
