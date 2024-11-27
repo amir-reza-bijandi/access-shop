@@ -1,2 +1,5 @@
-<h1>اکسس شاپ</h1>
-<p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است</p>
+<script>
+	import Logo from '$lib/component/logo.svelte';
+</script>
+
+<Logo />
