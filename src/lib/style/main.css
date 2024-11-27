@@ -7,6 +7,8 @@
 	--accent: 162 87% 35%;
 	--accent-tint: 162 82% 40%;
 	--accent-shade: 162 88% 30%;
+
+	--duration: 200ms;
 }
 
 body {
