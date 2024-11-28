@@ -14,5 +14,6 @@
 		height: auto;
 		aspect-ratio: 1 / 1;
 		opacity: 0.08;
+		pointer-events: none;
 	}
 </style>
