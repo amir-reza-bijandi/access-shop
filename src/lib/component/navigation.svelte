@@ -26,20 +26,22 @@
 	nav ul {
 		display: flex;
 		list-style: none;
-		gap: 2.4rem;
 	}
 
 	a {
+		position: relative;
+		display: inline-block;
 		color: inherit;
 		text-decoration: none;
 		font-weight: 700;
 	}
 
 	li {
-		position: relative;
+		cursor: pointer;
+		padding: 1.2rem;
 	}
 
-	li::before {
+	li a::before {
 		content: '';
 		position: absolute;
 		top: 100%;
@@ -53,16 +55,16 @@
 		transition-duration: var(--duration);
 	}
 
-	li:hover::before,
-	li.active::before {
+	li:hover a::before,
+	li.active a::before {
 		transform: translateY(0.8rem) scale(1);
 	}
 
-	li:hover::before {
+	li:hover a::before {
 		opacity: 0.5;
 	}
 
-	li.active::before {
+	li.active a::before {
 		opacity: 1;
 	}
 </style>
