@@ -13,7 +13,7 @@
 		align-items: center;
 		color: inherit;
 		text-decoration: none;
-		font-weight: 600;
+		font-weight: 700;
 		font-size: 2rem;
 		gap: 1rem;
 	}
