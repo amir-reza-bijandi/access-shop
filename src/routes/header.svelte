@@ -34,7 +34,7 @@
 	<Glow class={'glow'} />
 	<Logo />
 	<Navigation {routeList} />
-	<Button as="a" icon={LogIn} href="/login">ورود به حساب کاربری</Button>
+	<Button as="a" icon={LogIn} href="/login" variant="outline">ورود به حساب کاربری</Button>
 </header>
 
 <style>
