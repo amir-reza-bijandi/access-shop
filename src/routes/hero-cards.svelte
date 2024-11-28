@@ -45,7 +45,7 @@
 		<figure class="content {size}">
 			<div class="image">
 				<Glow class="icon-glow" />
-				<img class="icon" src={imageSrc} alt="{titleEn} logo" />
+				<img class="icon" src={imageSrc} alt="لوگوی {titleFa}" />
 			</div>
 			<figcaption class="caption">
 				<span class="en">{titleEn}</span>
