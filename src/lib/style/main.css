@@ -11,6 +11,8 @@
 	--stroke: hsl(var(--fg-primary) / 10%);
 
 	--duration: 200ms;
+
+	--line-height: 1.65625;
 }
 
 body {
