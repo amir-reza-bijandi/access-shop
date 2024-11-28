@@ -43,7 +43,7 @@
 	}
 
 	.description {
-		line-height: 1.65625;
+		line-height: var(--line-height);
 		margin-bottom: 3.2rem;
 	}
 </style>
