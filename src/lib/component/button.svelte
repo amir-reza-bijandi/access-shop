@@ -64,16 +64,16 @@
 	}
 
 	.outline {
-		background: hsl(var(--accent) / 0.05);
+		background: hsl(var(--accent) / 5%);
 		color: hsl(var(--accent));
 		border-color: hsl(var(--accent));
 	}
 
 	.outline:hover {
-		background: hsl(var(--accent) / 0.1);
+		background: hsl(var(--accent) / 10%);
 	}
 
 	.outline:active {
-		background: hsl(var(--accent) / 0.2);
+		background: hsl(var(--accent) / 20%);
 	}
 </style>
