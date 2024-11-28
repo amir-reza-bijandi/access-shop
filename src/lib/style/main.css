@@ -8,6 +8,8 @@
 	--accent-tint: 162 82% 40%;
 	--accent-shade: 162 88% 30%;
 
+	--stroke: hsl(var(--fg-primary) / 10%);
+
 	--duration: 200ms;
 }
 
