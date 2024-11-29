@@ -62,6 +62,9 @@
 <style>
 	.products {
 		margin-bottom: 19.2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.wrapper {
@@ -69,7 +72,7 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(48rem, 1fr));
 		gap: 2rem;
-		margin-bottom: 4.6rem;
+		margin-bottom: 3rem;
 	}
 
 	.wrapper :global(.container-glow) {
@@ -155,11 +158,29 @@
 	}
 
 	.view-all {
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		display: inline-flex;
 		color: hsl(var(--accent));
 		text-decoration: none;
 		gap: 0.8rem;
+		padding: 1.6rem;
+		transition-property: color, filter;
+		transition-duration: calc(var(--duration) * 2);
+	}
+
+	.view-all:hover {
+		color: hsl(var(--accent-tint));
+		filter: drop-shadow(0 0 12px hsl(var(--accent)));
+	}
+
+	.view-all:active {
+		color: hsl(var(--accent-shade));
+	}
+
+	.view-all :global(svg) {
+		transition: transform calc(var(--duration) * 2);
+	}
+
+	.view-all:hover :global(svg) {
+		transform: rotate(360deg) translateX(-0.6rem);
 	}
 </style>
