@@ -1,16 +1,23 @@
 <script>
 	import Accordion from '$lib/component/accordion.svelte';
 	import Glow from '$lib/component/glow.svelte';
+	import Title from '$lib/component/title.svelte';
 </script>
 
 <section class="faq">
-	<header class="header">
-		<h2 class="title">سوالات متدوال</h2>
-		<span class="subtitle">دوست داری دربارهٔ ما بیشتر بدونی؟</span>
-		<span class="subtitle">شاید جواب سوالت رو اینجا پیدا کنی...</span>
-		<span class="question-mark">?</span>
-	</header>
-	<div class="accordions">
+	<Title>
+		{#snippet text()}
+			<span class="title-text">سوالات متدوال</span>
+		{/snippet}
+		{#snippet description()}
+			<span class="title-description">
+				<span>دوست داری دربارهٔ ما بیشتر بدونی؟</span>
+				<span>شاید جواب سوالت رو اینجا پیدا کنی...</span>
+			</span>
+			<span class="title-icon">?</span>
+		{/snippet}
+	</Title>
+	<div class="wrapper">
 		<Glow class="container-glow" />
 		<Accordion title="چرا باید اکسس شاپ رو انتخاب کنی؟" open>
 			با اکسس شاپ می‌تونی به مجموعه‌ای گسترده از مدل‌های زبانی پیشرفته دسترسی داشته باشی که با دقت و
@@ -55,13 +62,7 @@
 		margin-bottom: 19.2rem;
 	}
 
-	header {
-		display: flex;
-		flex-direction: column;
-		gap: 0.8rem;
-	}
-
-	.accordions {
+	.wrapper {
 		position: relative;
 		flex: 1;
 		display: flex;
@@ -69,7 +70,7 @@
 		gap: 1.6rem;
 	}
 
-	.accordions :global(.container-glow) {
+	.wrapper :global(.container-glow) {
 		position: absolute;
 		left: 50%;
 		top: 50%;
@@ -78,18 +79,24 @@
 		z-index: -1;
 	}
 
-	.title {
+	.title-text {
+		display: block;
 		font-size: 3.6rem;
 		font-weight: 800;
-		margin-bottom: 1.2rem;
+		padding-bottom: 0.8rem;
+		text-align: right;
 	}
 
-	.subtitle {
+	.title-description {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
 		font-size: 2rem;
+		margin-bottom: 3.2rem;
+		text-align: right;
 	}
 
-	.question-mark {
-		/* display: block; */
+	.title-icon {
 		text-align: center;
 		font-size: 12.8rem;
 		margin-top: 2.4rem;

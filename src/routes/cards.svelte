@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Card from '$lib/component/card.svelte';
+	import Box from '$lib/component/box.svelte';
 	import Glow from '$lib/component/glow.svelte';
 
 	type CardInfo = {
@@ -31,9 +31,9 @@
 	];
 </script>
 
-<div class="hero-cards">
+<div class="cards">
 	<Glow class="container-glow" />
-	<div class="cards">
+	<div class="wrapper">
 		{#each cardInfoList as cardInfo}
 			{@render card(cardInfo)}
 		{/each}
@@ -41,29 +41,34 @@
 </div>
 
 {#snippet card({ imageSrc, titleEn, titleFa, size }: CardInfo)}
-	<Card class="card">
+	<Box class="card">
 		<figure class="content {size}">
 			<div class="image">
 				<Glow class="icon-glow" />
 				<img class="icon" src={imageSrc} alt="لوگوی {titleFa}" />
 			</div>
 			<figcaption class="caption">
-				<span class="en">{titleEn}</span>
-				<span class="fa">{titleFa}</span>
+				<span class="text-en">{titleEn}</span>
+				<span class="text-fa">{titleFa}</span>
 			</figcaption>
 		</figure>
-	</Card>
+	</Box>
 {/snippet}
 
 <style>
-	.hero-cards {
+	.cards {
 		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 
-	.cards {
+	.cards :global(.container-glow) {
+		position: absolute;
+		width: 768px;
+	}
+
+	.wrapper {
 		position: relative;
 		display: flex;
 		justify-content: center;
@@ -71,24 +76,19 @@
 		z-index: 2;
 	}
 
-	.hero-cards :global(.container-glow) {
-		position: absolute;
-		width: 768px;
-	}
-
-	.cards :global(.card) {
+	.wrapper :global(.card) {
 		position: relative;
 	}
 
-	.cards :global(.card:first-child) {
+	.wrapper :global(.card:first-child) {
 		transform: rotate(15deg) translate(-0.6rem, 4.2rem);
 	}
 
-	.cards :global(.card:last-child) {
+	.wrapper :global(.card:last-child) {
 		transform: rotate(-15deg) translate(0.6rem, 4.2rem);
 	}
 
-	.cards :global(.card:nth-child(2)) {
+	.wrapper :global(.card:nth-child(2)) {
 		z-index: 2;
 	}
 
@@ -133,19 +133,19 @@
 		--size: 9.6rem;
 	}
 
-	.large .en {
+	.large .text-en {
 		font-size: 2.4rem;
 	}
 
-	.large .fa {
+	.large .text-fa {
 		font-size: 2rem;
 	}
 
-	.small .fa {
+	.small .text-fa {
 		font-size: 1.6rem;
 	}
 
-	.small .en {
+	.small .text-en {
 		font-size: 2rem;
 	}
 </style>

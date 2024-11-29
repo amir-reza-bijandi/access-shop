@@ -1,17 +1,17 @@
 <script lang="ts">
-	import Card from '$lib/component/card.svelte';
+	import Box from '$lib/component/box.svelte';
 	import Glow from '$lib/component/glow.svelte';
-	import SectionHeader from '$lib/component/section-header.svelte';
+	import Title from '$lib/component/title.svelte';
 	import { commentList, type Comment } from '$lib/data/comments';
 	import formatCommentDate from '$lib/utility/format-comment-date';
 </script>
 
 <section class="testimonial">
-	<SectionHeader
-		title="نظرات مشتریان"
-		subtitle="یادتون نره شما هم تجربه‌تون رو باهمون به اشتراک بذارین!"
+	<Title
+		text="نظرات مشتریان"
+		description="یادتون نره شما هم تجربه‌تون رو باهمون به اشتراک بذارین!"
 	/>
-	<div class="comments">
+	<div class="wrapper">
 		<Glow class="container-glow" />
 		{#each commentList as comment (comment.id)}
 			{@render commentCard(comment)}
@@ -20,21 +20,23 @@
 </section>
 
 {#snippet commentCard({ name, text, date, iconSrc, avatarSrc }: Comment)}
-	<Card>
+	<Box>
 		<article class="comment">
-			<header>
+			<header class="header">
 				<div class="info">
 					<img class="avatar" src={avatarSrc} alt="عکس پروفایل {name}" />
 					<div>
-						<address>{name}</address>
-						<time datetime={new Date(date).toISOString()}>{formatCommentDate(date)}</time>
+						<address class="name">{name}</address>
+						<time class="date" datetime={new Date(date).toISOString()}
+							>{formatCommentDate(date)}</time
+						>
 					</div>
 				</div>
 				<img class="icon" src={iconSrc} alt="لوگوی یک سرویس هوش مصنوعی" />
 			</header>
 			<p class="text">{text}</p>
 		</article>
-	</Card>
+	</Box>
 {/snippet}
 
 <style>
@@ -42,14 +44,14 @@
 		margin-bottom: 19.2rem;
 	}
 
-	.comments {
+	.wrapper {
 		position: relative;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(39.2rem, 1fr));
 		gap: 2rem;
 	}
 
-	.comments :global(.container-glow) {
+	.wrapper :global(.container-glow) {
 		position: absolute;
 		left: 50%;
 		top: 50%;
@@ -64,7 +66,7 @@
 		flex-direction: column;
 	}
 
-	header {
+	.header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -77,14 +79,14 @@
 		gap: 1.6rem;
 	}
 
-	address {
+	.name {
 		font-size: 2rem;
 		font-weight: 700;
 		font-style: normal;
 		margin-bottom: 0.8rem;
 	}
 
-	time {
+	.date {
 		font-size: 1.4rem;
 	}
 

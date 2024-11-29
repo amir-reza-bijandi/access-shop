@@ -1,15 +1,15 @@
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
-	type CardProps = SvelteHTMLElements['div'];
-	const { class: className = '', children, ...restOfProps }: CardProps = $props();
+	type BoxProps = SvelteHTMLElements['div'];
+	const { class: className = '', children, ...restOfProps }: BoxProps = $props();
 </script>
 
-<div class={['card', className].join(' ')} {...restOfProps}>
+<div class="box {className}" {...restOfProps}>
 	{@render children?.()}
 </div>
 
 <style>
-	.card {
+	.box {
 		border: 1px solid var(--stroke);
 		border-radius: 1.6rem;
 		background: hsl(var(--bg-primary) / 33%);

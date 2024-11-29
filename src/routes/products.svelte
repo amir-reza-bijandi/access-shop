@@ -1,19 +1,16 @@
 <script lang="ts">
 	import Button from '$lib/component/button.svelte';
-	import Card from '$lib/component/card.svelte';
+	import Box from '$lib/component/box.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import Pattern from '$lib/component/pattern.svelte';
-	import SectionHeader from '$lib/component/section-header.svelte';
+	import Title from '$lib/component/title.svelte';
 	import { ArrowLeft, ShoppingBasket } from 'lucide-svelte';
 	import { productList, type Product } from '$lib/data/products';
 </script>
 
-<section class="product-showcase">
-	<SectionHeader
-		title="محصولات اکسس شاپ"
-		subtitle="سفرت تو دنیای هوش مصنوعی از اینجا شروع می‌شه!"
-	/>
-	<div class="products">
+<section class="products">
+	<Title text="محصولات اکسس شاپ" description="سفرت تو دنیای هوش مصنوعی از اینجا شروع می‌شه!" />
+	<div class="wrapper">
 		<Glow class="container-glow" />
 		{#each productList as product (product.id)}
 			{@render prodcutCard(product)}
@@ -33,21 +30,21 @@
 	deliveryTime,
 	startingPrice
 }: Product)}
-	<Card>
+	<Box>
 		<article class="product">
 			<div class="body">
 				<Pattern class="pattern" visibility="high" />
-				<figure>
+				<figure class="image">
 					<Glow class="icon-glow" />
 					<img class="icon" src={imageSrc} alt="لوگوی {nameFa}" />
 				</figure>
-				<div class="content">
-					<h3 class="title">خرید {nameFa} <span class="title-en">({nameEn})</span></h3>
+				<div>
+					<h3 class="title">خرید {nameFa} <span class="subtitle">({nameEn})</span></h3>
 					<p class="description">{description}</p>
 				</div>
 			</div>
-			<footer>
-				<small>
+			<footer class="footer">
+				<small class="info">
 					<span>شروع قیمت از {startingPrice.toLocaleString('fa-IR')}</span>
 					•
 					<span>
@@ -59,15 +56,15 @@
 				<Button as="a" href="/{id}" icon={ShoppingBasket}>ثبت سفارش</Button>
 			</footer>
 		</article>
-	</Card>
+	</Box>
 {/snippet}
 
 <style>
-	.product-showcase {
+	.products {
 		margin-bottom: 19.2rem;
 	}
 
-	.products {
+	.wrapper {
 		position: relative;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(48rem, 1fr));
@@ -75,7 +72,7 @@
 		margin-bottom: 4.6rem;
 	}
 
-	.products :global(.container-glow) {
+	.wrapper :global(.container-glow) {
 		position: absolute;
 		left: 50%;
 		top: 50%;
@@ -113,14 +110,14 @@
 		height: 51.9rem;
 	}
 
-	footer {
+	.footer {
 		border-top: 1px solid var(--stroke);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
 
-	small {
+	.info {
 		font-size: 1.6rem;
 		font-weight: 700;
 		color: hsl(var(--accent));
@@ -131,11 +128,11 @@
 		height: var(--icon-size);
 	}
 
-	figure {
+	.image {
 		position: relative;
 	}
 
-	figure :global(.icon-glow) {
+	.image :global(.icon-glow) {
 		position: absolute;
 		width: var(--icon-size);
 	}
@@ -149,7 +146,7 @@
 		margin-bottom: 1.2rem;
 	}
 
-	.title-en {
+	.subtitle {
 		font-size: 1.6rem;
 	}
 

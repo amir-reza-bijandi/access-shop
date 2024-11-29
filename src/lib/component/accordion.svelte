@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { MouseEventHandler, TransitionEventHandler } from 'svelte/elements';
-	import Card from './card.svelte';
+	import Box from './box.svelte';
 	import { ChevronUp } from 'lucide-svelte';
 
 	type AccordionProps = {
@@ -29,7 +29,7 @@
 	};
 </script>
 
-<Card>
+<Box>
 	<!-- 
       There is a bug in the Chrome browser that prevents the details element's
       animation from working with the first click. That's why i permently added
@@ -38,27 +38,27 @@
 	<details
 		bind:this={detailsElement}
 		{...isOpen ? { open: true } : {}}
-		class={open ? 'expanded' : ''}
+		class="accordion {open ? 'expanded' : ''}"
 		open
 	>
-		<summary onclick={expand}>{title}<ChevronUp /></summary>
-		<div class="content" ontransitionend={collapse}>
+		<summary class="title" onclick={expand}>{title}<ChevronUp /></summary>
+		<div class="description" ontransitionend={collapse}>
 			<p>{@render children()}</p>
 		</div>
 	</details>
-</Card>
+</Box>
 
 <style>
-	details {
+	.accordion {
 		display: block;
 		width: 100%;
 	}
 
-	summary::-webkit-details-marker {
+	.title::-webkit-details-marker {
 		display: none;
 	}
 
-	summary {
+	.title {
 		display: flex;
 		justify-content: space-between;
 		cursor: pointer;
@@ -71,7 +71,7 @@
 		list-style: none;
 	}
 
-	.content {
+	.description {
 		display: grid;
 		overflow: hidden;
 		grid-template-rows: 0fr;
@@ -79,11 +79,11 @@
 		line-height: var(--line-height);
 	}
 
-	details :global(svg) {
+	.accordion :global(svg) {
 		transition: transform var(--duration);
 	}
 
-	.content > p {
+	.description > p {
 		min-height: 0;
 		padding: 0;
 		opacity: 0;
@@ -92,19 +92,19 @@
 		transition-duration: var(--duration);
 	}
 
-	details.expanded .content {
+	.accordion.expanded .description {
 		grid-template-rows: 1fr;
 	}
 
-	details.expanded summary {
+	.accordion.expanded summary {
 		border-color: var(--stroke);
 	}
 
-	details.expanded :global(svg) {
+	.accordion.expanded :global(svg) {
 		transform: rotate(180deg);
 	}
 
-	details.expanded .content > p {
+	.accordion.expanded .description > p {
 		padding: 2.4rem;
 		opacity: 1;
 		transform: scale(1);

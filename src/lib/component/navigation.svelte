@@ -11,7 +11,7 @@
 </script>
 
 <nav>
-	<ul>
+	<ul class="list">
 		{#each routeList as route}
 			{@render item(route)}
 		{/each}
@@ -19,16 +19,18 @@
 </nav>
 
 {#snippet item({ name, path }: NavigationRoute)}
-	<li class={path === currentPath ? 'active' : ''}><a href={path}>{name}</a></li>
+	<li class="item {path === currentPath ? 'active' : ''}">
+		<a class="link" href={path}>{name}</a>
+	</li>
 {/snippet}
 
 <style>
-	nav ul {
+	.list {
 		display: flex;
 		list-style: none;
 	}
 
-	a {
+	.link {
 		position: relative;
 		display: inline-block;
 		color: inherit;
@@ -36,12 +38,12 @@
 		font-weight: 700;
 	}
 
-	li {
+	.item {
 		cursor: pointer;
 		padding: 1.2rem;
 	}
 
-	li a::before {
+	.item .link::before {
 		content: '';
 		position: absolute;
 		top: 100%;
@@ -55,16 +57,16 @@
 		transition-duration: var(--duration);
 	}
 
-	li:hover a::before,
-	li.active a::before {
+	.item:hover .link::before,
+	.item.active .link::before {
 		transform: translateY(0.8rem) scale(1);
 	}
 
-	li:hover a::before {
+	.item:hover .link::before {
 		opacity: 0.5;
 	}
 
-	li.active a::before {
+	.item.active .link::before {
 		opacity: 1;
 	}
 </style>

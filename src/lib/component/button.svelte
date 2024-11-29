@@ -24,7 +24,7 @@
 	}: ButtonProps = $props();
 </script>
 
-<svelte:element this={as} class={['button', variant, className].join(' ')} {...restOfProps}>
+<svelte:element this={as} class="button {variant} {className}" {...restOfProps}>
 	{@render children?.()}
 	{#if Icon}
 		<Icon strokeWidth={1.5} size={20} absoluteStrokeWidth />
