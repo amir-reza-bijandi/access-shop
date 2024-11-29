@@ -4,11 +4,12 @@
 	type HeaderProps = {
 		text: Snippet | string;
 		description: Snippet | string;
+		class?: string;
 	};
-	const { text, description }: HeaderProps = $props();
+	const { text, description, class: className = '' }: HeaderProps = $props();
 </script>
 
-<header class="title">
+<header class="title {className}">
 	<h2 class="text">
 		{#if typeof text === 'string'}
 			{text}
@@ -39,5 +40,28 @@
 
 	.description {
 		font-size: 2rem;
+	}
+
+	@media (max-width: 72rem) {
+		.title {
+			margin-bottom: 3.2rem;
+		}
+	}
+
+	@media (max-width: 32rem) {
+		.title {
+			margin-bottom: 2.4rem;
+		}
+
+		.text {
+			font-size: 2.4rem;
+			font-weight: 700;
+			margin-bottom: 0.6rem;
+		}
+
+		.description {
+			font-size: 1.6rem;
+			line-height: 1.5;
+		}
 	}
 </style>

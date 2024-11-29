@@ -5,7 +5,7 @@
 </script>
 
 <section class="faq">
-	<Title>
+	<Title class="section-title">
 		{#snippet text()}
 			<span class="title-text">سوالات متدوال</span>
 		{/snippet}
@@ -62,6 +62,10 @@
 		margin-bottom: 19.2rem;
 	}
 
+	.faq :global(.section-title) {
+		margin: 0;
+	}
+
 	.wrapper {
 		position: relative;
 		flex: 1;
@@ -91,7 +95,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.8rem;
-		font-size: 2rem;
 		margin-bottom: 3.2rem;
 		text-align: right;
 	}
@@ -100,5 +103,47 @@
 		text-align: center;
 		font-size: 12.8rem;
 		margin-top: 2.4rem;
+	}
+
+	@media (max-width: 80rem) {
+		.faq {
+			gap: 4.8rem;
+		}
+	}
+
+	@media (max-width: 56rem) {
+		.faq {
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.faq :global(.section-title) {
+			margin-bottom: 3.2rem;
+		}
+
+		.title-text {
+			font-size: 3.2rem;
+			font-weight: 700;
+			text-align: center;
+			padding-bottom: 0.2rem;
+		}
+
+		.title-description {
+			align-items: center;
+			margin: 0;
+		}
+
+		.title-icon {
+			display: none;
+		}
+	}
+
+	@media (max-width: 32rem) {
+		.faq :global(.section-title) {
+			margin-bottom: 2.4rem;
+		}
+		.title-description {
+			gap: 0;
+		}
 	}
 </style>

@@ -3,37 +3,44 @@
 	import Glow from '$lib/component/glow.svelte';
 	import Logo from '$lib/component/logo.svelte';
 	import Navigation from '$lib/component/navigation.svelte';
-	import type { NavigationRoute } from '$lib/type/general';
-	import { LogIn } from 'lucide-svelte';
+	import type { NavigationRoute } from '$lib/type/navigation';
+	import { House, LogIn, Newspaper, Phone, Scale, ShoppingBag } from 'lucide-svelte';
 
 	const routeList: NavigationRoute[] = [
 		{
 			name: 'صحفهٔ اصلی',
-			path: '/'
+			path: '/',
+			icon: House
 		},
 		{
 			name: 'محصولات',
-			path: '/products'
+			path: '/products',
+			icon: ShoppingBag
 		},
 		{
 			name: 'قوانین',
-			path: '/tos'
+			path: '/tos',
+			icon: Scale
 		},
 		{
 			name: 'بلاگ',
-			path: '/blog'
+			path: '/blog',
+			icon: Newspaper
 		},
 		{
 			name: 'تماس با ما',
-			path: '/contact'
+			path: '/contact',
+			icon: Phone
 		}
 	];
 </script>
 
 <header>
 	<Glow class={'glow'} />
-	<Logo />
-	<Navigation {routeList} />
+	<div class="right-section">
+		<Navigation {routeList} />
+		<Logo />
+	</div>
 	<Button as="a" icon={LogIn} href="/login" variant="outline">ورود به حساب کاربری</Button>
 </header>
 
@@ -52,5 +59,10 @@
 		transform: translate(50%, -50%);
 		width: 1024px;
 		z-index: -1;
+	}
+
+	.right-section {
+		display: flex;
+		gap: 1.2rem;
 	}
 </style>

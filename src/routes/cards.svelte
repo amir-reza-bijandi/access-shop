@@ -148,4 +148,43 @@
 	.small .text-en {
 		font-size: 2rem;
 	}
+
+	@media (max-width: 36rem) {
+		.content {
+			padding: 2rem;
+		}
+
+		.large {
+			--size: 9.6rem;
+		}
+
+		.small {
+			--size: 6.4rem;
+		}
+
+		.large .text-en {
+			font-size: 2rem;
+		}
+
+		.large .text-fa {
+			font-size: 1.6rem;
+		}
+
+		.small .text-en {
+			font-size: 1.6rem;
+		}
+
+		.small .text-fa {
+			font-size: 1.6rem;
+			font-weight: 600;
+		}
+
+		.wrapper :global(.card:first-child) {
+			transform: rotate(15deg) translate(-0.6rem, 2.2rem);
+		}
+
+		.wrapper :global(.card:last-child) {
+			transform: rotate(-15deg) translate(0.6rem, 2.2rem);
+		}
+	}
 </style>

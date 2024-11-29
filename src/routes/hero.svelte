@@ -5,7 +5,7 @@
 </script>
 
 <section class="hero">
-	<div>
+	<div class="right-section">
 		<h1 class="title">
 			دسترسی به دنیای هوش مصنوعی
 			<span class="subtitle">تنها با یک کلیک...</span>
@@ -49,5 +49,37 @@
 	.description {
 		line-height: var(--line-height);
 		margin-bottom: 3.2rem;
+	}
+
+	@media (max-width: 72rem) {
+		.hero {
+			margin-block: 12.8rem;
+			flex-direction: column;
+			justify-content: center;
+			gap: 5.2rem;
+		}
+
+		.right-section {
+			max-width: 64rem;
+			text-align: center;
+			order: 1;
+			margin: auto;
+		}
+	}
+
+	@media (max-width: 36rem) {
+		.title {
+			font-size: 2.8rem;
+		}
+	}
+
+	@media (max-width: 32rem) {
+		.title {
+			font-size: 2.4rem;
+		}
+
+		.subtitle {
+			font-size: 2rem;
+		}
 	}
 </style>

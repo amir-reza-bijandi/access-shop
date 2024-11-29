@@ -61,6 +61,7 @@
 	.title {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		cursor: pointer;
 		padding: 2.4rem;
 		font-size: 2rem;
@@ -108,5 +109,23 @@
 		padding: 2.4rem;
 		opacity: 1;
 		transform: scale(1);
+	}
+
+	@media (max-width: 56rem) {
+		.title {
+			font-size: 1.8rem;
+			padding: 2rem;
+		}
+	}
+
+	@media (max-width: 32rem) {
+		.title {
+			font-size: 1.6rem;
+			padding: 2rem;
+		}
+
+		.accordion.expanded .description > p {
+			padding: 2rem;
+		}
 	}
 </style>

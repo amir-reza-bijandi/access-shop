@@ -45,7 +45,7 @@
 			</div>
 			<footer class="footer">
 				<small class="info">
-					<span>شروع قیمت از {startingPrice.toLocaleString('fa-IR')}</span>
+					<span>شروع قیمت از {startingPrice.toLocaleString('fa-IR')} تومان</span>
 					•
 					<span>
 						تحویل بین {deliveryTime[0].toLocaleString('fa-IR')} تا {deliveryTime[1].toLocaleString(
@@ -53,7 +53,7 @@
 						)} دقیقه
 					</span>
 				</small>
-				<Button as="a" href="/{id}" icon={ShoppingBasket}>ثبت سفارش</Button>
+				<Button class="submit-order" as="a" href="/{id}" icon={ShoppingBasket}>ثبت سفارش</Button>
 			</footer>
 		</article>
 	</Box>
@@ -70,7 +70,7 @@
 	.wrapper {
 		position: relative;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(48rem, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
 		gap: 2rem;
 		margin-bottom: 3rem;
 	}
@@ -86,9 +86,11 @@
 
 	.product {
 		--icon-size: 16rem;
-		display: flex;
-		flex-direction: column;
-		height: 31.2rem;
+		display: grid;
+		grid-template-rows: 1fr auto;
+		min-height: 31.2rem;
+		align-content: stretch;
+		height: 100%;
 	}
 
 	.product > * {
@@ -182,5 +184,125 @@
 
 	.view-all:hover :global(svg) {
 		transform: rotate(360deg) translateX(-0.6rem);
+	}
+
+	/* Laptop */
+	@media (max-width: 72rem) {
+		.footer {
+			flex-direction: column;
+			gap: 1.6rem;
+		}
+
+		.footer :global(.submit-order) {
+			width: 100%;
+		}
+	}
+
+	/* Tablet */
+	@media (max-width: 68rem) {
+		.wrapper {
+			grid-template-columns: repeat(auto-fit, minmax(40.7rem, 1fr));
+		}
+
+		.image {
+			position: absolute;
+			left: 2rem;
+			top: 50%;
+			transform: translateY(-50%);
+			opacity: 0.25;
+		}
+
+		.product {
+			--icon-size: 12rem;
+			min-height: 28.8rem;
+		}
+
+		.footer {
+			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 56rem) {
+		.image {
+			position: unset;
+			transform: translateY(0);
+			opacity: 1;
+		}
+
+		.product {
+			--icon-size: 16rem;
+		}
+
+		.footer {
+			flex-direction: row;
+		}
+
+		.footer :global(.submit-order) {
+			width: unset;
+		}
+	}
+
+	@media (max-width: 40rem) {
+		.footer {
+			flex-direction: column;
+		}
+
+		.footer :global(.submit-order) {
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 38rem) {
+		.wrapper {
+			grid-template-columns: repeat(auto-fit, minmax(34.4rem, 1fr));
+		}
+
+		.image {
+			position: absolute;
+			left: 2rem;
+			top: 50%;
+			transform: translateY(-50%);
+			opacity: 0.25;
+		}
+
+		.product {
+			--icon-size: 12rem;
+		}
+	}
+
+	/* Mobile */
+	@media (max-width: 32rem) {
+		.body {
+			flex-direction: column;
+			gap: 1.6rem;
+			padding: 1.6rem;
+		}
+
+		.description {
+			text-align: center;
+		}
+
+		.title {
+			justify-content: center;
+		}
+
+		.footer {
+			padding: 1.6rem;
+		}
+
+		.info {
+			font-size: 1.4rem;
+		}
+
+		.image {
+			position: unset;
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.product {
+			--icon-size: 12.8rem;
+			min-height: 0;
+		}
 	}
 </style>
