@@ -46,6 +46,18 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		animation: section-intro 1s ease;
+	}
+
+	@keyframes section-intro {
+		0% {
+			transform: translateX(6.4rem);
+			opacity: 0;
+		}
+		100% {
+			transform: translateX(0);
+			opacity: 1;
+		}
 	}
 
 	.title {

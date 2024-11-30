@@ -74,6 +74,16 @@
 		justify-content: center;
 		align-items: center;
 		z-index: 2;
+		animation: cards-intro 1s ease;
+	}
+
+	@keyframes cards-intro {
+		0% {
+			transform: scale(0.9) translateY(6.4rem);
+		}
+		100% {
+			transform: scale(1) translateY(0);
+		}
 	}
 
 	.wrapper :global(.card) {
@@ -81,12 +91,6 @@
 	}
 
 	.wrapper :global(.card:first-child) {
-		--offset-x-start: -0.6rem;
-		--offset-y-start: 4.2rem;
-
-		--offset-x-start: 1.6rem;
-		--offset-y-start: 3rem;
-
 		transform: rotate(15deg) translate(-0.6rem, 4.2rem);
 		animation: showcase-right-large 6s ease infinite;
 	}
