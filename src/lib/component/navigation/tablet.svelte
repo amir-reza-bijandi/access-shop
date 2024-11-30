@@ -4,6 +4,7 @@
 	import Box from '../box.svelte';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
+	import { scale } from 'svelte/transition';
 
 	const currentPath = $derived($navigating ? $navigating.to?.url.pathname : $page.url.pathname);
 	let isMenuActive = $state(false);
@@ -31,9 +32,7 @@
 {#snippet item({ name, path }: NavigationRoute)}
 	<li class="item {path === currentPath ? 'active' : ''}">
 		<a class="link" href={path}>{name}</a>
-		{#if path === currentPath}
-			<span class="menu-icon"><Check /></span>
-		{/if}
+		<span class="menu-icon"><Check /></span>
 	</li>
 {/snippet}
 
@@ -113,8 +112,13 @@
 		position: absolute;
 		top: 50%;
 		left: 1.6rem;
-		transform: translateY(-50%);
+		transform: translateY(calc(-50% + 0.4rem)) scale(0);
+		transition: transform var(--duration);
 		color: hsl(var(--accent));
+	}
+
+	.item.active :global(.menu-icon) {
+		transform: translateY(-50%) scale(1);
 	}
 
 	.item {
