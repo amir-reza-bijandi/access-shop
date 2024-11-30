@@ -32,9 +32,9 @@
 	deliveryTime,
 	startingPrice
 }: Product)}
-	<div use:inview oninview_change={(e) => handleViewChange(e.detail)}>
-		<Box>
-			<article class="product">
+	<div class="product" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
+		<Box class="box">
+			<article class="content">
 				<div class="body">
 					<Pattern class="pattern" visibility="high" />
 					<figure class="image">
@@ -88,7 +88,11 @@
 		z-index: -1;
 	}
 
-	.product {
+	.product :global(.box) {
+		height: 100%;
+	}
+
+	.content {
 		--icon-size: 16rem;
 		display: grid;
 		grid-template-rows: 1fr auto;
@@ -97,7 +101,7 @@
 		height: 100%;
 	}
 
-	.product > * {
+	.content > * {
 		padding: 2rem;
 	}
 
@@ -216,7 +220,7 @@
 			opacity: 0.25;
 		}
 
-		.product {
+		.content {
 			--icon-size: 12rem;
 			min-height: 28.8rem;
 		}
@@ -233,7 +237,7 @@
 			opacity: 1;
 		}
 
-		.product {
+		.content {
 			--icon-size: 16rem;
 		}
 
@@ -269,7 +273,7 @@
 			opacity: 0.25;
 		}
 
-		.product {
+		.content {
 			--icon-size: 12rem;
 		}
 	}
@@ -304,7 +308,7 @@
 			transform: translateY(0);
 		}
 
-		.product {
+		.content {
 			--icon-size: 12.8rem;
 			min-height: 0;
 		}
