@@ -24,7 +24,7 @@
 		height: 97.4rem;
 	}
 
-	.background :global(:last-of-type) {
+	.background :global(.pattern:last-child) {
 		margin-top: auto;
 		transform: rotate(180deg);
 	}
