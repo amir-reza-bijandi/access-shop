@@ -1,5 +1,5 @@
 export type Product = {
-	id: string;
+	id: number;
 	nameEn: string;
 	nameFa: string;
 	description: string;
@@ -10,7 +10,7 @@ export type Product = {
 
 export const productList: Product[] = [
 	{
-		id: crypto.randomUUID(),
+		id: 1,
 		nameEn: 'Synthesia',
 		nameFa: 'سینتژیا',
 		description:
@@ -20,7 +20,7 @@ export const productList: Product[] = [
 		deliveryTime: [15, 30]
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 2,
 		nameEn: 'ChatGPT',
 		nameFa: 'چت‌جی‌پی‌تی',
 		description:
@@ -30,7 +30,7 @@ export const productList: Product[] = [
 		deliveryTime: [15, 30]
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 3,
 		nameEn: 'Cluade',
 		nameFa: 'کلاد',
 		description:
@@ -40,7 +40,7 @@ export const productList: Product[] = [
 		deliveryTime: [15, 30]
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 4,
 		nameEn: 'HeyGen',
 		nameFa: 'هی‌جن',
 		description:
@@ -50,7 +50,7 @@ export const productList: Product[] = [
 		deliveryTime: [15, 30]
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 5,
 		nameEn: 'Jasper',
 		nameFa: 'جاسپر',
 		description:
@@ -60,7 +60,7 @@ export const productList: Product[] = [
 		deliveryTime: [15, 30]
 	},
 	{
-		id: crypto.randomUUID(),
+		id: 6,
 		nameEn: 'Writesonic',
 		nameFa: 'رایت‌سونیک',
 		description:
