@@ -109,9 +109,19 @@
 	}
 
 	.title-icon {
+		display: block;
 		text-align: center;
 		font-size: 12.8rem;
 		margin-top: 2.4rem;
+		transform-origin: bottom center;
+		transform: rotate(15deg);
+		animation: wobble 4s ease-in-out infinite;
+	}
+
+	@keyframes wobble {
+		50% {
+			transform: rotate(-15deg);
+		}
 	}
 
 	@media (max-width: 80rem) {
