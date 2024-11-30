@@ -1,5 +1,8 @@
 <script lang="ts">
+	import handleViewChange from '$lib/utility/handle-view-change';
+
 	import type { Snippet } from 'svelte';
+	import { inview } from 'svelte-inview';
 
 	type HeaderProps = {
 		text: Snippet | string;
@@ -9,7 +12,7 @@
 	const { text, description, class: className = '' }: HeaderProps = $props();
 </script>
 
-<header class="title {className}">
+<header class="title {className}" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
 	<h2 class="text">
 		{#if typeof text === 'string'}
 			{text}

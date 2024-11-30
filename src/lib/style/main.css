@@ -40,3 +40,26 @@ body {
 	color: hsl(var(--fg-primary));
 	overflow-x: hidden;
 }
+
+.not-in-view-down {
+	transform-origin: top center;
+	transform: scale(0.9) translateY(3.2rem);
+	opacity: 0;
+}
+
+.not-in-view-up {
+	transform-origin: bottom center;
+	transform: scale(0.9) translateY(-3.2rem);
+	opacity: 0;
+}
+
+.in-view {
+	transform: scale(1) translateY(0);
+	opacity: 1;
+}
+
+.not-in-view,
+.in-view {
+	transition-property: transform, opacity;
+	transition-duration: var(--duration);
+}

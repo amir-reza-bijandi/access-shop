@@ -6,6 +6,8 @@
 	import Title from '$lib/component/title.svelte';
 	import { ArrowLeft, ShoppingBasket } from 'lucide-svelte';
 	import { productList, type Product } from '$lib/data/products';
+	import { inview } from 'svelte-inview';
+	import handleViewChange from '$lib/utility/handle-view-change';
 </script>
 
 <section class="products" id="products">
@@ -30,33 +32,35 @@
 	deliveryTime,
 	startingPrice
 }: Product)}
-	<Box>
-		<article class="product">
-			<div class="body">
-				<Pattern class="pattern" visibility="high" />
-				<figure class="image">
-					<Glow class="icon-glow" />
-					<img class="icon" src={imageSrc} alt="لوگوی {nameFa}" />
-				</figure>
-				<div>
-					<h3 class="title">خرید {nameFa} <span class="subtitle">({nameEn})</span></h3>
-					<p class="description">{description}</p>
+	<div use:inview oninview_change={(e) => handleViewChange(e.detail)}>
+		<Box>
+			<article class="product">
+				<div class="body">
+					<Pattern class="pattern" visibility="high" />
+					<figure class="image">
+						<Glow class="icon-glow" />
+						<img class="icon" src={imageSrc} alt="لوگوی {nameFa}" />
+					</figure>
+					<div>
+						<h3 class="title">خرید {nameFa} <span class="subtitle">({nameEn})</span></h3>
+						<p class="description">{description}</p>
+					</div>
 				</div>
-			</div>
-			<footer class="footer">
-				<small class="info">
-					<span>شروع قیمت از {startingPrice.toLocaleString('fa-IR')} تومان</span>
-					•
-					<span>
-						تحویل بین {deliveryTime[0].toLocaleString('fa-IR')} تا {deliveryTime[1].toLocaleString(
-							'fa-IR'
-						)} دقیقه
-					</span>
-				</small>
-				<Button class="submit-order" as="a" href="/{id}" icon={ShoppingBasket}>ثبت سفارش</Button>
-			</footer>
-		</article>
-	</Box>
+				<footer class="footer">
+					<small class="info">
+						<span>شروع قیمت از {startingPrice.toLocaleString('fa-IR')} تومان</span>
+						•
+						<span>
+							تحویل بین {deliveryTime[0].toLocaleString('fa-IR')} تا {deliveryTime[1].toLocaleString(
+								'fa-IR'
+							)} دقیقه
+						</span>
+					</small>
+					<Button class="submit-order" as="a" href="/{id}" icon={ShoppingBasket}>ثبت سفارش</Button>
+				</footer>
+			</article>
+		</Box>
+	</div>
 {/snippet}
 
 <style>

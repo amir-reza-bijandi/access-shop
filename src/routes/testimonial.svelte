@@ -4,6 +4,8 @@
 	import Title from '$lib/component/title.svelte';
 	import { commentList, type Comment } from '$lib/data/comments';
 	import formatCommentDate from '$lib/utility/format-comment-date';
+	import handleViewChange from '$lib/utility/handle-view-change';
+	import { inview } from 'svelte-inview';
 </script>
 
 <section>
@@ -20,26 +22,32 @@
 </section>
 
 {#snippet commentCard({ name, text, date, iconSrc, avatarSrc }: Comment)}
-	<Box>
-		<article class="comment">
-			<header class="header">
-				<div class="info">
-					<img class="avatar" src={avatarSrc} alt="عکس پروفایل {name}" />
-					<div>
-						<address class="name">{name}</address>
-						<time class="date" datetime={new Date(date).toISOString()}
-							>{formatCommentDate(date)}</time
-						>
+	<div class="comment" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
+		<Box class="box">
+			<article class="content">
+				<header class="header">
+					<div class="info">
+						<img class="avatar" src={avatarSrc} alt="عکس پروفایل {name}" />
+						<div>
+							<address class="name">{name}</address>
+							<time class="date" datetime={new Date(date).toISOString()}>
+								{formatCommentDate(date)}
+							</time>
+						</div>
 					</div>
-				</div>
-				<img class="icon" src={iconSrc} alt="لوگوی یک سرویس هوش مصنوعی" />
-			</header>
-			<p class="text">{text}</p>
-		</article>
-	</Box>
+					<img class="icon" src={iconSrc} alt="لوگوی یک سرویس هوش مصنوعی" />
+				</header>
+				<p class="text">{text}</p>
+			</article>
+		</Box>
+	</div>
 {/snippet}
 
 <style>
+	.comment :global(.box) {
+		height: 100%;
+	}
+
 	.wrapper {
 		position: relative;
 		display: grid;
@@ -56,7 +64,7 @@
 		z-index: -1;
 	}
 
-	.comment {
+	.content {
 		padding: 2.4rem;
 		display: flex;
 		flex-direction: column;
