@@ -3,8 +3,8 @@
 </script>
 
 <div class="background">
-	<Pattern />
-	<Pattern />
+	<Pattern class="pattern" />
+	<Pattern class="pattern" />
 </div>
 
 <style>
@@ -19,7 +19,7 @@
 		flex-direction: column;
 	}
 
-	.background :global(> *) {
+	.background :global(> .pattern) {
 		width: 192rem;
 		height: 97.4rem;
 	}
