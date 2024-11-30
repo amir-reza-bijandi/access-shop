@@ -6,7 +6,7 @@
 	import formatCommentDate from '$lib/utility/format-comment-date';
 </script>
 
-<section class="testimonial">
+<section>
 	<Title
 		text="نظرات مشتریان"
 		description="یادتون نره شما هم تجربه‌تون رو باهمون به اشتراک بذارین!"
@@ -40,10 +40,6 @@
 {/snippet}
 
 <style>
-	.testimonial {
-		margin-bottom: 19.2rem;
-	}
-
 	.wrapper {
 		position: relative;
 		display: grid;

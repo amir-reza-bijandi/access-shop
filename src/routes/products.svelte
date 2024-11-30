@@ -61,7 +61,6 @@
 
 <style>
 	.products {
-		margin-bottom: 19.2rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

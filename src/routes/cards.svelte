@@ -81,15 +81,71 @@
 	}
 
 	.wrapper :global(.card:first-child) {
+		--offset-x-start: -0.6rem;
+		--offset-y-start: 4.2rem;
+
+		--offset-x-start: 1.6rem;
+		--offset-y-start: 3rem;
+
 		transform: rotate(15deg) translate(-0.6rem, 4.2rem);
+		animation: showcase-right-large 6s ease infinite;
 	}
 
 	.wrapper :global(.card:last-child) {
 		transform: rotate(-15deg) translate(0.6rem, 4.2rem);
+		animation: showcase-left-large 6s ease infinite;
 	}
 
 	.wrapper :global(.card:nth-child(2)) {
 		z-index: 2;
+	}
+
+	.wrapper :global(.card:nth-child(2) .image) {
+		animation: showcase-center 6s ease infinite;
+		transform-origin: center center;
+	}
+
+	@keyframes showcase-right-large {
+		10% {
+			transform: rotate(0) translate(1.6rem, 3rem);
+		}
+		25% {
+			transform-origin: calc(50% + 1.6rem) calc(50% + 3rem);
+			transform: rotateY(360deg) translate(1.6rem, 3rem);
+		}
+		40% {
+			transform-origin: calc(50% + 1.6rem) calc(50% + 3rem);
+			transform: rotateY(360deg) translate(1.6rem, 3rem);
+		}
+		100% {
+			transform: rotate(15deg) translate(-0.6rem, 4.2rem);
+		}
+	}
+
+	@keyframes showcase-left-large {
+		10% {
+			transform: rotate(0) translate(-1.6rem, 3rem);
+		}
+		25% {
+			transform-origin: calc(50% + -1.6rem) calc(50% + 3rem);
+			transform: rotateY(360deg) translate(-1.6rem, 3rem);
+		}
+		40% {
+			transform-origin: calc(50% + 2rem) calc(50% + 3rem);
+			transform: rotateY(360deg) translate(-1.6rem, 3rem);
+		}
+		100% {
+			transform: rotate(-15deg) translate(0.6rem, 4.2rem);
+		}
+	}
+
+	@keyframes showcase-center {
+		10% {
+			transform: rotate(720deg);
+		}
+		40% {
+			transform: rotate(720deg);
+		}
 	}
 
 	.content,
@@ -112,6 +168,7 @@
 	}
 
 	.caption {
+		margin-top: 1.6rem;
 		text-align: center;
 		font-weight: 700;
 		gap: 0.4rem;
@@ -121,7 +178,6 @@
 		position: relative;
 		width: var(--size);
 		height: var(--size);
-		margin-bottom: 1.6rem;
 		z-index: 2;
 	}
 
@@ -181,10 +237,46 @@
 
 		.wrapper :global(.card:first-child) {
 			transform: rotate(15deg) translate(-0.6rem, 2.2rem);
+			animation: showcase-right-small 6s ease infinite;
 		}
 
 		.wrapper :global(.card:last-child) {
 			transform: rotate(-15deg) translate(0.6rem, 2.2rem);
+			animation: showcase-left-small 6s ease infinite;
+		}
+
+		@keyframes showcase-right-small {
+			10% {
+				transform: rotate(0) translate(1rem, 1rem);
+			}
+			25% {
+				transform-origin: calc(50% + 1rem) calc(50% + 1rem);
+				transform: rotateY(360deg) translate(1rem, 1rem);
+			}
+			40% {
+				transform-origin: calc(50% + 1rem) calc(50% + 1rem);
+				transform: rotateY(360deg) translate(1rem, 1rem);
+			}
+			100% {
+				transform: rotate(15deg) translate(-0.6rem, 2.2rem);
+			}
+		}
+
+		@keyframes showcase-left-small {
+			10% {
+				transform: rotate(0) translate(-1rem, 1rem);
+			}
+			25% {
+				transform-origin: calc(50% + -1rem) calc(50% + 1rem);
+				transform: rotateY(360deg) translate(-1rem, 1rem);
+			}
+			40% {
+				transform-origin: calc(50% + 2rem) calc(50% + 1rem);
+				transform: rotateY(360deg) translate(-1rem, 1rem);
+			}
+			100% {
+				transform: rotate(-15deg) translate(0.6rem, 2.2rem);
+			}
 		}
 	}
 </style>

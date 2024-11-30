@@ -59,7 +59,6 @@
 		display: flex;
 		align-items: center;
 		gap: 9.6rem;
-		margin-bottom: 19.2rem;
 	}
 
 	.faq :global(.section-title) {

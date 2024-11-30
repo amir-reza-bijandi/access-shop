@@ -34,6 +34,7 @@
 <style>
 	.button {
 		--color: hsl(var(--accent));
+		width: fit-content;
 		cursor: pointer;
 		display: inline-flex;
 		justify-content: center;

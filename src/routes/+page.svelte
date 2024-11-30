@@ -6,6 +6,30 @@
 </script>
 
 <Hero />
-<Products />
-<Testimonial />
-<Faq />
+<div class="wrapper">
+	<Products />
+	<Testimonial />
+	<Faq />
+</div>
+
+<style>
+	.wrapper {
+		--spacing: 19.2rem;
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing);
+		margin-block: var(--spacing);
+	}
+
+	@media (max-width: 72rem) {
+		.wrapper {
+			--spacing: 12.8rem;
+		}
+	}
+
+	@media (max-width: 32rem) {
+		.wrapper {
+			--spacing: 6.4rem;
+		}
+	}
+</style>
