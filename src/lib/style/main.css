@@ -47,6 +47,7 @@ body {
 
 body {
 	overflow-y: hidden;
+	min-height: 100vh;
 }
 
 .not-in-view-down {
