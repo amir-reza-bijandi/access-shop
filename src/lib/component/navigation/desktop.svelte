@@ -17,8 +17,10 @@
 </nav>
 
 {#snippet item({ name, path }: NavigationRoute)}
-	<li class="item {path === currentPath ? 'active' : ''}">
-		<a class="link" href={path}>{name}</a>
+	<li>
+		<a class="link {path === currentPath ? 'active' : ''}" href={path}>
+			<span class="link-content">{name}</span>
+		</a>
 	</li>
 {/snippet}
 
@@ -38,19 +40,18 @@
 	}
 
 	.link {
-		position: relative;
-		display: inline-block;
+		padding: 1.2rem;
 		color: inherit;
 		text-decoration: none;
+	}
+
+	.link-content {
+		position: relative;
+		display: inline-block;
 		font-weight: 700;
 	}
 
-	.item {
-		cursor: pointer;
-		padding: 1.2rem;
-	}
-
-	.link::before {
+	.link-content::before {
 		content: '';
 		position: absolute;
 		top: 100%;
@@ -64,16 +65,16 @@
 		transition-duration: var(--duration);
 	}
 
-	.item:hover .link::before,
-	.item.active .link::before {
+	.link:hover :global(.link-content::before),
+	.link.active :global(.link-content::before) {
 		transform: translateY(0.8rem) scale(1);
 	}
 
-	.item:hover .link::before {
+	.link:hover :global(.link-content::before) {
 		opacity: 0.5;
 	}
 
-	.item.active .link::before {
+	.link.active :global(.link-content::before) {
 		opacity: 1;
 	}
 

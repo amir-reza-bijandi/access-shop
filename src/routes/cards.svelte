@@ -189,19 +189,19 @@
 		--size: 9.6rem;
 	}
 
-	.large .text-en {
+	.large :global(.text-en) {
 		font-size: 2.4rem;
 	}
 
-	.large .text-fa {
+	.large :global(.text-fa) {
 		font-size: 2rem;
 	}
 
-	.small .text-fa {
+	.small :global(.text-fa) {
 		font-size: 1.6rem;
 	}
 
-	.small .text-en {
+	.small :global(.text-en) {
 		font-size: 2rem;
 	}
 
@@ -218,19 +218,19 @@
 			--size: 6.4rem;
 		}
 
-		.large .text-en {
+		.large :global(.text-en) {
 			font-size: 2rem;
 		}
 
-		.large .text-fa {
+		.large :global(.text-fa) {
 			font-size: 1.6rem;
 		}
 
-		.small .text-en {
+		.small :global(.text-en) {
 			font-size: 1.6rem;
 		}
 
-		.small .text-fa {
+		.small :global(.text-fa) {
 			font-size: 1.6rem;
 			font-weight: 600;
 		}

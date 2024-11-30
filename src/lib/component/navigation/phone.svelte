@@ -20,8 +20,8 @@
 </nav>
 
 {#snippet item({ icon: Icon, path }: NavigationRoute)}
-	<li class="item {path === currentPath ? 'active' : ''}">
-		<a class="link" href={path}><Icon /></a>
+	<li>
+		<a class="link {path === currentPath ? 'active' : ''}" href={path}><Icon /></a>
 	</li>
 {/snippet}
 
@@ -65,7 +65,7 @@
 		transition-duration: var(--duration);
 	}
 
-	.item.active .link::before {
+	.link.active::before {
 		opacity: 1;
 		transform: scale(1);
 	}
