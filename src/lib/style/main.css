@@ -38,7 +38,15 @@ body {
 	font-weight: 600;
 	background: hsl(var(--bg-primary));
 	color: hsl(var(--fg-primary));
+}
+
+html,
+body {
 	overflow-x: hidden;
+}
+
+body {
+	overflow-y: hidden;
 }
 
 .not-in-view-down {
