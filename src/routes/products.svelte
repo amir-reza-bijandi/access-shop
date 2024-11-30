@@ -8,7 +8,7 @@
 	import { productList, type Product } from '$lib/data/products';
 </script>
 
-<section class="products">
+<section class="products" id="products">
 	<Title text="محصولات اکسس شاپ" description="سفرت تو دنیای هوش مصنوعی از اینجا شروع می‌شه!" />
 	<div class="wrapper">
 		<Glow class="container-glow" />
@@ -64,6 +64,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		scroll-margin-top: 9.6rem;
 	}
 
 	.wrapper {
