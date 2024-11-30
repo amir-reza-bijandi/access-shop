@@ -5,6 +5,7 @@
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
 	import { scale } from 'svelte/transition';
+	import detectOutsideClick from '$lib/action/detect-outside-click';
 
 	const currentPath = $derived($navigating ? $navigating.to?.url.pathname : $page.url.pathname);
 	let isMenuActive = $state(false);
@@ -12,10 +13,16 @@
 	function toggleMenu() {
 		isMenuActive = !isMenuActive;
 	}
+
+	function handleOutsideClick() {
+		if (isMenuActive) {
+			isMenuActive = false;
+		}
+	}
 	const { routeList }: NavigationProps = getContext('navigationProps');
 </script>
 
-<nav class="navigation {isMenuActive ? 'active' : ''}">
+<nav class="navigation {isMenuActive ? 'active' : ''}" use:detectOutsideClick={handleOutsideClick}>
 	<button class="btn" onclick={toggleMenu}>
 		<span class="btn-icon open"><Menu /></span>
 		<span class="btn-icon close"><X /></span>
