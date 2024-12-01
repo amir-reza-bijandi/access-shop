@@ -4,7 +4,8 @@
 	import Logo from '$lib/component/logo.svelte';
 	import Navigation from './navigation.svelte';
 	import type { NavigationRoute } from '../type/navigation';
-	import { House, LogIn, Newspaper, Phone, Scale, ShoppingBag } from 'lucide-svelte';
+	import { House, LogIn, Newspaper, Phone, Scale, ShoppingBag, User } from 'lucide-svelte';
+	import rippleEffect from '$lib/action/ripple-effect.svelte';
 
 	const routeList: NavigationRoute[] = [
 		{
@@ -41,7 +42,10 @@
 		<Navigation {routeList} />
 		<Logo />
 	</div>
-	<Button as="a" icon={LogIn} href="/login" variant="outline">ورود به حساب کاربری</Button>
+	<!-- Desktop -->
+	<Button class="login-btn-desktop" icon={LogIn} variant="outline">ورود به حساب کاربری</Button>
+	<!-- Mobile -->
+	<button class="login-btn-mobile" use:rippleEffect={{ dynamicPositon: false }}><User /></button>
 </header>
 
 <style>
@@ -64,5 +68,29 @@
 	.right-section {
 		display: flex;
 		gap: 1.2rem;
+	}
+
+	.login-btn-mobile {
+		display: none;
+	}
+
+	@media (max-width: 32rem) {
+		header :global(.login-btn-desktop) {
+			display: none;
+		}
+
+		.login-btn-mobile {
+			--ripple-color: hsl(var(--gray-100) / 30%);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 1.2rem;
+			background: none;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			color: inherit;
+			border-radius: 0.8rem;
+		}
 	}
 </style>
