@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { inview } from 'svelte-inview';
 	import Accordion from './accordion.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import Title from '$lib/component/title.svelte';
 	import handleViewChange from '$lib/utility/handle-view-change';
-	import { inview } from 'svelte-inview';
+	import faqList from '../data/faq';
 </script>
 
 <section class="faq">
@@ -21,46 +22,11 @@
 	</Title>
 	<div class="wrapper">
 		<Glow class="container-glow" />
-		<div class="accordion" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
-			<Accordion title="چرا باید اکسس شاپ رو انتخاب کنی؟" open>
-				با اکسس شاپ می‌تونی به مجموعه‌ای گسترده از مدل‌های زبانی پیشرفته دسترسی داشته باشی که با دقت
-				و با استفاده از آخرین فناوری‌ها آموزش دیده‌ن تا بهترین نتایج را برات به ارمغان بیارن. اما
-				کار ما با ایجاد دسترسی تموم نمی‌شه. تیم پشتیبانی متخصص ما همیشه آماده‌ست تا در هر مرحله از
-				کار همراهیت کنه. از انتخاب مدل مناسب تا رفع مشکلات فنی و ارائه مشاوره‌های تخصصی، ما در کنارت
-				هستیم. با انتخاب ما، نه تنها به ابزارهای قدرتمند دسترسی پیدا می‌کنی، بلکه به یک تیم پشتیبان
-				حرفه‌ای هم می‌شه تکیه کرد.
-			</Accordion>
-		</div>
-		<div class="accordion" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
-			<Accordion title="فعال‌سازی اشتراک‌ها چقدر زمان می‌بره؟">
-				با اکسس شاپ می‌تونی به مجموعه‌ای گسترده از مدل‌های زبانی پیشرفته دسترسی داشته باشی که با دقت
-				و با استفاده از آخرین فناوری‌ها آموزش دیده‌ن تا بهترین نتایج را برات به ارمغان بیارن. اما
-				کار ما با ایجاد دسترسی تموم نمی‌شه. تیم پشتیبانی متخصص ما همیشه آماده‌ست تا در هر مرحله از
-				کار همراهیت کنه. از انتخاب مدل مناسب تا رفع مشکلات فنی و ارائه مشاوره‌های تخصصی، ما در کنارت
-				هستیم. با انتخاب ما، نه تنها به ابزارهای قدرتمند دسترسی پیدا می‌کنی، بلکه به یک تیم پشتیبان
-				حرفه‌ای هم می‌شه تکیه کرد.
-			</Accordion>
-		</div>
-		<div class="accordion" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
-			<Accordion title="آیا اشتراک‌ها قانونی هستند؟">
-				با اکسس شاپ می‌تونی به مجموعه‌ای گسترده از مدل‌های زبانی پیشرفته دسترسی داشته باشی که با دقت
-				و با استفاده از آخرین فناوری‌ها آموزش دیده‌ن تا بهترین نتایج را برات به ارمغان بیارن. اما
-				کار ما با ایجاد دسترسی تموم نمی‌شه. تیم پشتیبانی متخصص ما همیشه آماده‌ست تا در هر مرحله از
-				کار همراهیت کنه. از انتخاب مدل مناسب تا رفع مشکلات فنی و ارائه مشاوره‌های تخصصی، ما در کنارت
-				هستیم. با انتخاب ما، نه تنها به ابزارهای قدرتمند دسترسی پیدا می‌کنی، بلکه به یک تیم پشتیبان
-				حرفه‌ای هم می‌شه تکیه کرد.
-			</Accordion>
-		</div>
-		<div class="accordion" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
-			<Accordion title="آیا اشتراک‌ها قابل تمدید هستند؟">
-				با اکسس شاپ می‌تونی به مجموعه‌ای گسترده از مدل‌های زبانی پیشرفته دسترسی داشته باشی که با دقت
-				و با استفاده از آخرین فناوری‌ها آموزش دیده‌ن تا بهترین نتایج را برات به ارمغان بیارن. اما
-				کار ما با ایجاد دسترسی تموم نمی‌شه. تیم پشتیبانی متخصص ما همیشه آماده‌ست تا در هر مرحله از
-				کار همراهیت کنه. از انتخاب مدل مناسب تا رفع مشکلات فنی و ارائه مشاوره‌های تخصصی، ما در کنارت
-				هستیم. با انتخاب ما، نه تنها به ابزارهای قدرتمند دسترسی پیدا می‌کنی، بلکه به یک تیم پشتیبان
-				حرفه‌ای هم می‌شه تکیه کرد.
-			</Accordion>
-		</div>
+		{#each faqList as { question, answer }, index}
+			<div class="accordion" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
+				<Accordion title={question} {...index === 0 ? { open: true } : {}}>{answer}</Accordion>
+			</div>
+		{/each}
 	</div>
 </section>
 
@@ -124,12 +90,14 @@
 		}
 	}
 
+	/* Laptop */
 	@media (max-width: 80rem) {
 		.faq {
 			gap: 4.8rem;
 		}
 	}
 
+	/* Tablet */
 	@media (max-width: 56rem) {
 		.faq {
 			flex-direction: column;
@@ -157,6 +125,7 @@
 		}
 	}
 
+	/* Mobile */
 	@media (max-width: 32rem) {
 		.faq :global(.section-title) {
 			margin-bottom: 2.4rem;

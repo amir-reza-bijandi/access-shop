@@ -1,34 +1,7 @@
 <script lang="ts">
 	import Box from '$lib/component/box.svelte';
 	import Glow from '$lib/component/glow.svelte';
-
-	type CardInfo = {
-		imageSrc: string;
-		titleEn: string;
-		titleFa: string;
-		size: 'small' | 'large';
-	};
-
-	const cardInfoList: CardInfo[] = [
-		{
-			imageSrc: '/icon/claude.svg',
-			titleEn: 'Cluade',
-			titleFa: 'کلاد',
-			size: 'small'
-		},
-		{
-			imageSrc: '/icon/chatgpt.svg',
-			titleEn: 'ChatGPT',
-			titleFa: 'چت‌جی‌پی‌تی',
-			size: 'large'
-		},
-		{
-			imageSrc: '/icon/heygen.svg',
-			titleEn: 'HeyGen',
-			titleFa: 'هی‌جن',
-			size: 'small'
-		}
-	];
+	import { cardInfoList, type CardInfo } from '../data/hero-cards';
 </script>
 
 <div class="cards">
@@ -77,6 +50,7 @@
 		animation: cards-intro 1s ease;
 	}
 
+	/* Intro animation */
 	@keyframes cards-intro {
 		0% {
 			transform: scale(0.9) translateY(6.4rem);
@@ -109,6 +83,7 @@
 		transform-origin: center center;
 	}
 
+	/* Desktop animations */
 	@keyframes showcase-right-large {
 		10% {
 			transform: rotate(0) translate(1.6rem, 3rem);
@@ -209,6 +184,7 @@
 		font-size: 2rem;
 	}
 
+	/* Mobile */
 	@media (max-width: 36rem) {
 		.content {
 			padding: 2rem;
@@ -249,6 +225,7 @@
 			animation: showcase-left-small 6s ease infinite;
 		}
 
+		/* Mobile animations */
 		@keyframes showcase-right-small {
 			10% {
 				transform: rotate(0) translate(1rem, 1rem);
