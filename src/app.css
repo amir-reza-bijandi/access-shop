@@ -26,6 +26,9 @@
 	--duration: 200ms;
 
 	--line-height: 1.65625;
+
+	--ripple-color: hsl(var(--gray-100) / 10%);
+	--ripple-duration: 500ms;
 }
 
 html {
@@ -62,6 +65,8 @@ body {
 	min-height: 100vh;
 }
 
+/* Inview action */
+
 .not-in-view-down {
 	transform-origin: top center;
 	transform: scale(0.9) translateY(3.2rem);
@@ -83,4 +88,30 @@ body {
 .in-view {
 	transition-property: transform, opacity;
 	transition-duration: var(--duration);
+}
+
+/* Ripple effect action */
+
+.ripple-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.ripple {
+	display: block;
+	position: absolute;
+	transform: translate(-50%, -50%) scale(0);
+	opacity: 1;
+	aspect-ratio: 1 / 1;
+	background: var(--ripple-color);
+	border-radius: 50%;
+	animation: ripple var(--ripple-duration) linear;
+	pointer-events: none;
+}
+
+@keyframes ripple {
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 0;
+	}
 }

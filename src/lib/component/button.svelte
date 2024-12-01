@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes, HTMLAnchorAttributes } from 'svelte/elements';
 	import { Icon as LucideIcon } from 'lucide-svelte';
+	import rippleEffect from '$lib/action/ripple-effect.svelte';
 
 	type ButtonProps = (
 		| ({
@@ -24,7 +25,7 @@
 	}: ButtonProps = $props();
 </script>
 
-<svelte:element this={as} class="button {variant} {className}" {...restOfProps}>
+<svelte:element this={as} class="button {variant} {className}" {...restOfProps} use:rippleEffect>
 	{@render children?.()}
 	{#if Icon}
 		<Icon strokeWidth={1.5} size={20} absoluteStrokeWidth />
@@ -36,7 +37,7 @@
 		--color: var(--accent);
 		width: fit-content;
 		cursor: pointer;
-		display: inline-flex;
+		display: flex;
 		justify-content: center;
 		align-items: center;
 		gap: 0.8rem;
@@ -51,6 +52,7 @@
 	}
 
 	.fill {
+		--ripple-color: hsl(var(--gray-100) / 30%);
 		color: var(--fg-primary);
 		background-color: var(--color);
 		border-color: var(--color);
@@ -58,10 +60,6 @@
 
 	.fill:hover {
 		--color: var(--accent-tint);
-	}
-
-	.fill:active {
-		--color: var(--accent-shade);
 	}
 
 	.outline {
@@ -72,9 +70,5 @@
 
 	.outline:hover {
 		background: var(--accent-10);
-	}
-
-	.outline:active {
-		background: var(--accent-20);
 	}
 </style>
