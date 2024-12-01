@@ -21,7 +21,10 @@
 	const { routeList }: NavigationProps = getContext('navigationProps');
 </script>
 
-<nav class="navigation {isMenuActive ? 'active' : ''}" use:detectOutsideClick={handleOutsideClick}>
+<nav
+	class="navigation {isMenuActive ? 'active' : ''}"
+	use:detectOutsideClick={{ callback: handleOutsideClick }}
+>
 	<button class="btn" onclick={toggleMenu}>
 		<span class="btn-icon open"><Menu /></span>
 		<span class="btn-icon close"><X /></span>
