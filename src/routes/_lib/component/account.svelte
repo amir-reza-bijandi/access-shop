@@ -5,7 +5,7 @@
 	import Button from '$lib/component/button.svelte';
 	import { ChevronDown, LogIn, LogOut, ShoppingCart, User } from 'lucide-svelte';
 
-	const IS_USER_LOGGEED_IN = false;
+	const IS_USER_LOGGEED_IN = true;
 
 	let isMenuActive = $state(false);
 

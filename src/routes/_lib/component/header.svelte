@@ -65,4 +65,11 @@
 		display: flex;
 		gap: 1.2rem;
 	}
+
+	@media (min-width: 72rem) {
+		.right-section {
+			/* Prevent navigation from causing padding */
+			gap: 0;
+		}
+	}
 </style>
