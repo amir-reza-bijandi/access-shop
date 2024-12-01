@@ -5,7 +5,7 @@
 	const { class: className = '' }: GlowProps = $props();
 </script>
 
-<div class={['glow', className].join(' ')}></div>
+<div class="glow {className}"></div>
 
 <style>
 	.glow {
