@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Accordion from '$lib/component/accordion.svelte';
+	import Accordion from './accordion.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import Title from '$lib/component/title.svelte';
 	import handleViewChange from '$lib/utility/handle-view-change';

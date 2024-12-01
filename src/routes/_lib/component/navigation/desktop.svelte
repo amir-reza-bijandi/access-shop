@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { NavigationProps, NavigationRoute } from '$lib/type/navigation';
+	import type { NavigationProps, NavigationRoute } from '../../type/navigation';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
 

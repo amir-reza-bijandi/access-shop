@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { NavigationProps } from '$lib/type/navigation';
+	import type { NavigationProps } from '../type/navigation';
 	import Desktop from './navigation/desktop.svelte';
 	import Tablet from './navigation/tablet.svelte';
 	import Phone from './navigation/phone.svelte';

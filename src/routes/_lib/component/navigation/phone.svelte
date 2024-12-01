@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { NavigationProps, NavigationRoute } from '$lib/type/navigation';
+	import type { NavigationProps, NavigationRoute } from '../../type/navigation';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
-	import Box from '../box.svelte';
+	import Box from '$lib/component/box.svelte';
 
 	const currentPath = $derived($navigating ? $navigating.to?.url.pathname : $page.url.pathname);
 

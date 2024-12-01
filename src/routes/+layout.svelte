@@ -1,8 +1,8 @@
 <script>
 	import Pattern from '$lib/component/pattern.svelte';
-	import '$lib/style/main.css';
-	import Background from './background.svelte';
-	import Header from './header.svelte';
+	import Background from './_lib/component/background.svelte';
+	import Header from './_lib/component/header.svelte';
+	import '../app.css';
 	const { children } = $props();
 </script>
 

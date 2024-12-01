@@ -1,8 +1,8 @@
 <script>
-	import Faq from './faq.svelte';
-	import Hero from './hero.svelte';
-	import Products from './products.svelte';
-	import Testimonial from './testimonial.svelte';
+	import Faq from './_lib/component/faq.svelte';
+	import Hero from './_lib/component/hero.svelte';
+	import Products from './_lib/component/products.svelte';
+	import Testimonial from './_lib/component/testimonial.svelte';
 </script>
 
 <Hero />

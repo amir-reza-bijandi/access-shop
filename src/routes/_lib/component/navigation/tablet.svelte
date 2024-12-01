@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Check, Menu, X } from 'lucide-svelte';
-	import type { NavigationProps, NavigationRoute } from '$lib/type/navigation';
-	import Box from '../box.svelte';
+	import type { NavigationProps, NavigationRoute } from '../../type/navigation';
+	import Box from '$lib/component/box.svelte';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
 	import { scale } from 'svelte/transition';

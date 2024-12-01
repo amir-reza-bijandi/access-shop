@@ -3,7 +3,7 @@
 	import Glow from '$lib/component/glow.svelte';
 	import Title from '$lib/component/title.svelte';
 	import { commentList, type Comment } from '$lib/data/comments';
-	import formatCommentDate from '$lib/utility/format-comment-date';
+	import formatCommentDate from '../utility/format-comment-date';
 	import handleViewChange from '$lib/utility/handle-view-change';
 	import { inview } from 'svelte-inview';
 </script>

@@ -2,8 +2,8 @@
 	import Button from '$lib/component/button.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import Logo from '$lib/component/logo.svelte';
-	import Navigation from '$lib/component/navigation.svelte';
-	import type { NavigationRoute } from '$lib/type/navigation';
+	import Navigation from './navigation.svelte';
+	import type { NavigationRoute } from '../type/navigation';
 	import { House, LogIn, Newspaper, Phone, Scale, ShoppingBag } from 'lucide-svelte';
 
 	const routeList: NavigationRoute[] = [

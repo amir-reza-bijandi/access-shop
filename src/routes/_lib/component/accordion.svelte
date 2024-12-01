@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { MouseEventHandler, TransitionEventHandler } from 'svelte/elements';
-	import Box from './box.svelte';
+	import Box from '$lib/component/box.svelte';
 	import { ChevronUp } from 'lucide-svelte';
 
 	type AccordionProps = {
