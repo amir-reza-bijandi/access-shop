@@ -186,6 +186,16 @@
 
 	/* Mobile */
 	@media (max-width: 36rem) {
+		/* Intro animation */
+		@keyframes cards-intro {
+			0% {
+				transform: scale(0.9) translateY(-6.4rem);
+			}
+			100% {
+				transform: scale(1) translateY(0);
+			}
+		}
+
 		.content {
 			padding: 2rem;
 		}

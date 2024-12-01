@@ -151,5 +151,17 @@
 		.subtitle {
 			font-size: 2rem;
 		}
+
+		/* Intro animation */
+		@keyframes section-intro {
+			0% {
+				transform: translateY(6.4rem);
+				opacity: 0;
+			}
+			100% {
+				transform: translateY(0);
+				opacity: 1;
+			}
+		}
 	}
 </style>
