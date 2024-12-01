@@ -2,9 +2,23 @@
 	import Box from '$lib/component/box.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import { cardInfoList, type CardInfo } from '../data/hero-cards';
+	import { inview } from 'svelte-inview';
+
+	function handleViewChange({ node, inView }: ObserverEventDetails) {
+		const cards = node.querySelectorAll<HTMLElement>('.card');
+		if (inView) {
+			cards.forEach((card) => {
+				card.style.animationPlayState = 'running';
+			});
+		} else {
+			cards.forEach((card) => {
+				card.style.animationPlayState = 'paused';
+			});
+		}
+	}
 </script>
 
-<div class="cards">
+<div class="cards" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
 	<Glow class="container-glow" />
 	<div class="wrapper">
 		{#each cardInfoList as cardInfo}
