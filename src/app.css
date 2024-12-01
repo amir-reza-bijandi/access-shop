@@ -85,7 +85,6 @@ body {
 	opacity: 1;
 }
 
-.not-in-view,
 .in-view {
 	transition-property: transform, opacity;
 	transition-duration: var(--duration);
