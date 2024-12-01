@@ -4,7 +4,7 @@
 	import Box from '$lib/component/box.svelte';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
-	import detectOutsideClick from '$lib/action/detect-outside-click';
+	import detectOutsideClick from '$lib/action/detect-outside-click.svelte';
 
 	const currentPath = $derived($navigating ? $navigating.to?.url.pathname : $page.url.pathname);
 	let isMenuActive = $state(false);
