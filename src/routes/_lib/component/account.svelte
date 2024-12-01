@@ -13,8 +13,6 @@
 		isMenuActive = !isMenuActive;
 	}
 
-	$inspect(isMenuActive);
-
 	function handleOutsideClick() {
 		if (isMenuActive) {
 			isMenuActive = false;
@@ -36,11 +34,8 @@
 				<img class="avatar" src="/image/avatar/1.png" alt="عکس پروفایل شما" />
 			</button>
 		</Box>
-		<div
-			class="menu {isMenuActive ? 'active' : ''}"
-			use:detectOutsideClick={{ callback: handleOutsideClick, extraNodeList: [btnElement] }}
-		>
-			<Box class="menu-box">
+		<Box class="menu-box {isMenuActive ? 'active' : ''}">
+			<div use:detectOutsideClick={{ callback: handleOutsideClick, extraNodeList: [btnElement] }}>
 				<div class="header">
 					<img class="bg" src="/image/avatar/1.png" alt="عکس پروفایل شما" />
 					<span class="welcome">خوش اومدی!</span>
@@ -65,8 +60,8 @@
 						</a>
 					</li>
 				</ul>
-			</Box>
-		</div>
+			</div>
+		</Box>
 	{:else}
 		<Button class="login-btn-desktop" icon={LogIn} variant="outline">ورود به حساب کاربری</Button>
 		<button class="login-btn-mobile" use:rippleEffect={{ dynamicPositon: false }}><User /></button>
@@ -87,9 +82,6 @@
 
 	.account :global(.menu-box) {
 		overflow: hidden;
-	}
-
-	.menu {
 		opacity: 0;
 		transform: translateY(1rem);
 		pointer-events: none;
@@ -102,7 +94,7 @@
 		z-index: 9999;
 	}
 
-	.menu.active {
+	.account :global(.menu-box.active) {
 		opacity: 1;
 		transform: translateY(0);
 		pointer-events: all;
@@ -183,12 +175,15 @@
 	.header {
 		position: relative;
 		height: 8rem;
+		overflow: hidden;
 	}
 
 	.bg {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		/* Use filter instead of backdrop-filter to pervent flash in firefox */
+		filter: blur(15px);
 	}
 
 	.welcome {
@@ -202,7 +197,6 @@
 		width: 100%;
 		height: 100%;
 		background: var(--bg-primary-33);
-		backdrop-filter: blur(20px);
 	}
 
 	.login-btn-mobile {
@@ -220,7 +214,7 @@
 	}
 
 	@media (max-width: 83.125rem) {
-		.menu {
+		.account :global(.menu-box) {
 			left: 0;
 		}
 	}
