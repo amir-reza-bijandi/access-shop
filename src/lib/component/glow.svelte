@@ -9,7 +9,7 @@
 
 <style>
 	.glow {
-		background: radial-gradient(circle, hsl(var(--accent)) 0%, transparent 75%);
+		background: radial-gradient(circle, var(--accent) 0%, transparent 75%);
 		width: 256px;
 		aspect-ratio: 1 / 1;
 		opacity: 0.08;

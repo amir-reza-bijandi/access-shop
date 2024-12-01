@@ -52,7 +52,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		color: hsl(var(--fg-primary));
+		color: var(--fg-primary);
 		width: 4rem;
 		height: 4rem;
 		background: transparent;
@@ -120,7 +120,7 @@
 		left: 1.6rem;
 		transform: translateY(calc(-50% + 0.4rem)) scale(0);
 		transition: transform var(--duration);
-		color: hsl(var(--accent));
+		color: var(--accent);
 	}
 
 	.item.active :global(.menu-icon) {
@@ -138,11 +138,11 @@
 	}
 
 	.item:hover {
-		background: hsl(var(--bg-secondary) / 2%);
+		background: var(--bg-secondary);
 	}
 
 	.item:active {
-		background: hsl(var(--bg-secondary) / 4%);
+		background: var(--bg-tertiary);
 	}
 
 	.item:last-of-type {

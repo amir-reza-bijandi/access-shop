@@ -20,7 +20,7 @@
 	.box {
 		border: 1px solid var(--stroke);
 		border-radius: 1.6rem;
-		background: hsl(var(--bg-primary) / 33%);
+		background: var(--bg-primary-33);
 	}
 
 	.blur-low {

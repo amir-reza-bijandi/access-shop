@@ -2,14 +2,26 @@
 @import url(reset.css);
 
 :root {
-	--bg-primary: 0 0% 4%;
-	--bg-secondary: 0 0% 96%;
-	--fg-primary: 0 0% 96%;
-	--accent: 162 87% 35%;
-	--accent-tint: 162 82% 40%;
-	--accent-shade: 162 88% 30%;
+	--gray-900: 0 0% 4%;
+	--gray-100: 0 0% 96%;
+	--teal-700: 162 82% 40%;
+	--teal-800: 162 87% 35%;
+	--teal-900: 162 88% 30%;
 
-	--stroke: hsl(var(--fg-primary) / 10%);
+	--fg-primary: hsl(var(--gray-100));
+	--bg-primary: hsl(var(--gray-900));
+	--bg-secondary: hsl(var(--gray-100) / 2%);
+	--bg-tertiary: hsl(var(--gray-100) / 4%);
+	--accent: hsl(var(--teal-800));
+	--accent-tint: hsl(var(--teal-700));
+	--accent-shade: hsl(var(--teal-900));
+
+	--bg-primary-33: hsl(var(--gray-900) / 33%);
+	--accent-5: hsl(var(--teal-800) / 5%);
+	--accent-10: hsl(var(--teal-800) / 10%);
+	--accent-20: hsl(var(--teal-800) / 20%);
+
+	--stroke: hsl(var(--gray-100) / 10%);
 
 	--duration: 200ms;
 
@@ -36,8 +48,8 @@ body {
 		'Helvetica Neue',
 		sans-serif;
 	font-weight: 600;
-	background: hsl(var(--bg-primary));
-	color: hsl(var(--fg-primary));
+	background: var(--bg-primary);
+	color: var(--fg-primary);
 }
 
 html,

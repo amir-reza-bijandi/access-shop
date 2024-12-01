@@ -33,7 +33,7 @@
 
 <style>
 	.button {
-		--color: hsl(var(--accent));
+		--color: var(--accent);
 		width: fit-content;
 		cursor: pointer;
 		display: inline-flex;
@@ -51,30 +51,30 @@
 	}
 
 	.fill {
-		color: hsl(var(--fg-primary));
+		color: var(--fg-primary);
 		background-color: var(--color);
 		border-color: var(--color);
 	}
 
 	.fill:hover {
-		--color: hsl(var(--accent-tint));
+		--color: var(--accent-tint);
 	}
 
 	.fill:active {
-		--color: hsl(var(--accent-shade));
+		--color: var(--accent-shade);
 	}
 
 	.outline {
-		background: hsl(var(--accent) / 5%);
-		color: hsl(var(--accent));
-		border-color: hsl(var(--accent));
+		background: var(--accent-5);
+		color: var(--accent);
+		border-color: var(--accent);
 	}
 
 	.outline:hover {
-		background: hsl(var(--accent) / 10%);
+		background: var(--accent-10);
 	}
 
 	.outline:active {
-		background: hsl(var(--accent) / 20%);
+		background: var(--accent-20);
 	}
 </style>

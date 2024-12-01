@@ -58,7 +58,7 @@
 		width: 100%;
 		height: 0.4rem;
 		border-radius: 9999px;
-		background: hsl(var(--accent));
+		background: var(--accent);
 		opacity: 0;
 		transform: translateY(1.2rem) scale(0.9);
 		transition-property: opacity, transform;

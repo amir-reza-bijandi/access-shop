@@ -56,7 +56,7 @@
 		content: '';
 		position: absolute;
 		inset: 0;
-		background: hsl(var(--accent));
+		background: var(--accent);
 		border-radius: 0.8rem;
 		z-index: -1;
 		opacity: 0;

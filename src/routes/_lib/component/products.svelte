@@ -135,7 +135,7 @@
 	.info {
 		font-size: 1.6rem;
 		font-weight: 700;
-		color: hsl(var(--accent));
+		color: var(--accent);
 	}
 
 	.icon {
@@ -171,7 +171,7 @@
 
 	.view-all {
 		display: inline-flex;
-		color: hsl(var(--accent));
+		color: var(--accent);
 		text-decoration: none;
 		gap: 0.8rem;
 		padding: 1.6rem;
@@ -180,12 +180,12 @@
 	}
 
 	.view-all:hover {
-		color: hsl(var(--accent-tint));
-		filter: drop-shadow(0 0 12px hsl(var(--accent)));
+		color: var(--accent-tint);
+		filter: drop-shadow(0 0 12px var(--accent));
 	}
 
 	.view-all:active {
-		color: hsl(var(--accent-shade));
+		color: var(--accent-shade);
 	}
 
 	.view-all :global(svg) {
