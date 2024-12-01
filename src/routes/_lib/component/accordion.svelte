@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { MouseEventHandler, TransitionEventHandler } from 'svelte/elements';
-	import Box from '$lib/component/box.svelte';
 	import { ChevronUp } from 'lucide-svelte';
+	import Box from '$lib/component/box.svelte';
 
 	type AccordionProps = {
 		title: string;
@@ -14,6 +14,7 @@
 	let isOpen = $state(open);
 	let detailsElement: HTMLDetailsElement;
 
+	// Expand the accordion on click
 	const expand: MouseEventHandler<HTMLElement> = (e) => {
 		e.preventDefault();
 		detailsElement.classList.toggle('expanded');
@@ -22,6 +23,7 @@
 		}
 	};
 
+	// Collapse the accordion on transition end
 	const collapse: TransitionEventHandler<HTMLElement> = (e) => {
 		if (!detailsElement.classList.contains('expanded')) {
 			isOpen = false;
@@ -54,6 +56,9 @@
 		width: 100%;
 	}
 
+	/*** TITLE ***/
+
+	/* Hide the default chevron */
 	.title::-webkit-details-marker {
 		display: none;
 	}
@@ -69,19 +74,32 @@
 		border-bottom: 1px solid transparent;
 		transition: border calc(var(--duration) * 2);
 		user-select: none;
-		list-style: none;
-	}
 
-	.description {
-		display: grid;
-		overflow: hidden;
-		grid-template-rows: 0fr;
-		transition: grid-template-rows var(--duration);
-		line-height: var(--line-height);
+		/* Hide the default chevron */
+		list-style: none;
 	}
 
 	.accordion :global(svg) {
 		transition: transform var(--duration);
+	}
+
+	.accordion.expanded .title {
+		border-color: var(--stroke);
+	}
+
+	.accordion.expanded :global(svg) {
+		transform: rotate(180deg);
+	}
+	/*** TITLE ***/
+
+	/*** DESCRIPTION ***/
+	.description {
+		display: grid;
+		overflow: hidden;
+		/* Use grid to animate the hight */
+		grid-template-rows: 0fr;
+		transition: grid-template-rows var(--duration);
+		line-height: var(--line-height);
 	}
 
 	.description > p {
@@ -97,20 +115,14 @@
 		grid-template-rows: 1fr;
 	}
 
-	.accordion.expanded summary {
-		border-color: var(--stroke);
-	}
-
-	.accordion.expanded :global(svg) {
-		transform: rotate(180deg);
-	}
-
 	.accordion.expanded .description > p {
 		padding: 2.4rem;
 		opacity: 1;
 		transform: scale(1);
 	}
+	/*** DESCRIPTION ***/
 
+	/* Tablet */
 	@media (max-width: 56rem) {
 		.title {
 			font-size: 1.8rem;
@@ -118,6 +130,7 @@
 		}
 	}
 
+	/* Mobile */
 	@media (max-width: 32rem) {
 		.title {
 			font-size: 1.6rem;

@@ -12,6 +12,7 @@
 
 	let imgElement: HTMLImageElement | null;
 
+	// Add intro animation when image is loaded
 	function handleLoad() {
 		if (imgElement) {
 			imgElement.classList.add('loaded');
@@ -54,6 +55,7 @@
 		opacity: 0.05;
 	}
 
+	/* Animation */
 	.image:global(.loaded) {
 		opacity: 1;
 		transform: translateY(0);

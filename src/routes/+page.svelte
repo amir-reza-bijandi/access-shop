@@ -21,12 +21,14 @@
 		margin-block: var(--spacing);
 	}
 
+	/* Tablet */
 	@media (max-width: 72rem) {
 		.wrapper {
 			--spacing: 12.8rem;
 		}
 	}
 
+	/* Mobile */
 	@media (max-width: 32rem) {
 		.wrapper {
 			--spacing: 6.4rem;

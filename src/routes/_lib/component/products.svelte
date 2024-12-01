@@ -18,9 +18,9 @@
 			{@render prodcutCard(product)}
 		{/each}
 	</div>
-	<a class="view-all" href="/products"
-		>مشاهدهٔ لیست کامل محصولات <ArrowLeft strokeWidth={1.5} absoluteStrokeWidth size={20} /></a
-	>
+	<a class="view-all" href="/products">
+		مشاهدهٔ لیست کامل محصولات <ArrowLeft strokeWidth={1.5} absoluteStrokeWidth size={20} />
+	</a>
 </section>
 
 {#snippet prodcutCard({
@@ -35,6 +35,7 @@
 	<div class="product" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
 		<Box class="box">
 			<article class="content">
+				<!-- BODY -->
 				<div class="body">
 					<Pattern class="pattern" visibility="high" />
 					<figure class="image">
@@ -46,6 +47,7 @@
 						<p class="description">{description}</p>
 					</div>
 				</div>
+				<!-- FOOTER -->
 				<footer class="footer">
 					<small class="info">
 						<span>شروع قیمت از {startingPrice.toLocaleString('fa-IR')} تومان</span>

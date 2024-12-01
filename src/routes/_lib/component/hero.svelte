@@ -24,6 +24,7 @@
 		<Button as="a" href="#products" variant="fill" icon={ArrowDown}>مشاهدهٔ محصولات</Button>
 	</div>
 	<Cards />
+	<!-- Hide the scroll indicator arrow when the user has scrolled from the top -->
 	{#if scrollY === 0}
 		<div class="arrow" transition:fade>
 			<ChevronsDown size={32} absoluteStrokeWidth strokeWidth={2} />
@@ -49,6 +50,7 @@
 		animation: section-intro 1s ease;
 	}
 
+	/* Intro animation */
 	@keyframes section-intro {
 		0% {
 			transform: translateX(6.4rem);
@@ -84,6 +86,7 @@
 		display: none;
 	}
 
+	/* Desktop with a certain height */
 	@media (min-width: 72rem) and (max-height: 60rem) {
 		.hero {
 			margin-block: 0;
@@ -115,6 +118,7 @@
 		}
 	}
 
+	/* Tablet */
 	@media (max-width: 72rem) {
 		.hero {
 			flex-direction: column;
@@ -132,6 +136,7 @@
 		}
 	}
 
+	/* Mobile */
 	@media (max-width: 36rem) {
 		.title {
 			font-size: 2.8rem;

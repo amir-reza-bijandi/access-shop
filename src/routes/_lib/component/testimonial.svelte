@@ -25,6 +25,7 @@
 	<div class="comment" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
 		<Box class="box">
 			<article class="content">
+				<!-- HEADER -->
 				<header class="header">
 					<div class="info">
 						<img class="avatar" src={avatarSrc} alt="عکس پروفایل {name}" />
@@ -37,6 +38,7 @@
 					</div>
 					<img class="icon" src={iconSrc} alt="لوگوی یک سرویس هوش مصنوعی" />
 				</header>
+				<!-- TEXT -->
 				<p class="text">{text}</p>
 			</article>
 		</Box>

@@ -4,7 +4,6 @@
 	import Box from '$lib/component/box.svelte';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
-	import { scale } from 'svelte/transition';
 	import detectOutsideClick from '$lib/action/detect-outside-click';
 
 	const currentPath = $derived($navigating ? $navigating.to?.url.pathname : $page.url.pathname);

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { SvelteHTMLElements } from 'svelte/elements';
+
 	type BoxProps = SvelteHTMLElements['div'] & {
 		blur?: 'low' | 'high';
 	};

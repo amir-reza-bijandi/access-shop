@@ -25,12 +25,14 @@
 		padding: 3.2rem;
 	}
 
+	/* Tablet */
 	@media (max-width: 72rem) {
 		.container {
 			padding: 2.4rem;
 		}
 	}
 
+	/* Mobile */
 	@media (max-width: 32rem) {
 		.container {
 			padding: 1.6rem;

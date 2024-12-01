@@ -1,8 +1,7 @@
 <script lang="ts">
-	import handleViewChange from '$lib/utility/handle-view-change';
-
 	import type { Snippet } from 'svelte';
 	import { inview } from 'svelte-inview';
+	import handleViewChange from '$lib/utility/handle-view-change';
 
 	type HeaderProps = {
 		text: Snippet | string;
@@ -45,12 +44,14 @@
 		font-size: 2rem;
 	}
 
+	/* Tablet */
 	@media (max-width: 72rem) {
 		.title {
 			margin-bottom: 3.2rem;
 		}
 	}
 
+	/* Mobile */
 	@media (max-width: 32rem) {
 		.title {
 			margin-bottom: 2.4rem;
