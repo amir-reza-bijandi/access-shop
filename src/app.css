@@ -3,18 +3,23 @@
 
 :root {
 	--gray-900: 0 0% 4%;
+	--gray-400: 210 7% 56%;
 	--gray-100: 0 0% 96%;
 	--teal-700: 162 82% 40%;
 	--teal-800: 162 87% 35%;
 	--teal-900: 162 88% 30%;
 
+	--red-800: 0 86% 59%;
+
 	--fg-primary: hsl(var(--gray-100));
+	--fg-placeholder: hsl(var(--gray-400));
 	--bg-primary: hsl(var(--gray-900));
 	--bg-secondary: hsl(var(--gray-100) / 2%);
 	--bg-tertiary: hsl(var(--gray-100) / 4%);
 	--accent: hsl(var(--teal-800));
 	--accent-tint: hsl(var(--teal-700));
 	--accent-shade: hsl(var(--teal-900));
+	--error: hsl(var(--red-800));
 
 	--bg-primary-33: hsl(var(--gray-900) / 33%);
 	--accent-5: hsl(var(--teal-800) / 5%);
@@ -22,6 +27,7 @@
 	--accent-20: hsl(var(--teal-800) / 20%);
 
 	--stroke: hsl(var(--gray-100) / 10%);
+	--stroke-focus: hsl(var(--gray-100) / 20%);
 
 	--duration: 200ms;
 
