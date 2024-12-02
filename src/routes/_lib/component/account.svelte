@@ -4,13 +4,19 @@
 	import Box from '$lib/component/box.svelte';
 	import Button from '$lib/component/button.svelte';
 	import { ChevronDown, LogIn, LogOut, ShoppingCart, User } from 'lucide-svelte';
+	import Auth from './auth.svelte';
 
-	const IS_USER_LOGGEED_IN = true;
+	const IS_USER_LOGGEED_IN = false;
 
 	let isMenuActive = $state(false);
+	let isAuthActive = $state(true);
 
 	function toggleMenu() {
 		isMenuActive = !isMenuActive;
+	}
+
+	function toggleAuth() {
+		isAuthActive = !isAuthActive;
 	}
 
 	function handleOutsideClick() {
@@ -23,6 +29,7 @@
 	let btnElement: HTMLButtonElement | null;
 </script>
 
+<Auth open={isAuthActive} onclose={toggleAuth} />
 <div class="account">
 	{#if IS_USER_LOGGEED_IN}
 		<Box class="btn-box">
@@ -63,8 +70,14 @@
 			</div>
 		</Box>
 	{:else}
-		<Button class="login-btn-desktop" icon={LogIn} variant="outline">ورود به حساب کاربری</Button>
-		<button class="login-btn-mobile" use:rippleEffect={{ dynamicPositon: false }}><User /></button>
+		<Button class="login-btn-desktop" icon={LogIn} variant="outline" onclick={toggleAuth}
+			>ورود به حساب کاربری</Button
+		>
+		<button
+			class="login-btn-mobile"
+			use:rippleEffect={{ dynamicPositon: false }}
+			onclick={toggleAuth}><User /></button
+		>
 	{/if}
 </div>
 
