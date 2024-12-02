@@ -1,8 +1,13 @@
-<script>
+<script lang="ts">
 	import { BrainCircuit } from 'lucide-svelte';
+
+	type LogoProps = {
+		interactive?: boolean;
+	};
+	const { interactive = true }: LogoProps = $props();
 </script>
 
-<a class="logo" href="/">
+<a class="logo {interactive ? 'interactive' : ''}" href="/">
 	<div class="icon"><BrainCircuit strokeWidth={2.5} /></div>
 	اکسس شاپ
 </a>
@@ -16,6 +21,11 @@
 		font-weight: 700;
 		font-size: 2rem;
 		gap: 1rem;
+		pointer-events: none;
+	}
+
+	.logo.interactive {
+		pointer-events: all;
 	}
 
 	.icon {
