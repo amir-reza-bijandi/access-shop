@@ -3,6 +3,7 @@
 	import Portal from 'svelte-portal';
 	import Box from './box.svelte';
 	import type { Snippet } from 'svelte';
+	import { trapFocus } from 'trap-focus-svelte';
 
 	export type ModalProps = {
 		children: Snippet;
@@ -36,6 +37,7 @@
 		style:--modal-opacity={open ? opacity : 0}
 		style:--modal-height={`${height}rem`}
 		class="modal {open ? 'open' : ''}"
+		use:trapFocus
 	>
 		<Box class="box">
 			<header class="header">
