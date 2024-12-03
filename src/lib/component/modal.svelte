@@ -17,8 +17,12 @@
 	$effect(() => {
 		if (open) {
 			document.documentElement.style.overflowY = 'hidden';
+			document.body.classList.add('pause-animations');
 		}
-		return () => (document.documentElement.style.overflowY = 'auto');
+		return () => {
+			document.documentElement.style.overflowY = 'auto';
+			document.body.classList.remove('pause-animations');
+		};
 	});
 </script>
 

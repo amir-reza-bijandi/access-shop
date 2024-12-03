@@ -77,6 +77,10 @@ body {
 	min-height: 100vh;
 }
 
+.pause-animations * {
+	animation-play-state: paused !important;
+}
+
 /* Inview action */
 
 .not-in-view-down {
