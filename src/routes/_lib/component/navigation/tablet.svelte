@@ -13,17 +13,12 @@
 		isMenuActive = !isMenuActive;
 	}
 
-	function handleOutsideClick() {
-		if (isMenuActive) {
-			isMenuActive = false;
-		}
-	}
 	const { routeList }: NavigationProps = getContext('navigationProps');
 </script>
 
 <nav
 	class="navigation {isMenuActive ? 'active' : ''}"
-	use:detectOutsideClick={{ callback: handleOutsideClick }}
+	use:detectOutsideClick={() => (isMenuActive = false)}
 >
 	<button class="btn" onclick={toggleMenu}>
 		<span class="btn-icon open"><Menu /></span>

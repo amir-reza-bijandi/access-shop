@@ -1,19 +1,10 @@
 import type { Action } from 'svelte/action';
 
-type Params = {
-	extraNodeList?: Node[];
-	callback: () => void;
-};
-export const detectOutsideClick: Action<HTMLElement, Params> = (
-	node,
-	{ callback, extraNodeList }
-) => {
+type Callback = () => void;
+export const detectOutsideClick: Action<HTMLElement, Callback> = (node, callback) => {
 	$effect(() => {
 		function handleClick(e: MouseEvent) {
-			if (
-				!node.contains(e.target as Node) &&
-				!extraNodeList?.some((node) => node.contains(e.target as Node))
-			) {
+			if (!node.contains(e.target as Node)) {
 				callback();
 			}
 		}

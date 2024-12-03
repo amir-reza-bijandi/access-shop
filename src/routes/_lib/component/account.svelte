@@ -18,22 +18,13 @@
 	function toggleAuth() {
 		isAuthActive = !isAuthActive;
 	}
-
-	function handleOutsideClick() {
-		if (isMenuActive) {
-			isMenuActive = false;
-		}
-	}
-
-	// svelte-ignore non_reactive_update
-	let btnElement: HTMLButtonElement | null;
 </script>
 
 <Auth open={isAuthActive} onclose={toggleAuth} />
 <div class="account">
 	{#if IS_USER_LOGGEED_IN}
 		<Box class="btn-box">
-			<button class="btn" use:rippleEffect onclick={toggleMenu} bind:this={btnElement}>
+			<button class="btn" use:rippleEffect onclick={toggleMenu}>
 				<span class="icon {isMenuActive ? 'active' : ''}">
 					<ChevronDown size={16} absoluteStrokeWidth strokeWidth={2} />
 				</span>
@@ -42,7 +33,7 @@
 			</button>
 		</Box>
 		<Box class="menu-box {isMenuActive ? 'active' : ''}">
-			<div use:detectOutsideClick={{ callback: handleOutsideClick, extraNodeList: [btnElement] }}>
+			<div use:detectOutsideClick={() => (isMenuActive = false)}>
 				<div class="header">
 					<img class="bg" src="/image/avatar/1.png" alt="عکس پروفایل شما" />
 					<span class="welcome">خوش اومدی!</span>
