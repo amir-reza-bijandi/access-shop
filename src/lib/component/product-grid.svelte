@@ -11,8 +11,9 @@
 			text: string;
 			description: string;
 		};
+		showViewAll?: boolean;
 	};
-	const { infoList, title }: ProductGridProps = $props();
+	const { infoList, title, showViewAll }: ProductGridProps = $props();
 </script>
 
 <section class="products" id="products">
@@ -25,9 +26,11 @@
 			<ProductGridItem info={productInfo} />
 		{/each}
 	</div>
-	<a class="view-all" href="/products">
-		مشاهدهٔ لیست کامل محصولات <ArrowLeft strokeWidth={1.5} absoluteStrokeWidth size={20} />
-	</a>
+	{#if showViewAll}
+		<a class="view-all" href="/products">
+			مشاهدهٔ لیست کامل محصولات <ArrowLeft strokeWidth={1.5} absoluteStrokeWidth size={20} />
+		</a>
+	{/if}
 </section>
 
 <style>
