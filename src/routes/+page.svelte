@@ -32,6 +32,8 @@
 	@media (max-width: 32rem) {
 		.wrapper {
 			--spacing: 6.4rem;
+			/* Use a higher margin to account for navigation on mobile devices */
+			margin-bottom: 10rem;
 		}
 	}
 </style>
