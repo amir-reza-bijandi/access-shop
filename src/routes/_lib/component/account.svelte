@@ -9,7 +9,7 @@
 	const IS_USER_LOGGEED_IN = false;
 
 	let isMenuActive = $state(false);
-	let isAuthActive = $state(true);
+	let isAuthActive = $state(false);
 
 	function toggleMenu() {
 		isMenuActive = !isMenuActive;
