@@ -7,6 +7,7 @@
 	import Pattern from './pattern.svelte';
 	import Box from './box.svelte';
 	import type { ProductInfo } from '$lib/data/products';
+	import ProductIcon from './product-icon.svelte';
 
 	type ProductProps = {
 		info: ProductInfo;
@@ -23,8 +24,7 @@
 			<div class="body">
 				<Pattern class="pattern" visibility="high" />
 				<figure class="image">
-					<Glow class="icon-glow" />
-					<img class="icon" src={imageSrc} alt="لوگوی {nameFa}" />
+					<ProductIcon src={imageSrc} class="icon" />
 				</figure>
 				<div>
 					<h3 class="title">خرید {nameFa} <span class="subtitle">({nameEn})</span></h3>
@@ -99,17 +99,7 @@
 		color: var(--accent);
 	}
 
-	.icon {
-		width: var(--icon-size);
-		height: var(--icon-size);
-	}
-
-	.image {
-		position: relative;
-	}
-
-	.image :global(.icon-glow) {
-		position: absolute;
+	.image :global(.icon) {
 		width: var(--icon-size);
 	}
 
@@ -164,7 +154,7 @@
 
 	@media (max-width: 56rem) {
 		.image {
-			position: unset;
+			position: static;
 			transform: translateY(0);
 			opacity: 1;
 		}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ProductIcon from '$lib/component/product-icon.svelte';
 	import Box from '$lib/component/box.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import { cardInfoList, type CardInfo } from '../data/hero-cards';
@@ -30,10 +31,7 @@
 {#snippet card({ imageSrc, titleEn, titleFa, size }: CardInfo)}
 	<Box class="card">
 		<figure class="content {size}">
-			<div class="image">
-				<Glow class="icon-glow" />
-				<img class="icon" src={imageSrc} alt="لوگوی {titleFa}" />
-			</div>
+			<ProductIcon src={imageSrc} class="image" />
 			<figcaption class="caption">
 				<span class="text-en">{titleEn}</span>
 				<span class="text-fa">{titleFa}</span>
@@ -151,8 +149,8 @@
 		padding: 2.4rem;
 	}
 
-	.image {
-		position: relative;
+	.content :global(.image) {
+		width: var(--size);
 	}
 
 	.content :global(.icon-glow) {
@@ -165,13 +163,6 @@
 		text-align: center;
 		font-weight: 700;
 		gap: 0.4rem;
-	}
-
-	.icon {
-		position: relative;
-		width: var(--size);
-		height: var(--size);
-		z-index: 2;
 	}
 
 	.large {

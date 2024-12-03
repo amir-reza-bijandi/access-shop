@@ -6,6 +6,7 @@
 	import formatCommentDate from '../utility/format-comment-date';
 	import handleViewChange from '$lib/utility/handle-view-change';
 	import { inview } from 'svelte-inview';
+	import ProductIcon from '$lib/component/product-icon.svelte';
 </script>
 
 <section>
@@ -36,7 +37,7 @@
 							</time>
 						</div>
 					</div>
-					<img class="icon" src={iconSrc} alt="لوگوی یک سرویس هوش مصنوعی" />
+					<ProductIcon class="icon" src={iconSrc} />
 				</header>
 				<!-- TEXT -->
 				<p class="text">{text}</p>
@@ -103,9 +104,8 @@
 		border-radius: 9999px;
 	}
 
-	.icon {
+	.header :global(.icon) {
 		width: 3.6rem;
-		height: 3.6rem;
 	}
 
 	.text {
