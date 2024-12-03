@@ -1,4 +1,4 @@
-export type Product = {
+export type ProductInfo = {
 	id: number;
 	nameEn: string;
 	nameFa: string;
@@ -8,7 +8,7 @@ export type Product = {
 	deliveryTime: [number, number];
 };
 
-export const productList: Product[] = [
+export const productInfoList: ProductInfo[] = [
 	{
 		id: 1,
 		nameEn: 'Synthesia',
