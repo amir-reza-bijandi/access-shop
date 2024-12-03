@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="cards" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
+<div id="hero-cards" class="cards" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
 	<Glow class="container-glow" />
 	<div class="wrapper">
 		{#each cardInfoList as cardInfo}

@@ -16,13 +16,18 @@
 	const { children, header, open, opacity = 1, height = 38.4, onclose }: ModalProps = $props();
 
 	$effect(() => {
+		const cards = document.getElementById('hero-cards');
 		if (open) {
 			document.documentElement.style.overflowY = 'hidden';
-			document.body.classList.add('pause-animations');
+			if (cards) {
+				cards.classList.add('pause-animations');
+			}
 		}
 		return () => {
 			document.documentElement.style.overflowY = 'auto';
-			document.body.classList.remove('pause-animations');
+			if (cards) {
+				cards.classList.remove('pause-animations');
+			}
 		};
 	});
 </script>
