@@ -15,6 +15,9 @@
 
 <style>
 	.product-icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		position: relative;
 		width: 6.4rem;
 		height: auto;
