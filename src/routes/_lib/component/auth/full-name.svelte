@@ -71,16 +71,22 @@
 			</span>
 		{/if}
 	</div>
+	<small class="footer">
+		ثبت‌نام در اکسس شاپ به منزلهٔ <a class="highlight" href="/tos" onclick={onclose}
+			>پذیرفتن شرایط و قوانین</a
+		> استفاده از خدمات سایت تلقی می‌شود.
+	</small>
 </div>
 
 <style>
 	.content {
 		display: flex;
 		flex-direction: column;
+		justify-content: end;
 		width: 100%;
-		padding: 2rem;
-		padding-top: 7.2rem;
+		padding: var(--modal-padding);
 		transition: opacity var(--duration);
+		height: 100%;
 	}
 
 	.content.submitting {
@@ -117,5 +123,14 @@
 
 	.error-message {
 		color: var(--error);
+	}
+
+	.footer {
+		font-size: 1.4rem;
+		line-height: 1.65;
+	}
+
+	.highlight {
+		color: var(--accent);
 	}
 </style>

@@ -132,10 +132,11 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		padding: 2rem;
-		padding-top: 6.1rem;
+		justify-content: end;
+		padding: var(--modal-padding);
 		transition: opacity var(--duration);
 		width: 100%;
+		height: 100%;
 	}
 
 	.content.submitting {

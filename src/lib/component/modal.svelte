@@ -56,6 +56,7 @@
 	}
 
 	.modal {
+		--modal-padding: 2rem;
 		display: grid;
 		grid-template-rows: 1fr;
 		position: fixed;
@@ -66,7 +67,7 @@
 		width: 100%;
 		/* Add 4rem to account for padding */
 		max-width: 53.2rem;
-		padding-inline: 2rem;
+		padding-inline: var(--modal-padding);
 		min-height: var(--modal-height);
 		opacity: 0;
 		pointer-events: none;
@@ -110,7 +111,7 @@
 	.header {
 		display: flex;
 		justify-content: space-between;
-		padding: 2rem;
+		padding: var(--modal-padding);
 	}
 
 	.close {
@@ -118,5 +119,14 @@
 		background: none;
 		cursor: pointer;
 		color: inherit;
+	}
+
+	/* Mobile */
+	@media (max-width: 33.25rem) {
+		.modal {
+			max-width: 52.4rem;
+			min-height: calc(var(--modal-height) - 2rem);
+			--modal-padding: 1.6rem;
+		}
 	}
 </style>

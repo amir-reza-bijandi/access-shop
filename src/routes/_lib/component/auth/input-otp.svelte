@@ -146,4 +146,25 @@
 			opacity: 1;
 		}
 	}
+
+	/* Mobile */
+	@media (max-width: 36rem) {
+		.input-otp {
+			gap: 0.8rem;
+		}
+
+		.input-otp :global(.input) {
+			width: 5.6rem;
+			height: 5.6rem;
+			font-size: 2.4rem;
+		}
+	}
+
+	@media (max-width: 28rem) {
+		.input-otp :global(.input) {
+			width: 4.5rem;
+			height: 4.5rem;
+			font-size: 2rem;
+		}
+	}
 </style>

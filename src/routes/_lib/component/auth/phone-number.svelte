@@ -53,7 +53,7 @@
 	in:fly|global={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly|global={{ x: -492, duration: 400, opacity: 0 }}
 >
-	<h2 class="title">ورود یا ثبت نام</h2>
+	<h2 class="title">ورود یا ثبت‌نام</h2>
 	<form class="form" onsubmit={handleSubmit}>
 		<Input
 			id="phone-number-input"
@@ -79,7 +79,7 @@
 		{/if}
 	</div>
 	<small class="footer">
-		ورود یا ثبت نام در اکسس شاپ به منزلهٔ <a class="highlight" href="/tos" onclick={onclose}
+		ورود یا ثبت‌نام در اکسس شاپ به منزلهٔ <a class="highlight" href="/tos" onclick={onclose}
 			>پذیرفتن شرایط و قوانین</a
 		> استفاده از خدمات سایت تلقی می‌شود.
 	</small>
@@ -89,9 +89,10 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		padding: 2rem;
-		padding-top: 7.2rem;
+		justify-content: end;
+		padding: var(--modal-padding);
 		transition: opacity var(--duration);
+		height: 100%;
 	}
 
 	.content.submitting {

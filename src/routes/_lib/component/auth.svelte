@@ -21,7 +21,7 @@
 	const formStepList: FormStep[] = [
 		{ index: 0, modalHeight: { min: 38.4, max: 42.6 } },
 		{ index: 1, modalHeight: { min: 40.1, max: 44.8 } },
-		{ index: 2, modalHeight: { min: 32.8, max: 36.8 } }
+		{ index: 2, modalHeight: { min: 38.4, max: 42.6 } }
 	];
 
 	let currentStep: FormStep = $state(formStepList[0]);
