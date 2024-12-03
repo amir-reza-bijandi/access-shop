@@ -3,27 +3,28 @@
 
 	type PageWrapperProps = {
 		children: Snippet;
+		as?: 'main' | 'div';
 	};
-	const { children }: PageWrapperProps = $props();
+	const { as = 'main', children }: PageWrapperProps = $props();
 </script>
 
-<main>
+<svelte:element this={as} class="page-wrapper">
 	{@render children()}
-</main>
+</svelte:element>
 
 <style>
-	main {
+	.page-wrapper {
 		padding-block: 6.4rem;
 	}
 
 	@media (max-width: 72rem) {
-		main {
+		.page-wrapper {
 			padding-block: 4.8rem;
 		}
 	}
 
 	@media (max-width: 32rem) {
-		main {
+		.page-wrapper {
 			/* Using a higher value to account for navigation on mobile */
 			padding-top: 3.2rem;
 			padding-bottom: 6.8rem;
