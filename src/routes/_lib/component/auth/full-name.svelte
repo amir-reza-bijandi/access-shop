@@ -7,8 +7,7 @@
 	import { getContext } from 'svelte';
 
 	const context: AuthContext = getContext('auth');
-	let phoneNumber = $state('');
-	const validationPattern = '^(09|۰۹)[\\d۰-۹]{9}$';
+	let fullName = $state('');
 
 	// Logic for submitting the form
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -16,15 +15,14 @@
 		context.setSubmit(true);
 
 		// Remove focus from the input
-		const input = document.getElementById('phone-number-input');
+		const input = document.getElementById('full-name-input');
 		if (input) {
 			input.blur();
 		}
 
 		await new Promise((resolve) => setTimeout(resolve, 2000));
 		context.setSubmit(false);
-		context.setPhoneNumber(phoneNumber);
-		context.setStep(1);
+		context.closeModal();
 	};
 
 	// Remove error when user starts typing
@@ -36,14 +34,11 @@
 	const handleInvalid: FormEventHandler<HTMLInputElement> = (e) => {
 		const input = e.currentTarget;
 		e.preventDefault();
-		if (input.validity.patternMismatch) {
-			context.setError('شمارهٔ موبایل صحیح نمی‌باشد!');
-		}
 		if (input.validity.valueMissing) {
-			context.setError('شمارهٔ موبایل برای ثبت نام الزامیست!');
+			context.setError('نام و نام خانوادگی برای تکمیل ثبت نام الزامیست!');
 		}
-		if (input.validity.tooShort) {
-			context.setError('شمارهٔ موبایل باید حداقل ۱۱ رقم باشد!');
+		if (input.validity.patternMismatch) {
+			context.setError('تنها استفاده از حروف فارسی مجاز است!');
 		}
 	};
 </script>
@@ -53,23 +48,21 @@
 	in:fly|global={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly|global={{ x: -492, duration: 400, opacity: 0 }}
 >
-	<h2 class="title">ورود یا ثبت نام</h2>
+	<h2 class="title">نام و نام خانوادگی</h2>
 	<form class="form" onsubmit={handleSubmit}>
 		<Input
-			id="phone-number-input"
-			placeholder="شمارهٔ موبایل خود را وارد کنید..."
-			inputmode="numeric"
-			pattern={validationPattern}
-			title="تنها استفاده از اعداد مجاز است"
+			id="full-name-input"
+			placeholder="نام و نام خانوادگی خود را وارد کنید..."
+			inputmode="text"
+			pattern="^[\u0600-\u06FF\s]+$"
+			title="تنها استفاده از حروف فارسی مجاز است"
 			required
-			maxlength={11}
-			minlength={11}
-			autocomplete="tel-national"
+			autocomplete="name"
 			oninput={handleInput}
 			oninvalid={handleInvalid}
-			bind:value={phoneNumber}
+			bind:value={fullName}
 		/>
-		<Button class="submit" type="submit">ادامه</Button>
+		<Button class="submit" type="submit">تکمیل ثبت‌نام</Button>
 	</form>
 	<div class="error-container">
 		{#if context.error}
@@ -78,17 +71,13 @@
 			</span>
 		{/if}
 	</div>
-	<small class="footer">
-		ورود یا ثبت نام در اکسس شاپ به منزلهٔ <a class="highlight" href="/tos" onclick={onclose}
-			>پذیرفتن شرایط و قوانین</a
-		> استفاده از خدمات سایت تلقی می‌شود.
-	</small>
 </div>
 
 <style>
 	.content {
 		display: flex;
 		flex-direction: column;
+		width: 100%;
 		padding: 2rem;
 		padding-top: 7.2rem;
 		transition: opacity var(--duration);
@@ -128,14 +117,5 @@
 
 	.error-message {
 		color: var(--error);
-	}
-
-	.footer {
-		font-size: 1.4rem;
-		line-height: 1.65;
-	}
-
-	.highlight {
-		color: var(--accent);
 	}
 </style>

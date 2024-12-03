@@ -6,6 +6,7 @@
 	import PhoneNumber from './auth/phone-number.svelte';
 	import CodeVerification from './auth/code-verification.svelte';
 	import { setContext } from 'svelte';
+	import FullName from './auth/full-name.svelte';
 
 	type AuthProps = Omit<ModalProps, 'children' | 'header'>;
 	const { open, onclose }: AuthProps = $props();
@@ -19,7 +20,8 @@
 	};
 	const formStepList: FormStep[] = [
 		{ index: 0, modalHeight: { min: 38.4, max: 42.6 } },
-		{ index: 1, modalHeight: { min: 40.1, max: 44.8 } }
+		{ index: 1, modalHeight: { min: 40.1, max: 44.8 } },
+		{ index: 2, modalHeight: { min: 32.8, max: 36.8 } }
 	];
 
 	let currentStep: FormStep = $state(formStepList[0]);
@@ -48,6 +50,9 @@
 		setPhoneNumber(phoneNumber) {
 			authContext.phoneNumber = phoneNumber;
 		},
+		closeModal() {
+			onclose?.();
+		},
 		error: null,
 		isSubmiting: false,
 		modalHeight: 'min',
@@ -75,6 +80,8 @@
 			<PhoneNumber />
 		{:else if currentStep.index === 1}
 			<CodeVerification />
+		{:else if currentStep.index === 2}
+			<FullName />
 		{/if}
 	</div>
 </Modal>

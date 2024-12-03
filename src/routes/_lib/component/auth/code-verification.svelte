@@ -45,7 +45,7 @@
 		context.setSubmit(true);
 		await new Promise((resolve) => setTimeout(resolve, 2000));
 		context.setSubmit(false);
-		context.setStep(1);
+		context.setStep(2);
 	};
 
 	// Remove error when user starts typing
