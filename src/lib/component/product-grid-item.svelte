@@ -42,7 +42,9 @@
 						)} دقیقه
 					</span>
 				</small>
-				<Button class="submit-order" as="a" href="/{id}" icon={ShoppingBasket}>ثبت سفارش</Button>
+				<Button class="submit-order" as="a" href="/products/{id}" icon={ShoppingBasket}
+					>ثبت سفارش</Button
+				>
 			</footer>
 		</article>
 	</Box>
