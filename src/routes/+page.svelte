@@ -1,20 +1,13 @@
 <script lang="ts">
 	import Faq from './_lib/component/faq.svelte';
 	import Hero from './_lib/component/hero.svelte';
-	import ProductGrid from '../lib/component/product-grid.svelte';
+	import Products from './_lib/component/products.svelte';
 	import Testimonial from './_lib/component/testimonial.svelte';
-	import { productInfoList } from '$lib/data/products';
 </script>
 
 <Hero />
 <div class="wrapper">
-	<ProductGrid
-		infoList={productInfoList}
-		title={{
-			text: 'محصولات اکسس شاپ',
-			description: 'سفرت تو دنیای هوش مصنوعی از اینجا شروع می‌شه!'
-		}}
-	/>
+	<Products />
 	<Testimonial />
 	<Faq />
 </div>
