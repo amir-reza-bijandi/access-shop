@@ -7,6 +7,7 @@ export type AuthContext = {
 	setModalHeight: (height: ModalHeight) => void;
 	setPhoneNumber: (phoneNumber: string) => void;
 	closeModal: () => void;
+	cancel: () => void;
 	error: string | null;
 	modalHeight: ModalHeight;
 	isSubmiting: boolean;

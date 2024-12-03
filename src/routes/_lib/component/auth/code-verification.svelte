@@ -123,7 +123,7 @@
 		</div>
 		<div class="buttons">
 			<Button id="submit" type="submit">تأیید</Button>
-			<Button type="button" variant="outline">انصراف</Button>
+			<Button type="button" variant="outline" onclick={context.cancel}>انصراف</Button>
 		</div>
 	</form>
 </div>

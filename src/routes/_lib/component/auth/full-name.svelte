@@ -62,7 +62,10 @@
 			oninvalid={handleInvalid}
 			bind:value={fullName}
 		/>
-		<Button class="submit" type="submit">تکمیل ثبت‌نام</Button>
+		<div class="buttons">
+			<Button id="submit" type="submit">تکمیل ثبت‌نام</Button>
+			<Button type="button" variant="outline" onclick={context.cancel}>انصراف</Button>
+		</div>
 	</form>
 	<div class="error-container">
 		{#if context.error}
@@ -107,6 +110,16 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.2rem;
+	}
+
+	.buttons {
+		display: flex;
+		width: 100%;
+		gap: 1.2rem;
+	}
+
+	.buttons :global(button) {
+		flex: 1;
 	}
 
 	.content.error .error-container {

@@ -53,6 +53,10 @@
 		closeModal() {
 			onclose?.();
 		},
+		cancel() {
+			authContext.closeModal();
+			authContext.setStep(0);
+		},
 		error: null,
 		isSubmiting: false,
 		modalHeight: 'min',
