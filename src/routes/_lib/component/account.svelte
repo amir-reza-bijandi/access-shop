@@ -204,7 +204,7 @@
 	}
 
 	.login-btn-mobile {
-		--ripple-color: hsl(var(--gray-100) / 30%);
+		--ripple-color: hsl(var(--base-gray-100) / 30%);
 		display: none;
 		justify-content: center;
 		align-items: center;

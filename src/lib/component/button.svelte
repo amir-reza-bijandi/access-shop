@@ -52,7 +52,7 @@
 	}
 
 	.fill {
-		--ripple-color: hsl(var(--gray-100) / 30%);
+		--ripple-color: hsl(var(--base-gray-100) / 30%);
 		color: var(--fg-primary);
 		background-color: var(--color);
 		border-color: var(--color);
