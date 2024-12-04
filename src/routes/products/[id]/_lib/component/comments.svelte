@@ -23,7 +23,8 @@
 		</ul>
 		{#if IS_USER_LOGGED_IN}
 			<form class="comment-form" onsubmit={handleSubmit}>
-				<textarea class="text box" placeholder="دیدگاه خود را اینجا بنویسید..."></textarea>
+				<textarea class="text box rounded-lg" placeholder="دیدگاه خود را اینجا بنویسید..."
+				></textarea>
 				<Button type="submit" class="submit">ثبت دیدگاه</Button>
 			</form>
 		{/if}

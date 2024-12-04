@@ -30,7 +30,7 @@
 	};
 </script>
 
-<div class="box">
+<div class="box rounded-lg">
 	<!-- 
       There is a bug in the Chrome browser that prevents the details element's
       animation from working with the first click. That's why i permently added

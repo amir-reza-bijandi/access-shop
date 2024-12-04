@@ -48,7 +48,7 @@
 			use:trapFocus
 			transition:scale={{ duration: transitionDuration, opacity: 0, start: 0.8 }}
 		>
-			<div class="box">
+			<div class="box rounded-lg">
 				<header class="header">
 					{@render header()}
 					<button class="close" onclick={onclose}><X /></button>

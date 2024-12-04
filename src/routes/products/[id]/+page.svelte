@@ -1,5 +1,6 @@
 <script lang="ts">
 	import PageWrapper from '$lib/component/page-wrapper.svelte';
+	import SwitchBox from '$lib/component/switch-box.svelte';
 	import Comments from './_lib/component/comments.svelte';
 	import FullDescription from './_lib/component/full-description.svelte';
 	import ProductBranding from './_lib/component/product-branding.svelte';

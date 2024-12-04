@@ -93,6 +93,14 @@ body {
 	backdrop-filter: blur(40px);
 }
 
+.box.rounded-lg {
+	border-radius: 2.4rem;
+}
+
+.box.rounded-sm {
+	border-radius: 1.2rem;
+}
+
 .box.blur-low {
 	backdrop-filter: blur(20px);
 }

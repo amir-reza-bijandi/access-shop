@@ -9,7 +9,7 @@
 </script>
 
 <nav class="navigation">
-	<div class="box blur-low">
+	<div class="box rounded-sm blur-low">
 		<ul class="list">
 			{#each routeList as route}
 				{@render item(route)}

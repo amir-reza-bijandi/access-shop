@@ -6,7 +6,7 @@
 	const { nameEn, nameFa, imageSrc } = singleProduct;
 </script>
 
-<header class="box product-branding">
+<header class="box rounded-lg product-branding">
 	<Glow class="glow" />
 	<Pattern class="pattern" visibility="high" />
 	<figure class="content">

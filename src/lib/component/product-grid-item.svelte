@@ -16,7 +16,7 @@
 </script>
 
 <div class="product" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
-	<div class="box">
+	<div class="box rounded-lg">
 		<article class="content">
 			<!-- BODY -->
 			<div class="body">

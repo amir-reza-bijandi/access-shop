@@ -26,7 +26,7 @@
 </script>
 
 <div class="subscription">
-	<div class="box">
+	<div class="box rounded-lg">
 		<div class="content">
 			<div class="options">
 				<Select itemList={planTypeList} bind:value={selectedTypeId} />

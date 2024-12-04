@@ -25,7 +25,7 @@
 	use:inview
 	oninview_change={viewAnimation ? (e) => handleViewChange(e.detail) : undefined}
 >
-	<article class="content box">
+	<article class="content box rounded-lg">
 		<header class="header">
 			<div class="info">
 				<img class="avatar" src={avatarSrc} alt="عکس پروفایل {name}" />
