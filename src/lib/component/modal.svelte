@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { X } from 'lucide-svelte';
 	import Portal from 'svelte-portal';
-	import Box from './box.svelte';
 	import type { Snippet } from 'svelte';
 	import { trapFocus } from 'trap-focus-svelte';
 
@@ -44,13 +43,13 @@
 		class="modal {open ? 'open' : ''}"
 		use:trapFocus
 	>
-		<Box class="box">
+		<div class="box">
 			<header class="header">
 				{@render header()}
 				<button class="close" onclick={onclose}><X /></button>
 			</header>
 			<div class="body">{@render children()}</div>
-		</Box>
+		</div>
 	</section>
 </Portal>
 

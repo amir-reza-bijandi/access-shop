@@ -2,7 +2,6 @@
 	import type { NavigationProps, NavigationRoute } from '../../type/navigation';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
-	import Box from '$lib/component/box.svelte';
 
 	const currentPath = $derived($navigating ? $navigating.to?.url.pathname : $page.url.pathname);
 
@@ -10,13 +9,13 @@
 </script>
 
 <nav class="navigation">
-	<Box class="box" blur="low">
+	<div class="box blur-low">
 		<ul class="list">
 			{#each routeList as route}
 				{@render item(route)}
 			{/each}
 		</ul>
-	</Box>
+	</div>
 </nav>
 
 {#snippet item({ icon: Icon, path }: NavigationRoute)}

@@ -3,9 +3,7 @@
 	import { ShoppingBasket } from 'lucide-svelte';
 	import { inview } from 'svelte-inview';
 	import Button from './button.svelte';
-	import Glow from './glow.svelte';
 	import Pattern from './pattern.svelte';
-	import Box from './box.svelte';
 	import type { ProductInfo } from '$lib/data/products';
 	import ProductIcon from './product-icon.svelte';
 
@@ -18,7 +16,7 @@
 </script>
 
 <div class="product" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
-	<Box class="box">
+	<div class="box">
 		<article class="content">
 			<!-- BODY -->
 			<div class="body">
@@ -47,7 +45,7 @@
 				>
 			</footer>
 		</article>
-	</Box>
+	</div>
 </div>
 
 <style>

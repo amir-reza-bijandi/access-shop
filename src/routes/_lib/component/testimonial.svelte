@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Box from '$lib/component/box.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import Title from '$lib/component/title.svelte';
 	import { commentList, type Comment } from '$lib/data/comments';
@@ -24,7 +23,7 @@
 
 {#snippet commentCard({ name, text, date, iconSrc, avatarSrc }: Comment)}
 	<div class="comment" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
-		<Box class="box">
+		<div class="box">
 			<article class="content">
 				<!-- HEADER -->
 				<header class="header">
@@ -42,7 +41,7 @@
 				<!-- TEXT -->
 				<p class="text">{text}</p>
 			</article>
-		</Box>
+		</div>
 	</div>
 {/snippet}
 

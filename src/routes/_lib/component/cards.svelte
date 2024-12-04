@@ -1,6 +1,5 @@
 <script lang="ts">
 	import ProductIcon from '$lib/component/product-icon.svelte';
-	import Box from '$lib/component/box.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import { cardInfoList, type CardInfo } from '../data/hero-cards';
 	import { inview } from 'svelte-inview';
@@ -29,7 +28,7 @@
 </div>
 
 {#snippet card({ imageSrc, titleEn, titleFa, size }: CardInfo)}
-	<Box class="card">
+	<div class="box card">
 		<figure class="content {size}">
 			<ProductIcon src={imageSrc} class="image" />
 			<figcaption class="caption">
@@ -37,7 +36,7 @@
 				<span class="text-fa">{titleFa}</span>
 			</figcaption>
 		</figure>
-	</Box>
+	</div>
 {/snippet}
 
 <style>

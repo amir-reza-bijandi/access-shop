@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Check, Menu, X } from 'lucide-svelte';
 	import type { NavigationProps, NavigationRoute } from '../../type/navigation';
-	import Box from '$lib/component/box.svelte';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
 	import detectOutsideClick from '$lib/action/detect-outside-click.svelte';
@@ -24,13 +23,13 @@
 		<span class="btn-icon open"><Menu /></span>
 		<span class="btn-icon close"><X /></span>
 	</button>
-	<Box class="box">
+	<div class="box">
 		<ul class="list">
 			{#each routeList as route}
 				{@render item(route)}
 			{/each}
 		</ul>
-	</Box>
+	</div>
 </nav>
 
 {#snippet item({ name, path }: NavigationRoute)}

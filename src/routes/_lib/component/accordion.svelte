@@ -2,7 +2,6 @@
 	import type { Snippet } from 'svelte';
 	import type { MouseEventHandler, TransitionEventHandler } from 'svelte/elements';
 	import { ChevronUp } from 'lucide-svelte';
-	import Box from '$lib/component/box.svelte';
 
 	type AccordionProps = {
 		title: string;
@@ -31,7 +30,7 @@
 	};
 </script>
 
-<Box>
+<div class="box">
 	<!-- 
       There is a bug in the Chrome browser that prevents the details element's
       animation from working with the first click. That's why i permently added
@@ -48,7 +47,7 @@
 			<p>{@render children()}</p>
 		</div>
 	</details>
-</Box>
+</div>
 
 <style>
 	.accordion {

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import detectOutsideClick from '$lib/action/detect-outside-click.svelte';
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
-	import Box from '$lib/component/box.svelte';
 	import Button from '$lib/component/button.svelte';
 	import { ChevronDown, LogIn, LogOut, ShoppingCart, User } from 'lucide-svelte';
 	import Auth from './auth.svelte';
@@ -23,7 +22,7 @@
 <Auth open={isAuthActive} onclose={toggleAuth} />
 <div class="account">
 	{#if IS_USER_LOGGEED_IN}
-		<Box class="btn-box">
+		<div class="box btn-box">
 			<button class="btn" use:rippleEffect onclick={toggleMenu}>
 				<span class="icon {isMenuActive ? 'active' : ''}">
 					<ChevronDown size={16} absoluteStrokeWidth strokeWidth={2} />
@@ -31,8 +30,8 @@
 				<span class="name">امیررضا بیجندی</span>
 				<img class="avatar" src="/image/avatar/1.png" alt="عکس پروفایل شما" />
 			</button>
-		</Box>
-		<Box class="menu-box {isMenuActive ? 'active' : ''}">
+		</div>
+		<div class="box menu-box {isMenuActive ? 'active' : ''}">
 			<div use:detectOutsideClick={() => (isMenuActive = false)}>
 				<div class="header">
 					<img class="bg" src="/image/avatar/1.png" alt="عکس پروفایل شما" />
@@ -59,7 +58,7 @@
 					</li>
 				</ul>
 			</div>
-		</Box>
+		</div>
 	{:else}
 		<Button class="login-btn-desktop" icon={LogIn} variant="outline" onclick={toggleAuth}
 			>ورود به حساب کاربری</Button
