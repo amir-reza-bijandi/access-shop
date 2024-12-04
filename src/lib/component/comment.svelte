@@ -7,12 +7,24 @@
 
 	type CommentProps = {
 		data: Comment;
+		showProductIcon?: boolean;
+		size?: 'small' | 'large';
+		viewAnimation?: boolean;
 	};
-	const { data }: CommentProps = $props();
+	const {
+		data,
+		showProductIcon = true,
+		size = 'large',
+		viewAnimation = true
+	}: CommentProps = $props();
 	const { name, text, date, iconSrc, avatarSrc } = data;
 </script>
 
-<div class="comment" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
+<div
+	class="comment {size === 'small' ? 'small' : ''}"
+	use:inview
+	oninview_change={viewAnimation ? (e) => handleViewChange(e.detail) : undefined}
+>
 	<article class="content box">
 		<header class="header">
 			<div class="info">
@@ -24,7 +36,9 @@
 					</time>
 				</div>
 			</div>
-			<ProductIcon class="icon" src={iconSrc} />
+			{#if showProductIcon}
+				<ProductIcon class="icon" src={iconSrc} />
+			{/if}
 		</header>
 		<p class="text">{text}</p>
 	</article>
@@ -54,11 +68,19 @@
 		gap: 1.6rem;
 	}
 
+	.small .info {
+		gap: 0.8rem;
+	}
+
 	.name {
 		font-size: 2rem;
 		font-weight: 700;
 		font-style: normal;
 		margin-bottom: 0.8rem;
+	}
+
+	.small .name {
+		font-size: 1.6rem;
 	}
 
 	.date {
@@ -70,6 +92,11 @@
 		height: 6.4rem;
 		border: 1px solid var(--stroke);
 		border-radius: 9999px;
+	}
+
+	.small .avatar {
+		width: 4.8rem;
+		height: 4.8rem;
 	}
 
 	.header :global(.icon) {
