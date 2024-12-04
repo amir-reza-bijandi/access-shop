@@ -50,8 +50,8 @@
 
 <div
 	class="content {context.error ? 'error' : ''} {context.isSubmiting ? 'submitting' : ''}"
-	in:fly|global={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
-	out:fly|global={{ x: -492, duration: 400, opacity: 0 }}
+	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
+	out:fly={{ x: -492, duration: 400, opacity: 0 }}
 >
 	<h2 class="title">ورود یا ثبت‌نام</h2>
 	<form class="form" onsubmit={handleSubmit}>
