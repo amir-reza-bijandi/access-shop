@@ -19,6 +19,8 @@
 	--accent: hsl(var(--base-teal-800));
 	--accent-tint: hsl(var(--base-teal-700));
 	--accent-shade: hsl(var(--base-teal-900));
+
+	--success: hsl(var(--base-teal-700));
 	--error: hsl(var(--base-red-800));
 
 	--bg-primary-33: hsl(var(--base-gray-900) / 33%);
@@ -69,6 +71,11 @@ body {
 
 ::selection {
 	background: var(--accent-shade);
+	color: var(--fg-primary);
+}
+
+input:-webkit-autofill::selection {
+	-webkit-text-fill-color: var(--fg-primary);
 	color: var(--fg-primary);
 }
 
