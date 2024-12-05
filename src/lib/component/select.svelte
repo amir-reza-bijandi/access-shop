@@ -11,9 +11,10 @@
 	type SelectProps = {
 		itemList: Item[];
 		value: number;
+		class?: string;
 		oninput?: (value: number) => void;
 	};
-	let { itemList, value: currentValue = $bindable(0) }: SelectProps = $props();
+	let { itemList, value: currentValue = $bindable(0), class: className }: SelectProps = $props();
 
 	let isSelectActive = $state(false);
 
@@ -28,7 +29,7 @@
 </script>
 
 <div
-	class="select {isSelectActive ? 'active' : ''}"
+	class="select {className} {isSelectActive ? 'active' : ''}"
 	use:detectOutsideClick={() => (isSelectActive = false)}
 >
 	<button type="button" class="menu-btn" onclick={handleToggle} use:rippleEffect>

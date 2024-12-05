@@ -29,9 +29,19 @@
 	<div class="box rounded-lg">
 		<div class="content">
 			<div class="options">
-				<Select itemList={planTypeList} bind:value={context.typeId} />
-				<Select itemList={planPeriodList} bind:value={context.periodId} />
-				<Select itemList={planUserLimitList} bind:value={context.userLimitId} />
+				<div class="select-wrapper">
+					<span class="label">نوع اشتراک</span>
+					<Select class="select" itemList={planTypeList} bind:value={context.typeId} />
+				</div>
+				<div class="select-wrapper">
+					<span class="label">بازهٔ زمانی</span>
+
+					<Select class="select" itemList={planPeriodList} bind:value={context.periodId} />
+				</div>
+				<div class="select-wrapper">
+					<span class="label">تعداد کاربران</span>
+					<Select class="select" itemList={planUserLimitList} bind:value={context.userLimitId} />
+				</div>
 			</div>
 			<section class="description">
 				<Glow class="glow" />
@@ -56,6 +66,22 @@
 		justify-content: center;
 		gap: 1.6rem;
 		padding-left: var(--subscription-padding);
+	}
+
+	.options .select-wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1.2rem;
+	}
+
+	.options :global(.select) {
+		width: 100%;
+	}
+
+	.label {
+		font-weight: 700;
+		min-width: 8.3rem;
 	}
 
 	.description {
@@ -99,6 +125,14 @@
 
 		.options {
 			padding: 0;
+		}
+
+		.options .select-wrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: start;
+			flex-direction: column;
+			gap: 1.2rem;
 		}
 	}
 </style>
