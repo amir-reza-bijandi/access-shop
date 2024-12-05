@@ -3,35 +3,35 @@
 	import Select from '$lib/component/select.svelte';
 	import formatPlanTypeName from '../utility/format-plan-type-name';
 	import { singleProduct } from '../data/single-product';
+	import { getContext } from 'svelte';
+	import type { CheckoutContext } from '../type/checkout';
 
 	const { plan } = singleProduct;
+	const context: CheckoutContext = getContext('checkout');
 
 	const planTypeList = plan.typeList.map((type) => ({
 		name: formatPlanTypeName(type),
 		value: type.id
 	}));
-	let selectedTypeId = $state(planTypeList[0].value);
 
 	let planPeriodList = plan.periodList
-		.filter((period) => period.typeId === selectedTypeId || period.typeId === 0)
+		.filter((period) => period.typeId === context.typeId || period.typeId === 0)
 		.map((period) => ({ name: period.nameFa, value: period.id }));
-	let selectedPeriodId = $state(planPeriodList[0].value);
 
 	let planUserLimitList = plan.userLimitList
-		.filter((userLimit) => userLimit.periodId === selectedPeriodId || userLimit.periodId === 0)
+		.filter((userLimit) => userLimit.periodId === context.periodId || userLimit.periodId === 0)
 		.map((userLimit) => ({ name: userLimit.nameFa, value: userLimit.id }));
-	let selectedPlanId = $state(planUserLimitList[0].value);
 
-	const selectedType = $derived(plan.typeList.find((type) => type.id === selectedTypeId)!);
+	const selectedType = $derived(plan.typeList.find((type) => type.id === context.typeId)!);
 </script>
 
 <div class="subscription">
 	<div class="box rounded-lg">
 		<div class="content">
 			<div class="options">
-				<Select itemList={planTypeList} bind:value={selectedTypeId} />
-				<Select itemList={planPeriodList} bind:value={selectedPeriodId} />
-				<Select itemList={planUserLimitList} bind:value={selectedPlanId} />
+				<Select itemList={planTypeList} bind:value={context.typeId} />
+				<Select itemList={planPeriodList} bind:value={context.periodId} />
+				<Select itemList={planUserLimitList} bind:value={context.userLimitId} />
 			</div>
 			<section class="description">
 				<Glow class="glow" />
