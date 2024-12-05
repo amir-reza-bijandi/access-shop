@@ -2,6 +2,7 @@
 	import detectOutsideClick from '$lib/action/detect-outside-click.svelte';
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
 	import { Check, ChevronDown } from 'lucide-svelte';
+	import { fly } from 'svelte/transition';
 
 	type Item = {
 		name: string;
@@ -40,20 +41,22 @@
 			<ChevronDown size={16} strokeWidth={1.5} absoluteStrokeWidth />
 		</div>
 	</button>
-	<ul class="menu">
-		{#each itemList as { name, value } (value)}
-			<li class="item">
-				<button class="item-btn" type="button" onclick={() => handleSelect(value)}>
-					{name}
-					{#if currentValue === value}
-						<div class="check-icon">
-							<Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
-						</div>
-					{/if}
-				</button>
-			</li>
-		{/each}
-	</ul>
+	{#if isSelectActive}
+		<ul class="menu" transition:fly={{ duration: 200, opacity: 0, y: 8 }}>
+			{#each itemList as { name, value } (value)}
+				<li class="item">
+					<button class="item-btn" type="button" onclick={() => handleSelect(value)}>
+						{name}
+						{#if currentValue === value}
+							<div class="check-icon">
+								<Check size={16} strokeWidth={1.5} absoluteStrokeWidth />
+							</div>
+						{/if}
+					</button>
+				</li>
+			{/each}
+		</ul>
+	{/if}
 </div>
 
 <style>
@@ -101,20 +104,10 @@
 		list-style: none;
 		border: 1px solid var(--stroke-focus);
 		border-radius: 0.8rem;
-		background: var(--bg-primary-33);
-		backdrop-filter: blur(40px);
-		opacity: 0;
-		transform: translateY(0.6rem);
-		pointer-events: none;
-		transition-property: opacity, transform;
-		transition-duration: var(--duration);
+		background: var(--bg-primary);
+		/* There is bug in Chrome that prevents nested backdrop-filter */
+		/* backdrop-filter: blur(40px); */
 		z-index: 2;
-	}
-
-	.select.active .menu {
-		opacity: 1;
-		transform: translateY(0);
-		pointer-events: all;
 	}
 
 	.item {
