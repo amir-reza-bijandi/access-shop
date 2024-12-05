@@ -81,11 +81,11 @@ input:-webkit-autofill::selection {
 
 html,
 body {
-	overflow-x: hidden;
+	overflow-x: clip;
 }
 
 body {
-	overflow-y: hidden;
+	overflow-y: clip;
 	min-height: 100vh;
 }
 

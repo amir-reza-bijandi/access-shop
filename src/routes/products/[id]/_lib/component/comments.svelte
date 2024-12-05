@@ -4,7 +4,7 @@
 	import { commentList } from '$lib/data/comments';
 	import type { FormEventHandler } from 'svelte/elements';
 
-	const IS_USER_LOGGED_IN = false;
+	const IS_USER_LOGGED_IN = true;
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault();
@@ -50,8 +50,9 @@
 	}
 
 	.comment-form {
-		position: relative;
-		width: 30.2rem;
+		position: sticky;
+		top: 2rem;
+		min-width: 30.2rem;
 		height: 24.8rem;
 		flex-shrink: 0;
 	}
@@ -69,5 +70,56 @@
 		resize: none;
 		padding: 2rem;
 		width: 100%;
+	}
+
+	@media (max-width: 64rem) {
+		.content {
+			flex-direction: column;
+			gap: 2rem;
+		}
+
+		.comment-form {
+			order: 1;
+		}
+
+		.list {
+			order: 2;
+		}
+	}
+
+	@media (max-width: 56rem) {
+		.content {
+			flex-direction: row;
+			gap: 2rem;
+		}
+
+		.comment-form {
+			order: 2;
+			min-width: 32rem;
+		}
+
+		.list {
+			order: 1;
+		}
+	}
+
+	@media (max-width: 48rem) {
+		.content {
+			flex-direction: column;
+		}
+
+		.comment-form {
+			position: relative;
+			order: 1;
+			top: 0;
+		}
+
+		.list {
+			order: 2;
+		}
+
+		.title {
+			display: none;
+		}
 	}
 </style>

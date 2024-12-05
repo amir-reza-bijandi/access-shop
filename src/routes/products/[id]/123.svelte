@@ -4,6 +4,7 @@
 	import FullDescription from './_lib/component/full-description.svelte';
 	import ProductBranding from './_lib/component/product-branding.svelte';
 	import ShortDescription from './_lib/component/short-description.svelte';
+	import CheckoutOptions from './_lib/component/checkout-options.svelte';
 	import Subscription from './_lib/component/subscription.svelte';
 	import type { CheckoutContext } from './_lib/type/checkout';
 	import { singleProduct } from './_lib/data/single-product';
@@ -27,19 +28,29 @@
 </script>
 
 <PageWrapper as="div">
-	<main class="main">
-		<div class="short-description-tablet">
+	<div class="desktop">
+		<div class="content">
+			<ShortDescription />
+			<Subscription />
+			<article>
+				<ProductBranding />
+				<FullDescription />
+			</article>
+			<Comments />
+		</div>
+		<CheckoutOptions />
+	</div>
+	<div class="tablet">
+		<div class="short-description">
 			<ShortDescription />
 		</div>
-		<div class="short-description-desktop">
-			<ShortDescription />
+		<div class="right-column">
+			<Subscription />
+			<ProductBranding />
+			<FullDescription />
 		</div>
-		<Subscription />
-		<ProductBranding />
-		<FullDescription />
-
-		<div class="sidebar">
-			<div class="sidebar-content">
+		<div class="left-column">
+			<div class="left-column-content">
 				<Checkout />
 				<NewAccount />
 				<FastDelivary />
@@ -50,77 +61,57 @@
 		<div class="comments">
 			<Comments />
 		</div>
-	</main>
+	</div>
 </PageWrapper>
 
 <style>
-	.main {
+	.desktop {
 		display: grid;
 		grid-template-columns: 1fr 32rem;
-		gap: 2rem;
-		grid-template-rows: min-content;
+		gap: 2.4rem;
 	}
 
-	.sidebar {
-		grid-area: 1/2/5/3;
-	}
-
-	.sidebar-content {
-		position: sticky;
-		top: 2rem;
-		display: grid;
-		gap: 2rem;
-	}
-
-	.short-description-tablet {
+	.tablet {
 		display: none;
+		gap: 2rem;
+	}
+
+	.content {
+		display: grid;
+		gap: 3.2rem;
 	}
 
 	@media (max-width: 56rem) {
-		.short-description-desktop {
+		.desktop {
 			display: none;
 		}
 
-		.short-description-tablet {
-			display: block;
-			grid-column: span 2;
-		}
-
-		.sidebar {
-			grid-area: 2/2/5/3;
-		}
-
-		.comments {
-			grid-column: span 2;
-		}
-	}
-
-	@media (max-width: 48rem) {
-		.main {
+		.tablet {
 			display: grid;
-			grid-template-columns: 1fr;
+			grid-template-columns: 1fr 32rem;
+		}
+
+		.short-description {
+			grid-column: span 2;
+		}
+
+		.right-column {
+			display: grid;
 			gap: 2rem;
-			grid-template-rows: min-content;
+			align-content: start;
 		}
 
-		.short-description-tablet {
-			display: block;
-			grid-column: span 1;
-		}
-
-		.sidebar {
-			grid-area: 3/1/6/2;
-		}
-
-		.sidebar-content {
+		.left-column-content {
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
 			position: sticky;
 			top: 2rem;
-			display: grid;
-			gap: 2rem;
+			align-self: start;
 		}
 
 		.comments {
-			grid-column: span 1;
+			grid-column: span 2;
 		}
 	}
 </style>

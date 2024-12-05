@@ -7,9 +7,9 @@
 
 <section class="short-description">
 	<header class="header">
-		<div class="box"><ProductIcon src={imageSrc} /></div>
+		<div class="box"><ProductIcon class="product-icon" src={imageSrc} /></div>
 		<div>
-			<h1 class="heading">خرید اشتراک {nameFa} ({nameEn})</h1>
+			<h1 class="heading">خرید {nameFa} ({nameEn})</h1>
 			<span class="subheading">{slogan}</span>
 		</div>
 	</header>
@@ -24,7 +24,7 @@
 		margin-bottom: 1.6rem;
 	}
 
-	.header :global(.box) {
+	.box {
 		padding: 1.2rem;
 	}
 
@@ -40,5 +40,14 @@
 
 	.body {
 		line-height: var(--line-height);
+	}
+
+	@media (max-width: 32rem) {
+		.short-description :global(.product-icon) {
+			width: 4.8rem;
+		}
+		.heading {
+			font-size: 1.8rem;
+		}
 	}
 </style>

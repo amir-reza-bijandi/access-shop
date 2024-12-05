@@ -16,7 +16,7 @@
 		{#if Array.isArray(body)}
 			<ul class="list">
 				{#each body as item}
-					<li>{item}</li>
+					<li class="item">{item}</li>
 				{/each}
 			</ul>
 		{:else}
@@ -43,7 +43,11 @@
 	.list {
 		margin-top: 1rem;
 		display: grid;
-		gap: 0.8rem;
+		gap: 0.4rem;
 		padding-right: 2rem;
+	}
+
+	.item {
+		line-height: var(--line-height);
 	}
 </style>

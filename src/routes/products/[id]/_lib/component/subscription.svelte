@@ -44,7 +44,7 @@
 
 <style>
 	.content {
-		--subscription-padding: 2.4rem;
+		--subscription-padding: 2rem;
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		padding: var(--subscription-padding);
@@ -83,5 +83,22 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		z-index: -1;
+	}
+
+	@media (max-width: 68rem) {
+		.content {
+			grid-template-columns: 1fr;
+			grid-template-rows: repeat(2, auto);
+			gap: var(--subscription-padding);
+		}
+
+		.description {
+			border-right: 0;
+			padding: 0;
+		}
+
+		.options {
+			padding: 0;
+		}
 	}
 </style>

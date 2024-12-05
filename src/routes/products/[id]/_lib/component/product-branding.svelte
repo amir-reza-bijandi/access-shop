@@ -27,7 +27,7 @@
 		width: 100%;
 		aspect-ratio: 109/60;
 		overflow: hidden;
-		margin-bottom: 2.4rem;
+		margin-bottom: 1.2rem;
 	}
 
 	.product-branding :global(.pattern) {
@@ -41,7 +41,7 @@
 
 	.product-branding :global(.glow) {
 		position: absolute;
-		width: 76.8rem;
+		width: 88%;
 		top: 0;
 		left: 50%;
 		transform: translate(-50%, -50%);
@@ -69,5 +69,116 @@
 
 	.name-fa {
 		font-size: 4.8rem;
+	}
+
+	@media (max-width: 72rem) {
+		.icon {
+			width: 16rem;
+		}
+
+		.name-en {
+			font-size: 5.6rem;
+		}
+
+		.name-fa {
+			font-size: 4rem;
+		}
+	}
+
+	@media (max-width: 64rem) {
+		.icon {
+			width: 12.8rem;
+		}
+
+		.name-en {
+			font-size: 3.8rem;
+		}
+
+		.name-fa {
+			font-size: 3.2rem;
+		}
+	}
+
+	@media (max-width: 54rem) {
+		.icon {
+			width: 11.2rem;
+		}
+
+		.name-en {
+			font-size: 3.4rem;
+		}
+
+		.name-fa {
+			font-size: 2.8rem;
+		}
+	}
+
+	@media (max-width: 48rem) {
+		.icon {
+			width: 16rem;
+		}
+
+		.name-en {
+			font-size: 5.6rem;
+		}
+
+		.name-fa {
+			font-size: 4rem;
+		}
+	}
+
+	@media (max-width: 44rem) {
+		.icon {
+			width: 12.8rem;
+		}
+
+		.name-en {
+			font-size: 3.8rem;
+		}
+
+		.name-fa {
+			font-size: 3.2rem;
+		}
+	}
+
+	@media (max-width: 34rem) {
+		.icon {
+			width: 11.2rem;
+		}
+
+		.name-en {
+			font-size: 3.4rem;
+		}
+
+		.name-fa {
+			font-size: 2.8rem;
+		}
+	}
+
+	@media (max-width: 34rem) {
+		.icon {
+			width: 11.2rem;
+		}
+
+		.name-en {
+			font-size: 3.4rem;
+		}
+
+		.name-fa {
+			font-size: 2.8rem;
+		}
+	}
+	@media (max-width: 28rem) {
+		.icon {
+			width: 9.6rem;
+		}
+
+		.name-en {
+			font-size: 3.2rem;
+		}
+
+		.name-fa {
+			font-size: 2.4rem;
+		}
 	}
 </style>

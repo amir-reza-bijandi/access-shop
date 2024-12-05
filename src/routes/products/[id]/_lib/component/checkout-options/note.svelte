@@ -16,4 +16,10 @@
 		outline: 0;
 		resize: vertical;
 	}
+
+	@media (max-width: 32rem) {
+		.text {
+			resize: none;
+		}
+	}
 </style>
