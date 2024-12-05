@@ -27,7 +27,7 @@
 		.page-wrapper {
 			/* Using a higher value to account for navigation on mobile */
 			padding-top: 3.2rem;
-			padding-bottom: 6.8rem;
+			padding-bottom: 9.6rem;
 		}
 	}
 </style>

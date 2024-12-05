@@ -46,7 +46,6 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
 		gap: 2rem;
-		margin-bottom: 3rem;
 	}
 
 	.wrapper :global(.container-glow) {
@@ -66,6 +65,7 @@
 		padding: 1.6rem;
 		transition-property: color, filter;
 		transition-duration: calc(var(--duration) * 2);
+		margin-top: 3.2rem;
 	}
 
 	.view-all:hover {
