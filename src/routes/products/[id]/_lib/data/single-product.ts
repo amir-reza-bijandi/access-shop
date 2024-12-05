@@ -1,4 +1,4 @@
-import { type Comment, commentList } from '../../../../../lib/data/comments';
+import { type Comment, commentList } from '$lib/data/comments';
 
 type Name = {
 	nameFa: string;
@@ -34,7 +34,7 @@ export type Plan = {
 };
 
 export type SingleProduct = {
-	type: 'voucher' | 'account';
+	accountType: 'voucher' | 'email' | 'phone';
 	slogan: string;
 	nameFa: string;
 	nameEn: string;
@@ -42,11 +42,14 @@ export type SingleProduct = {
 	shortDescription: string;
 	fullDescription: Description[];
 	plan: Plan;
+	discount: number;
+	accountFee: number;
+	fastDeliveryFee: number;
 	commentList: Comment[];
 };
 
 export const singleProduct: SingleProduct = {
-	type: 'account',
+	accountType: 'email',
 	nameFa: 'سینتژیا',
 	nameEn: 'Synthesia',
 	slogan: 'انقلاب هوش مصنوعی در تولید محتوا',
@@ -128,5 +131,8 @@ export const singleProduct: SingleProduct = {
 				price: 0
 			}
 		]
-	}
+	},
+	accountFee: 200_000,
+	fastDeliveryFee: 100_000,
+	discount: 10
 };
