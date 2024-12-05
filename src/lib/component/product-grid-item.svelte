@@ -9,9 +9,10 @@
 
 	type ProductProps = {
 		info: ProductInfo;
+		showPattern?: boolean;
 	};
 
-	const { info }: ProductProps = $props();
+	const { info, showPattern = true }: ProductProps = $props();
 	const { id, nameFa, nameEn, description, imageSrc, deliveryTime, startingPrice } = info;
 </script>
 
@@ -20,7 +21,9 @@
 		<article class="content">
 			<!-- BODY -->
 			<div class="body">
-				<Pattern class="pattern" visibility="high" />
+				{#if showPattern}
+					<Pattern class="pattern" visibility="high" />
+				{/if}
 				<figure class="image">
 					<ProductIcon src={imageSrc} class="icon" />
 				</figure>

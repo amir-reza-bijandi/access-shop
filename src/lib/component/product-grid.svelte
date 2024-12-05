@@ -12,8 +12,9 @@
 			description: string;
 		};
 		showViewAll?: boolean;
+		showPattern?: boolean;
 	};
-	const { infoList, title, showViewAll }: ProductGridProps = $props();
+	const { infoList, title, showViewAll, showPattern = true }: ProductGridProps = $props();
 </script>
 
 <section class="products" id="products">
@@ -23,7 +24,7 @@
 	<div class="wrapper">
 		<Glow class="container-glow" />
 		{#each infoList as productInfo (productInfo.id)}
-			<ProductGridItem info={productInfo} />
+			<ProductGridItem info={productInfo} {showPattern} />
 		{/each}
 	</div>
 	{#if showViewAll}

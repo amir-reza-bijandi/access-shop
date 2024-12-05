@@ -5,5 +5,5 @@
 </script>
 
 <PageWrapper>
-	<ProductGrid infoList={productInfoList} />
+	<ProductGrid infoList={productInfoList} showPattern={false} />
 </PageWrapper>
