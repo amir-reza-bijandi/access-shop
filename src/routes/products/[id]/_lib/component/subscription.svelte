@@ -111,6 +111,12 @@
 		z-index: -1;
 	}
 
+	@media (min-width: 48rem) {
+		.subscription {
+			animation: intro-right 1s ease backwards;
+		}
+	}
+
 	@media (max-width: 68rem) {
 		.content {
 			grid-template-columns: 1fr;

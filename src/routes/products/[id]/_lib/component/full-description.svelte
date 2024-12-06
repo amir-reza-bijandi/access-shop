@@ -50,4 +50,10 @@
 	.item {
 		line-height: var(--line-height);
 	}
+
+	@media (min-width: 48rem) {
+		.full-description {
+			animation: intro-right 1s ease backwards;
+		}
+	}
 </style>

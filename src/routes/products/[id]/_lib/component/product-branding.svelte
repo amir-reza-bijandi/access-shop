@@ -71,6 +71,12 @@
 		font-size: 4.8rem;
 	}
 
+	@media (min-width: 48rem) {
+		.product-branding {
+			animation: intro-right 1s ease backwards;
+		}
+	}
+
 	@media (max-width: 72rem) {
 		.icon {
 			width: 16rem;

@@ -75,6 +75,17 @@
 
 	.short-description-tablet {
 		display: none;
+		animation: intro-down 1s ease backwards;
+	}
+
+	.short-description-desktop {
+		animation: intro-right 1s ease backwards;
+	}
+
+	@media (min-width: 48rem) {
+		.sidebar {
+			animation: intro-left 1s ease backwards;
+		}
 	}
 
 	@media (max-width: 68rem) {
@@ -104,11 +115,13 @@
 			grid-template-columns: 1fr;
 			gap: 2rem;
 			grid-template-rows: min-content;
+			animation: intro-up 1s ease backwards;
 		}
 
 		.short-description-tablet {
 			display: block;
 			grid-column: span 1;
+			animation: none;
 		}
 
 		.sidebar {
