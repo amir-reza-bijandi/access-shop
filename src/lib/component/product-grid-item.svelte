@@ -57,7 +57,7 @@
 		animation-delay: calc(var(--animation-index) * 100ms);
 		animation-duration: 1s;
 		animation-timing-function: ease;
-		animation-fill-mode: both;
+		animation-fill-mode: backwards;
 	}
 
 	.product :global(.box) {
