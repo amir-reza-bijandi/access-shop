@@ -89,7 +89,7 @@
 	/* Tablet */
 	@media (max-width: 68rem) {
 		.wrapper {
-			grid-template-columns: repeat(auto-fit, minmax(40.7rem, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(41.3rem, 1fr));
 		}
 		/* Because of the scrollbar size difference in firefox and chrome
 		   we need to set a different min size for layout change */
