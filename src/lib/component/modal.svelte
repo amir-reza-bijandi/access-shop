@@ -34,7 +34,7 @@
 	const transitionDuration = 200;
 </script>
 
-<svelte:window on:keydown={(e) => e.key === 'Escape' && onclose?.()} />
+<svelte:window on:keydown={(e) => e.key === 'Escape' && open && onclose?.()} />
 <Portal target="body">
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
