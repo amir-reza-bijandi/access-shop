@@ -22,7 +22,7 @@
 </script>
 
 <Auth open={isAuthActive} onclose={toggleAuth} />
-<div class="account">
+<div class="account" use:detectOutsideClick={() => (isMenuActive = false)}>
 	{#if userContext.isLoggedIn}
 		<div class="box btn-box">
 			<button class="btn" use:rippleEffect onclick={toggleMenu}>
@@ -34,7 +34,7 @@
 			</button>
 		</div>
 		<div class="box menu-box {isMenuActive ? 'active' : ''}">
-			<div use:detectOutsideClick={() => (isMenuActive = false)}>
+			<div>
 				<div class="header">
 					<img class="bg" src="/image/avatar/1.png" alt="عکس پروفایل شما" />
 					<span class="welcome">خوش اومدی!</span>

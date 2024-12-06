@@ -6,7 +6,7 @@
 	import type { UserContext } from '$lib/type/user';
 	const { children } = $props();
 	const userContext: UserContext = $state({
-		isLoggedIn: false
+		isLoggedIn: true
 	});
 	setContext('user', userContext);
 </script>
