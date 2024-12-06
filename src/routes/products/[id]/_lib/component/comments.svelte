@@ -26,9 +26,8 @@
 			</ul>
 		{/if}
 		{#if IS_USER_LOGGED_IN}
-			<form class="comment-form" onsubmit={handleSubmit}>
-				<textarea class="text box rounded-lg" placeholder="دیدگاه خود را اینجا بنویسید..."
-				></textarea>
+			<form class="comment-form box rounded-lg" onsubmit={handleSubmit}>
+				<textarea class="text" placeholder="دیدگاه خود را اینجا بنویسید..."></textarea>
 				<Button type="submit" class="submit">ثبت دیدگاه</Button>
 			</form>
 		{/if}
@@ -50,10 +49,14 @@
 
 	.content {
 		display: flex;
-		gap: 1.6rem;
+		gap: 2rem;
 	}
 
 	.comment-form {
+		display: flex;
+		flex-direction: column;
+		gap: 1.6rem;
+		padding: 2rem;
 		position: sticky;
 		top: 2rem;
 		min-width: 32rem;
@@ -69,9 +72,7 @@
 	}
 
 	.comment-form :global(.submit) {
-		position: absolute;
-		width: auto;
-		inset: auto 2rem 2rem 2rem;
+		width: 100%;
 	}
 
 	.text {
@@ -79,8 +80,10 @@
 		outline: 0;
 		height: 100%;
 		resize: none;
-		padding: 2rem;
 		width: 100%;
+		background: transparent;
+		border: 0;
+		outline: 0;
 	}
 
 	@media (max-width: 48rem) {
