@@ -5,14 +5,16 @@
 	import { fly } from 'svelte/transition';
 	import type { AuthContext } from '../../type/auth';
 	import { getContext } from 'svelte';
+	import type { UserContext } from '$lib/type/user';
 
-	const context: AuthContext = getContext('auth');
+	const authContext: AuthContext = getContext('auth');
+	const userContext: UserContext = getContext('user');
 	let fullName = $state('');
 
 	// Logic for submitting the form
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
-		context.setSubmit(true);
+		authContext.setSubmit(true);
 
 		// Remove focus from the input
 		const input = document.getElementById('full-name-input');
@@ -21,13 +23,14 @@
 		}
 
 		await new Promise((resolve) => setTimeout(resolve, 2000));
-		context.setSubmit(false);
-		context.closeModal();
+		authContext.setSubmit(false);
+		authContext.closeModal();
+		userContext.isLoggedIn = true;
 	};
 
 	// Remove error when user starts typing
 	const handleInput = () => {
-		context.setError(null);
+		authContext.setError(null);
 	};
 
 	// Validate user input
@@ -35,16 +38,16 @@
 		const input = e.currentTarget;
 		e.preventDefault();
 		if (input.validity.valueMissing) {
-			context.setError('نام و نام خانوادگی برای تکمیل ثبت نام الزامیست!');
+			authContext.setError('نام و نام خانوادگی برای تکمیل ثبت نام الزامیست!');
 		}
 		if (input.validity.patternMismatch) {
-			context.setError('تنها استفاده از حروف فارسی مجاز است!');
+			authContext.setError('تنها استفاده از حروف فارسی مجاز است!');
 		}
 	};
 </script>
 
 <div
-	class="content {context.error ? 'error' : ''} {context.isSubmiting ? 'submitting' : ''}"
+	class="content {authContext.error ? 'error' : ''} {authContext.isSubmiting ? 'submitting' : ''}"
 	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly={{ x: -492, duration: 400, opacity: 0 }}
 >
@@ -64,13 +67,13 @@
 		/>
 		<div class="buttons">
 			<Button id="submit" type="submit">تکمیل ثبت‌نام</Button>
-			<Button type="button" variant="outline" onclick={context.cancel}>انصراف</Button>
+			<Button type="button" variant="outline" onclick={authContext.cancel}>انصراف</Button>
 		</div>
 	</form>
 	<div class="error-container">
-		{#if context.error}
+		{#if authContext.error}
 			<span transition:fly={{ duration: 200, opacity: 0, y: -10 }} class="error-message">
-				{context.error}
+				{authContext.error}
 			</span>
 		{/if}
 	</div>

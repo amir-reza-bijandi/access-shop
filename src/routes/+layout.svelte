@@ -1,9 +1,14 @@
-<script>
-	import Pattern from '$lib/component/pattern.svelte';
+<script lang="ts">
 	import Background from './_lib/component/background.svelte';
 	import Header from './_lib/component/header.svelte';
 	import '../app.css';
+	import { setContext } from 'svelte';
+	import type { UserContext } from '$lib/type/user';
 	const { children } = $props();
+	const userContext: UserContext = $state({
+		isLoggedIn: false
+	});
+	setContext('user', userContext);
 </script>
 
 <div class="app">

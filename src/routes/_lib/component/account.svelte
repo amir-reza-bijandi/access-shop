@@ -4,8 +4,10 @@
 	import Button from '$lib/component/button.svelte';
 	import { ChevronDown, LogIn, LogOut, ShoppingCart, User } from 'lucide-svelte';
 	import Auth from './auth.svelte';
+	import { getContext } from 'svelte';
+	import type { UserContext } from '$lib/type/user';
 
-	const IS_USER_LOGGEED_IN = false;
+	const userContext: UserContext = getContext('user');
 
 	let isMenuActive = $state(false);
 	let isAuthActive = $state(false);
@@ -21,7 +23,7 @@
 
 <Auth open={isAuthActive} onclose={toggleAuth} />
 <div class="account">
-	{#if IS_USER_LOGGEED_IN}
+	{#if userContext.isLoggedIn}
 		<div class="box btn-box">
 			<button class="btn" use:rippleEffect onclick={toggleMenu}>
 				<span class="icon {isMenuActive ? 'active' : ''}">

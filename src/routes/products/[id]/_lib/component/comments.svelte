@@ -4,6 +4,8 @@
 	import type { FormEventHandler, EventHandler } from 'svelte/elements';
 	import { singleProduct } from '../data/single-product';
 	import Status from '$lib/component/status.svelte';
+	import type { UserContext } from '$lib/type/user';
+	import { getContext } from 'svelte';
 
 	type Form = {
 		status: 'error' | 'success' | null;
@@ -16,7 +18,7 @@
 		isSubmitting: false
 	});
 
-	const IS_USER_LOGGED_IN = true;
+	const userContext: UserContext = getContext('user');
 
 	const { commentList } = singleProduct;
 
@@ -59,7 +61,7 @@
 				{/each}
 			</ul>
 		{/if}
-		{#if IS_USER_LOGGED_IN}
+		{#if userContext.isLoggedIn}
 			<form class="comment-form box rounded-lg" onsubmit={handleSubmit}>
 				<div class="comment-form-wrapper">
 					<textarea
