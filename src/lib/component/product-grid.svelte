@@ -13,18 +13,34 @@
 		};
 		showViewAll?: boolean;
 		showPattern?: boolean;
+		introAnimation?: boolean;
 	};
-	const { infoList, title, showViewAll, showPattern = true }: ProductGridProps = $props();
+	const {
+		infoList,
+		title,
+		showViewAll,
+		showPattern = true,
+		introAnimation = false
+	}: ProductGridProps = $props();
+
+	function getAnimationName(index: number) {
+		return introAnimation ? ((index + 1) % 2 === 0 ? 'intro-left' : 'intro-right') : '';
+	}
 </script>
 
-<section class="products" id="products">
+<section class="products {introAnimation ? 'intro-animation' : ''}" id="products">
 	{#if title}
 		<Title text={title.text} description={title.description} />
 	{/if}
 	<div class="wrapper">
 		<Glow class="container-glow" />
-		{#each infoList as productInfo (productInfo.id)}
-			<ProductGridItem info={productInfo} {showPattern} />
+		{#each infoList as productInfo, index (productInfo.id)}
+			<ProductGridItem
+				info={productInfo}
+				{showPattern}
+				--animation-index={index}
+				--animation-name={getAnimationName(index)}
+			/>
 		{/each}
 	</div>
 	{#if showViewAll}

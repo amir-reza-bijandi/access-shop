@@ -187,3 +187,27 @@ body {
 		opacity: 0;
 	}
 }
+
+/* Intro Animations */
+
+@keyframes intro-right {
+	0% {
+		transform: translateX(3.2rem);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0rem);
+		opacity: 1;
+	}
+}
+
+@keyframes intro-left {
+	0% {
+		transform: translateX(-3.2rem);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0rem);
+		opacity: 1;
+	}
+}

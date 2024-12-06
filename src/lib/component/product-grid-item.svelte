@@ -52,6 +52,14 @@
 </div>
 
 <style>
+	.product {
+		animation-name: var(--animation-name);
+		animation-delay: calc(var(--animation-index) * 100ms);
+		animation-duration: 1s;
+		animation-timing-function: ease;
+		animation-fill-mode: both;
+	}
+
 	.product :global(.box) {
 		height: 100%;
 	}
