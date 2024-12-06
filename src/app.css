@@ -37,6 +37,10 @@
 
 	--ripple-color: hsl(var(--base-gray-100) / 10%);
 	--ripple-duration: 500ms;
+
+	--sb-track-color: hsl(var(--base-teal-800) / 10%);
+	--sb-thumb-color: hsl(var(--base-teal-800));
+	--sb-size: 4px;
 }
 
 *:not(input, textarea):focus-visible {
@@ -87,6 +91,28 @@ body {
 body {
 	overflow-y: clip;
 	min-height: 100vh;
+}
+
+/* Scrollbar */
+
+*::-webkit-scrollbar {
+	width: var(--sb-size);
+}
+
+*::-webkit-scrollbar-track {
+	background: var(--sb-track-color);
+	border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background: var(--sb-thumb-color);
+	border-radius: 4px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+	* {
+		scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+	}
 }
 
 .pause-animations * {
