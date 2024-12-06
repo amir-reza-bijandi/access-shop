@@ -14,15 +14,17 @@
 <section class="comments">
 	<h2 class="title">دیدگاه مشتریان</h2>
 	<div class="content">
-		<ul class="list">
-			{#each commentList as comment (comment.id)}
-				<li>
-					<Comment data={comment} showProductIcon={false} size="small" viewAnimation={false} />
-				</li>
-			{/each}
-		</ul>
+		{#if commentList.length > 0}
+			<ul class="list">
+				{#each commentList as comment (comment.id)}
+					<li>
+						<Comment data={comment} showProductIcon={false} size="small" viewAnimation={false} />
+					</li>
+				{/each}
+			</ul>
+		{/if}
 		{#if IS_USER_LOGGED_IN}
-			<form class="comment-form" onsubmit={handleSubmit}>
+			<form class="comment-form {!commentList.length ? 'no-comment' : ''}" onsubmit={handleSubmit}>
 				<textarea class="text box rounded-lg" placeholder="دیدگاه خود را اینجا بنویسید..."
 				></textarea>
 				<Button type="submit" class="submit">ثبت دیدگاه</Button>
@@ -55,6 +57,13 @@
 		min-width: 30.2rem;
 		height: 24.8rem;
 		flex-shrink: 0;
+	}
+
+	.comment-form.no-comment {
+		position: relative;
+		top: 0;
+		flex-shrink: 1;
+		width: 100%;
 	}
 
 	.comment-form :global(.submit) {

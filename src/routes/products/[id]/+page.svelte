@@ -89,10 +89,6 @@
 		.sidebar {
 			grid-area: 2/2/5/3;
 		}
-
-		.comments {
-			grid-column: span 2;
-		}
 	}
 
 	@media (max-width: 48rem) {
@@ -117,10 +113,6 @@
 			top: 2rem;
 			display: grid;
 			gap: 2rem;
-		}
-
-		.comments {
-			grid-column: span 1;
 		}
 	}
 </style>
