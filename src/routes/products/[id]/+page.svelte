@@ -14,13 +14,14 @@
 	import DiscountCode from './_lib/component/checkout-options/discount-code.svelte';
 	import Note from './_lib/component/checkout-options/note.svelte';
 
+	const { plan, commentList } = singleProduct;
 	const checkoutContext: CheckoutContext = $state({
 		accountFee: false,
 		fastDeliveryFee: true,
 		coupon: 0,
-		typeId: singleProduct.plan.typeList[0].id,
-		periodId: singleProduct.plan.periodList[0].id,
-		userLimitId: singleProduct.plan.userLimitList[0].id
+		typeId: plan.typeList[0].id,
+		periodId: plan.periodList[0].id,
+		userLimitId: plan.userLimitList[0].id
 	});
 
 	setContext('checkout', checkoutContext);
@@ -47,7 +48,7 @@
 				<Note />
 			</div>
 		</div>
-		<div class="comments">
+		<div class="comments {!commentList.length ? 'no-comment' : ''}">
 			<Comments />
 		</div>
 	</main>
@@ -74,6 +75,12 @@
 
 	.short-description-tablet {
 		display: none;
+	}
+
+	@media (max-width: 68rem) {
+		.comments:not(.no-comment) {
+			grid-column: span 2;
+		}
 	}
 
 	@media (max-width: 56rem) {
@@ -113,6 +120,10 @@
 			top: 2rem;
 			display: grid;
 			gap: 2rem;
+		}
+
+		.comments:not(.no-comment) {
+			grid-column: span 1;
 		}
 	}
 </style>

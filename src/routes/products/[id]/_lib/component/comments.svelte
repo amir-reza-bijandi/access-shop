@@ -1,17 +1,19 @@
 <script lang="ts">
 	import Button from '$lib/component/button.svelte';
 	import Comment from '$lib/component/comment.svelte';
-	import { commentList } from '$lib/data/comments';
 	import type { FormEventHandler } from 'svelte/elements';
+	import { singleProduct } from '../data/single-product';
 
 	const IS_USER_LOGGED_IN = true;
+
+	const { commentList } = singleProduct;
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault();
 	};
 </script>
 
-<section class="comments">
+<section class="comments {!commentList.length ? 'no-comment' : ''}">
 	<h2 class="title">دیدگاه مشتریان</h2>
 	<div class="content">
 		{#if commentList.length > 0}
@@ -24,7 +26,7 @@
 			</ul>
 		{/if}
 		{#if IS_USER_LOGGED_IN}
-			<form class="comment-form {!commentList.length ? 'no-comment' : ''}" onsubmit={handleSubmit}>
+			<form class="comment-form" onsubmit={handleSubmit}>
 				<textarea class="text box rounded-lg" placeholder="دیدگاه خود را اینجا بنویسید..."
 				></textarea>
 				<Button type="submit" class="submit">ثبت دیدگاه</Button>
@@ -54,12 +56,12 @@
 	.comment-form {
 		position: sticky;
 		top: 2rem;
-		min-width: 30.2rem;
-		height: 24.8rem;
+		min-width: 32rem;
+		height: 28rem;
 		flex-shrink: 0;
 	}
 
-	.comment-form.no-comment {
+	.no-comment .comment-form {
 		position: relative;
 		top: 0;
 		flex-shrink: 1;
@@ -79,37 +81,6 @@
 		resize: none;
 		padding: 2rem;
 		width: 100%;
-	}
-
-	@media (max-width: 64rem) {
-		.content {
-			flex-direction: column;
-			gap: 2rem;
-		}
-
-		.comment-form {
-			order: 1;
-		}
-
-		.list {
-			order: 2;
-		}
-	}
-
-	@media (max-width: 56rem) {
-		.content {
-			flex-direction: row;
-			gap: 2rem;
-		}
-
-		.comment-form {
-			order: 2;
-			min-width: 32rem;
-		}
-
-		.list {
-			order: 1;
-		}
 	}
 
 	@media (max-width: 48rem) {
