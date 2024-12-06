@@ -91,6 +91,13 @@
 		.wrapper {
 			grid-template-columns: repeat(auto-fit, minmax(40.7rem, 1fr));
 		}
+		/* Because of the scrollbar size difference in firefox and chrome
+		   we need to set a different min size for layout change */
+		@supports (-moz-appearance: none) {
+			.wrapper {
+				grid-template-columns: repeat(auto-fit, minmax(41.45rem, 1fr));
+			}
+		}
 	}
 
 	@media (max-width: 38rem) {
