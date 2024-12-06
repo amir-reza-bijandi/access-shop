@@ -105,8 +105,6 @@
 	}
 
 	.title {
-		display: flex;
-		align-items: center;
 		gap: 0.6rem;
 		font-size: 2rem;
 		font-weight: 700;
@@ -194,6 +192,17 @@
 
 		.content {
 			--icon-size: 12rem;
+		}
+	}
+
+	@media (min-width: 32rem) {
+		.description {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 5;
+			-moz-line-clamp: 5;
+			line-clamp: 5;
+			overflow: hidden;
 		}
 	}
 

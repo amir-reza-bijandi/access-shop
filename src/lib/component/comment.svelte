@@ -10,12 +10,14 @@
 		showProductIcon?: boolean;
 		size?: 'small' | 'large';
 		viewAnimation?: boolean;
+		lineClamp?: boolean;
 	};
 	const {
 		data,
 		showProductIcon = true,
 		size = 'large',
-		viewAnimation = true
+		viewAnimation = true,
+		lineClamp = false
 	}: CommentProps = $props();
 	const { name, text, date, iconSrc, avatarSrc } = data;
 </script>
@@ -40,7 +42,7 @@
 				<ProductIcon class="icon" src={iconSrc} />
 			{/if}
 		</header>
-		<p class="text">{text}</p>
+		<p class="text {lineClamp ? 'line-clamp' : ''}">{text}</p>
 	</article>
 </div>
 
@@ -77,6 +79,14 @@
 		font-weight: 700;
 		font-style: normal;
 		margin-bottom: 0.8rem;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 1;
+		-moz-line-clamp: 1;
+		line-clamp: 1;
+		overflow: hidden;
+		/* Prevent the hidden part of the text from leaking out */
+		line-height: 1.2;
 	}
 
 	.small .name {
@@ -105,5 +115,14 @@
 
 	.text {
 		line-height: var(--line-height);
+	}
+
+	.text.line-clamp {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 4;
+		-moz-line-clamp: 4;
+		line-clamp: 4;
+		overflow: hidden;
 	}
 </style>

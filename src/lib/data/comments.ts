@@ -51,7 +51,7 @@ export const commentList: Comment[] = [
 	{
 		id: 6,
 		date: Date.now() - (1000000000 + Math.random() * 1000000000),
-		name: 'علی‌اکبر حسینی',
+		name: 'علی‌اکبر حسینی ثانی قلی آبادی',
 		text: 'به عنوان یک برنامه‌نویس، این ابزار خیلی به من کمک کرده تا کدهای با کیفیت‌تری بنویسم و زمان توسعه نرم‌افزارها رو کاهش بدم.',
 		avatarSrc: '/image/avatar/6.png',
 		iconSrc: '/icon/claude.svg'

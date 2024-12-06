@@ -13,7 +13,7 @@
 	<div class="wrapper">
 		<Glow class="container-glow" />
 		{#each commentList as comment (comment.id)}
-			<Comment data={comment} />
+			<Comment data={comment} lineClamp={true} />
 		{/each}
 	</div>
 </section>
