@@ -106,6 +106,7 @@
 		border-color: transparent;
 		gap: 0.4rem;
 		width: fit-content;
+		border-radius: 9999px;
 	}
 
 	.compact .menu-btn:hover {
@@ -116,6 +117,11 @@
 	.select.active .menu-btn {
 		background: var(--bg-secondary);
 		border-color: var(--stroke-focus);
+	}
+
+	.compact .menu-btn:hover,
+	.select.compact.active .menu-btn {
+		background: transparent;
 	}
 
 	.chevron-icon {
@@ -151,6 +157,8 @@
 
 	.compact .menu {
 		width: 19.2rem;
+		border-radius: 1.6rem;
+		margin-top: 0.4rem;
 	}
 
 	.item {
@@ -168,11 +176,10 @@
 		position: relative;
 		padding: 1.6rem;
 		transition: background-color var(--duration);
-		background: var(--bg-secondary);
 	}
 
 	.item-btn:hover {
-		background: var(--bg-tertiary);
+		background: var(--bg-secondary);
 	}
 
 	.check-icon {
