@@ -10,6 +10,7 @@
 	--base-teal-900: 162 88% 30%;
 
 	--base-red-800: 0 86% 59%;
+	--base-yellow-800: 39 100% 48%;
 
 	--fg-primary: hsl(var(--base-gray-100));
 	--fg-placeholder: hsl(var(--base-gray-400));
@@ -22,6 +23,7 @@
 
 	--success: hsl(var(--base-teal-700));
 	--error: hsl(var(--base-red-800));
+	--warning: hsl(var(--base-yellow-800));
 
 	--bg-primary-33: hsl(var(--base-gray-900) / 33%);
 	--accent-5: hsl(var(--base-teal-800) / 5%);
@@ -166,7 +168,7 @@ body {
 
 .ripple-container {
 	position: relative;
-	overflow: hidden;
+	overflow: clip;
 }
 
 .ripple {

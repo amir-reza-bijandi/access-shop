@@ -47,9 +47,9 @@
 						</a>
 					</li>
 					<li class="item">
-						<a href="/" class="link">
+						<a href="/orders" class="link">
 							<ShoppingCart size={20} strokeWidth={1.5} absoluteStrokeWidth />
-							سفارشات
+							سفارش‌ها
 						</a>
 					</li>
 					<li class="item">
