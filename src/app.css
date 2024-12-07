@@ -26,6 +26,7 @@
 	--warning: hsl(var(--base-yellow-800));
 
 	--bg-primary-33: hsl(var(--base-gray-900) / 33%);
+	--bg-primary-85: hsl(var(--base-gray-900) / 85%);
 	--accent-5: hsl(var(--base-teal-800) / 5%);
 	--accent-10: hsl(var(--base-teal-800) / 10%);
 	--accent-20: hsl(var(--base-teal-800) / 20%);
@@ -124,7 +125,7 @@ body {
 .box {
 	border: 1px solid var(--stroke);
 	border-radius: 1.6rem;
-	background: var(--bg-primary-33);
+	background: var(--bg-primary-85);
 	backdrop-filter: blur(40px);
 }
 
