@@ -53,6 +53,11 @@
 </div>
 
 <style>
+	.subscription {
+		position: relative;
+		z-index: 2;
+	}
+
 	.content {
 		--subscription-padding: 2rem;
 		display: grid;
