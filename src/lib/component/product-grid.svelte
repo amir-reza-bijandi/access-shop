@@ -14,13 +14,15 @@
 		showViewAll?: boolean;
 		showPattern?: boolean;
 		introAnimation?: boolean;
+		viewAnimation?: boolean;
 	};
 	const {
 		infoList,
 		title,
 		showViewAll,
 		showPattern = true,
-		introAnimation = false
+		introAnimation = false,
+		viewAnimation = true
 	}: ProductGridProps = $props();
 
 	function getAnimationName(index: number) {
@@ -40,6 +42,7 @@
 				{showPattern}
 				--animation-index={index}
 				--animation-name={getAnimationName(index)}
+				{viewAnimation}
 			/>
 		{/each}
 	</div>

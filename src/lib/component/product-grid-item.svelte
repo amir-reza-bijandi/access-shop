@@ -10,13 +10,18 @@
 	type ProductProps = {
 		info: ProductInfo;
 		showPattern?: boolean;
+		viewAnimation?: boolean;
 	};
 
-	const { info, showPattern = true }: ProductProps = $props();
+	const { info, showPattern = true, viewAnimation = true }: ProductProps = $props();
 	const { id, nameFa, nameEn, description, imageSrc, deliveryTime, startingPrice } = info;
 </script>
 
-<div class="product" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
+<div
+	class="product"
+	use:inview
+	oninview_change={(e) => viewAnimation && handleViewChange(e.detail)}
+>
 	<div class="box rounded-lg">
 		<article class="content">
 			<!-- BODY -->
