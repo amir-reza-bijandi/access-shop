@@ -1,6 +1,14 @@
 <script lang="ts">
 	import PageWrapper from '$lib/component/page-wrapper.svelte';
-	import { ArrowUp, ChevronUp, LayoutGrid, MoveUp } from 'lucide-svelte';
+	import {
+		ArrowDownUp,
+		ArrowDownWideNarrow,
+		ArrowUp,
+		Check,
+		LayoutGrid,
+		Loader,
+		X
+	} from 'lucide-svelte';
 	import { orderList } from './_lib/data/orders';
 	import formatOrderDate from '$lib/utility/format-order-date';
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
@@ -12,6 +20,8 @@
 	import { fly, scale } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import { cubicOut } from 'svelte/easing';
+	import { Icon } from 'lucide-svelte';
+	import Select from '$lib/component/select.svelte';
 
 	const PER_PAGE = 8;
 
@@ -36,6 +46,12 @@
 		canceled: 'لغو شده'
 	};
 
+	const statusIconMap: Record<keyof typeof statusDisplayMap, typeof Icon> = {
+		pending: Loader,
+		delivered: Check,
+		canceled: X
+	};
+
 	const statusColorMap = {
 		pending: 'warning',
 		delivered: 'success',
@@ -46,14 +62,36 @@
 	const handleSortChange = (type: SortType) => {
 		if (type === sort.type) sort.direction = sort.direction === 'asc' ? 'desc' : 'asc';
 		else sort.type = type;
-
-		console.log(sort.direction);
 	};
 </script>
 
 <PageWrapper>
 	{#if orderList.length > 0}
-		<h1 class="page-title">سفارش‌ها</h1>
+		<div class="sort-options">
+			<Select
+				itemList={[
+					{ name: 'تاریخ ثبت', value: 'submitDate' },
+					{ name: 'قیمت', value: 'price' },
+					{ name: 'تاریخ تحویل', value: 'deliveryDate' },
+					{ name: 'وضعیت', value: 'status' }
+				]}
+				variant="compact"
+				icon={ArrowDownWideNarrow}
+				label="مرتب‌سازی"
+				bind:value={sort.type}
+			/>
+			<Select
+				itemList={[
+					{ name: 'صعودی', value: 'asc' },
+					{ name: 'نزولی', value: 'desc' }
+				]}
+				variant="compact"
+				icon={ArrowDownUp}
+				label="ترتیب نمایش"
+				menuOrigin="left"
+				bind:value={sort.direction}
+			/>
+		</div>
 	{/if}
 	<div class="table-container">
 		<Glow class="glow" />
@@ -64,14 +102,15 @@
 						<tr>
 							<th><LayoutGrid size={32} strokeWidth={2} absoluteStrokeWidth /></th>
 							<th class="product">محصول</th>
-							{@render tableHeader('تاریخ ثبت', 'submitDate')}
-							{@render tableHeader('قیمت', 'price')}
-							{@render tableHeader('تاریخ تحویل', 'deliveryDate')}
-							{@render tableHeader('وضعیت', 'status')}
+							{@render tableHeader('تاریخ ثبت', 'submit-date', 'submitDate')}
+							{@render tableHeader('قیمت', 'price', 'price')}
+							{@render tableHeader('تاریخ تحویل', 'delivery-date', 'deliveryDate')}
+							{@render tableHeader('وضعیت', 'status', 'status')}
 						</tr>
 					</thead>
 					<tbody>
 						{#each currentOrderList as { id, product, submitDate, deliveryDate, status, price }, index (id)}
+							{@const Icon = statusIconMap[status]}
 							<tr
 								use:rippleEffect
 								in:fly={{
@@ -92,17 +131,24 @@
 									/>
 								</td>
 								<td class="product"
-									><div class="description">
+									><div class="product-description">
 										<span>اشتراک {product.period.fa} - {product.name.fa} - {product.type.fa}</span
 										><span style="direction: ltr;"
 											>{product.period.en} - {product.name.en} - {product.type.en}</span
 										>
 									</div></td
 								>
-								<td>{formatOrderDate(submitDate)}</td>
-								<td>{price.toLocaleString('fa-IR')} تومان</td>
-								<td>{status === 'delivered' ? formatOrderDate(deliveryDate) : '-'}</td>
-								<td class={statusColorMap[status]}>{statusDisplayMap[status]}</td>
+								<td class="submit-date">{formatOrderDate(submitDate)}</td>
+								<td class="price">{price.toLocaleString('fa-IR')} تومان</td>
+								<td class="delivery-date">
+									{status === 'delivered' ? formatOrderDate(deliveryDate) : '-'}
+								</td>
+								<td class="status {statusColorMap[status]}">
+									<span class="status-text">{statusDisplayMap[status]}</span>
+									<span class="status-icon">
+										<Icon size={16} strokeWidth={1.5} absoluteStrokeWidth />
+									</span>
+								</td>
 							</tr>
 						{/each}
 					</tbody>
@@ -121,12 +167,12 @@
 	</div>
 </PageWrapper>
 
-{#snippet tableHeader(label: string, sortType: SortType)}
-	<th onclick={() => handleSortChange(sortType)}>
-		<div class="label">
+{#snippet tableHeader(label: string, className: string, sortType: SortType)}
+	<th class={className} onclick={() => handleSortChange(sortType)}>
+		<div class="header-label">
 			{#if sort.type === sortType}
 				<span
-					class="icon {sort.direction === 'asc' ? 'active' : ''}"
+					class="sort-icon {sort.direction === 'asc' ? 'active' : ''}"
 					in:scale={{ duration: 200, opacity: 0, easing: cubicOut }}
 					><ArrowUp size={16} strokeWidth={2} absoluteStrokeWidth />
 				</span>
@@ -137,23 +183,6 @@
 {/snippet}
 
 <style>
-	.label {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.8rem;
-	}
-
-	.icon {
-		display: flex;
-		color: var(--accent);
-		transition: transform var(--duration);
-	}
-
-	.icon.active {
-		transform: rotate(180deg) scale(1);
-	}
-
 	.page-title {
 		font-size: 2.4rem;
 		font-weight: 700;
@@ -161,8 +190,19 @@
 		margin-bottom: 3.2rem;
 	}
 
+	.sort-options {
+		display: none;
+		justify-content: end;
+		gap: 0.4rem;
+		margin-bottom: 0.8rem;
+		margin-inline: 0.8rem;
+	}
+
 	.table-wrapper {
-		height: calc(((var(--per-page)) * 8.5rem) + 7.7rem);
+		--header-height: 8.5rem;
+		--row-height: 8.1rem;
+		min-height: calc(((var(--per-page)) * var(--row-height)) + var(--header-height));
+		max-height: calc(((var(--per-page)) * var(--row-height)) + var(--header-height));
 		overflow: hidden;
 	}
 
@@ -190,6 +230,7 @@
 		justify-content: center;
 		align-items: center;
 		gap: 2.4rem;
+		width: 100%;
 	}
 
 	.no-order .title {
@@ -259,9 +300,17 @@
 		text-align: right;
 	}
 
-	.description {
+	.product-description {
 		display: grid;
 		gap: 0.8rem;
+	}
+
+	.product-description > * {
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		line-clamp: 1;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
 	tbody tr {
@@ -288,5 +337,111 @@
 
 	.error {
 		color: var(--error);
+	}
+
+	.status-icon {
+		display: none;
+	}
+	.status-text {
+		display: flex;
+	}
+
+	.status-icon,
+	.status-text {
+		align-items: center;
+		justify-content: center;
+	}
+
+	.header-label {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.8rem;
+	}
+
+	.sort-icon {
+		display: flex;
+		color: var(--accent);
+		transition: transform var(--duration);
+	}
+
+	.sort-icon.active {
+		transform: rotate(180deg) scale(1);
+	}
+
+	@media (max-width: 64rem) {
+		.page-title {
+			margin-bottom: 2.4rem;
+		}
+	}
+
+	@media (max-width: 60rem) {
+		.sort-options {
+			display: flex;
+		}
+
+		.warning .status-icon {
+			animation: spin 2s linear infinite;
+		}
+
+		.status-icon {
+			display: flex;
+		}
+
+		.status-text {
+			display: none;
+		}
+
+		/* Hide columns */
+		.submit-date,
+		.delivery-date,
+		.price {
+			display: none;
+		}
+
+		/* Header table header */
+		thead {
+			display: none;
+		}
+
+		.table-wrapper {
+			--header-height: 0px;
+		}
+
+		/* Make first and last column's width fit their content */
+		:is(th, td):is(:first-child, :last-child) {
+			width: 1%;
+		}
+
+		/* Disable sorting by table headers */
+		th {
+			pointer-events: none;
+		}
+
+		@keyframes spin {
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	}
+
+	@media (max-width: 38rem) {
+		.sort-options {
+			justify-content: space-between;
+		}
+	}
+
+	@media (max-width: 32rem) {
+		.page-title {
+			margin-bottom: 2rem;
+		}
+
+		td:first-child {
+			display: none;
+		}
+
+		td {
+			padding: 2rem;
+		}
 	}
 </style>

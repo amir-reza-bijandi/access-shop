@@ -3,22 +3,34 @@
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
 	import { Check, ChevronDown } from 'lucide-svelte';
 	import { fly } from 'svelte/transition';
+	import { Icon as LucidIcon } from 'lucide-svelte';
 
 	type Item = {
 		name: string;
-		value: number;
+		value: number | string;
 	};
 	type SelectProps = {
 		itemList: Item[];
-		value: number;
+		value: number | string;
 		class?: string;
-		oninput?: (value: number) => void;
+		variant?: 'normal' | 'compact';
+		label?: string;
+		icon?: typeof LucidIcon;
+		menuOrigin?: 'left' | 'right';
 	};
-	let { itemList, value: currentValue = $bindable(0), class: className }: SelectProps = $props();
+	let {
+		itemList,
+		value: currentValue = $bindable(0),
+		variant = 'normal',
+		icon: Icon,
+		label,
+		menuOrigin = 'right',
+		class: className
+	}: SelectProps = $props();
 
 	let isSelectActive = $state(false);
 
-	const handleSelect = (value: number) => {
+	const handleSelect = (value: number | string) => {
 		currentValue = value;
 		isSelectActive = false;
 	};
@@ -29,17 +41,27 @@
 </script>
 
 <div
-	class="select {className} {isSelectActive ? 'active' : ''}"
+	class="select {className} {isSelectActive ? 'active' : ''} {variant === 'compact'
+		? 'compact'
+		: ''}"
 	use:detectOutsideClick={() => (isSelectActive = false)}
 >
 	<button type="button" class="menu-btn" onclick={handleToggle} use:rippleEffect>
-		{itemList.find((item) => item.value === currentValue)?.name}
-		<div class="chevron-icon">
-			<ChevronDown size={16} strokeWidth={1.5} absoluteStrokeWidth />
-		</div>
+		{#if variant === 'compact' && Icon}
+			<Icon size={16} strokeWidth={1.25} absoluteStrokeWidth />
+		{/if}
+		{`${label ? `${label}: ` : ''}`}{itemList.find((item) => item.value === currentValue)?.name}
+		{#if variant === 'normal'}
+			<div class="chevron-icon">
+				<ChevronDown size={16} strokeWidth={1.5} absoluteStrokeWidth />
+			</div>
+		{/if}
 	</button>
 	{#if isSelectActive}
-		<ul class="menu" transition:fly={{ duration: 200, opacity: 0, y: 8 }}>
+		<ul
+			class="menu {menuOrigin === 'left' ? 'left' : ''}"
+			transition:fly={{ duration: 200, opacity: 0, y: 8 }}
+		>
 			{#each itemList as { name, value } (value)}
 				<li class="item">
 					<button class="item-btn" type="button" onclick={() => handleSelect(value)}>
@@ -61,6 +83,11 @@
 		position: relative;
 	}
 
+	.select.compact {
+		display: inline-block;
+		font-size: 1.4rem;
+	}
+
 	.menu-btn {
 		width: 100%;
 		position: relative;
@@ -72,6 +99,17 @@
 		border: 1px solid var(--stroke);
 		transition-property: background-color, border-color;
 		transition-duration: var(--duration);
+	}
+
+	.compact .menu-btn {
+		padding: 0.8rem;
+		border-color: transparent;
+		gap: 0.4rem;
+		width: fit-content;
+	}
+
+	.compact .menu-btn:hover {
+		border-color: var(--stroke);
 	}
 
 	.menu-btn:hover,
@@ -105,6 +143,14 @@
 		/* There is bug in Chrome that prevents nested backdrop-filter */
 		/* backdrop-filter: blur(40px); */
 		z-index: 2;
+	}
+
+	.menu.left {
+		left: 0;
+	}
+
+	.compact .menu {
+		width: 19.2rem;
 	}
 
 	.item {
