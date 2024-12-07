@@ -41,19 +41,19 @@
 				</div>
 				<ul class="list">
 					<li class="item">
-						<a href="/" class="link" use:rippleEffect>
+						<a href="/" class="link" onclick={toggleMenu}>
 							<User size={20} strokeWidth={1.5} absoluteStrokeWidth />
 							ویرایش حساب کاربری
 						</a>
 					</li>
 					<li class="item">
-						<a href="/orders" class="link">
+						<a href="/orders" class="link" onclick={toggleMenu}>
 							<ShoppingCart size={20} strokeWidth={1.5} absoluteStrokeWidth />
 							سفارش‌ها
 						</a>
 					</li>
 					<li class="item">
-						<a href="/" class="link">
+						<a href="/" class="link" onclick={toggleMenu}>
 							<LogOut size={20} strokeWidth={1.5} absoluteStrokeWidth />
 							خروج از حساب
 						</a>
@@ -220,7 +220,7 @@
 
 	@media (max-width: 83.125rem) {
 		.account :global(.menu-box) {
-			left: 0;
+			left: -0.8rem;
 		}
 	}
 
