@@ -86,7 +86,7 @@
 		opacity: 0;
 		pointer-events: none;
 		top: calc(100% + 1.6rem);
-		right: 0;
+		right: -0.8rem;
 		left: unset;
 		transform: translate(0, 1rem) scale(0.9);
 		transition-property: opacity, transform;
