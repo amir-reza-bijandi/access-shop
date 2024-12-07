@@ -65,7 +65,7 @@
 	};
 </script>
 
-<PageWrapper>
+<PageWrapper introAnimation>
 	{#if orderList.length > 0}
 		<div class="sort-options">
 			<Select

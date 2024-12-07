@@ -4,17 +4,22 @@
 	type PageWrapperProps = {
 		children: Snippet;
 		as?: 'main' | 'div';
+		introAnimation?: boolean;
 	};
-	const { as = 'main', children }: PageWrapperProps = $props();
+	const { as = 'main', introAnimation = false, children }: PageWrapperProps = $props();
 </script>
 
-<svelte:element this={as} class="page-wrapper">
+<svelte:element this={as} class="page-wrapper {introAnimation ? 'intro' : ''}">
 	{@render children()}
 </svelte:element>
 
 <style>
 	.page-wrapper {
 		padding-block: 6.4rem;
+	}
+
+	.page-wrapper.intro {
+		animation: intro-up 1s ease backwards;
 	}
 
 	@media (max-width: 72rem) {
