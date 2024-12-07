@@ -3,18 +3,19 @@ import type { Action } from 'svelte/action';
 type Params = {
 	// Ripple position is based on the current mouse position
 	dynamicPositon?: boolean;
+	sizeMultiplier?: number;
 };
 
 const rippleEffect: Action<HTMLElement, Params | undefined> = (node, params) => {
 	function createRipple(clientX?: number, clientY?: number) {
-		const { dynamicPositon = true } = params || {};
+		const { dynamicPositon = true, sizeMultiplier = 1 } = params || {};
 		node.classList.add('ripple-container');
 		const nodeRect = node.getBoundingClientRect();
 
 		const duration = parseInt(getComputedStyle(node).getPropertyValue('--ripple-duration'));
 		const ripple = document.createElement('span');
 		ripple.classList.add('ripple');
-		ripple.style.width = `${nodeRect.width}px`;
+		ripple.style.width = `${nodeRect.width * sizeMultiplier}px`;
 
 		if (dynamicPositon && clientX && clientY) {
 			ripple.style.left = `${clientX - nodeRect.left}px`;
