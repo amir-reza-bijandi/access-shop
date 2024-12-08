@@ -1,16 +1,8 @@
 <script lang="ts">
 	import PageWrapper from '$lib/component/page-wrapper.svelte';
-	import {
-		ArrowDownUp,
-		ArrowDownWideNarrow,
-		ArrowUp,
-		Check,
-		LayoutGrid,
-		Loader,
-		X
-	} from 'lucide-svelte';
-	import { orderList } from './_lib/data/orders';
-	import formatOrderDate from '$lib/utility/format-order-date';
+	import { ArrowDownUp, ArrowDownWideNarrow, ArrowUp, LayoutGrid } from 'lucide-svelte';
+	import { orderList, type Order, type OrderStatus } from './_lib/data/orders';
+	import formatOrderDate from './_lib/utility/format-order-date';
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import Button from '$lib/component/button.svelte';
@@ -20,8 +12,10 @@
 	import { fly, scale } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	import { cubicOut } from 'svelte/easing';
-	import { Icon } from 'lucide-svelte';
 	import Select from '$lib/component/select.svelte';
+	import Details from './_lib/component/details.svelte';
+	import getStatusColor from './_lib/utility/get-status-color';
+	import getStatusIcon from './_lib/utility/get-status-icon';
 
 	const PER_PAGE = 8;
 
@@ -39,23 +33,14 @@
 		sortedOrderList.slice(PER_PAGE * (currentPage - 1), PER_PAGE * currentPage)
 	);
 	const totalPages = $derived(Math.ceil(orderList.length / PER_PAGE));
+	// svelte-ignore state_referenced_locally
+	let selectedOrder = $state(currentOrderList[0]);
+	let isOrderDetailsOpen = $state(false);
 
-	const statusDisplayMap = {
+	const statusTextMap: Record<OrderStatus, string> = {
 		pending: 'در حال انجام',
 		delivered: 'انجام شده',
 		canceled: 'لغو شده'
-	};
-
-	const statusIconMap: Record<keyof typeof statusDisplayMap, typeof Icon> = {
-		pending: Loader,
-		delivered: Check,
-		canceled: X
-	};
-
-	const statusColorMap = {
-		pending: 'warning',
-		delivered: 'success',
-		canceled: 'error'
 	};
 
 	const handlePageChange = (page: number) => (currentPage = page);
@@ -63,8 +48,14 @@
 		if (type === sort.type) sort.direction = sort.direction === 'asc' ? 'desc' : 'asc';
 		else sort.type = type;
 	};
+	const handleCloseOrderDetails = () => (isOrderDetailsOpen = !isOrderDetailsOpen);
+	const handleOpenOrderDetails = (order: Order) => {
+		selectedOrder = order;
+		handleCloseOrderDetails();
+	};
 </script>
 
+<Details order={selectedOrder} open={isOrderDetailsOpen} onclose={handleCloseOrderDetails} />
 <PageWrapper introAnimation>
 	{#if orderList.length > 0}
 		<div class="sort-options">
@@ -109,9 +100,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						{#each currentOrderList as { id, product, submitDate, deliveryDate, status, price }, index (id)}
-							{@const Icon = statusIconMap[status]}
+						{#each currentOrderList as order, index (order.id)}
+							{@const { product, submitDate, deliveryDate, status, price } = order}
+							{@const Icon = getStatusIcon(status)}
 							<tr
+								onclick={() => handleOpenOrderDetails(order)}
 								use:rippleEffect
 								in:fly={{
 									y: -80,
@@ -126,8 +119,8 @@
 									<img
 										src={product.iconSrc}
 										alt="لوگوی سرویس هوش مصنوعی {product.name.fa}"
-										width="32"
-										height="32"
+										width="32rem"
+										height="32rem"
 									/>
 								</td>
 								<td class="product"
@@ -143,8 +136,8 @@
 								<td class="delivery-date">
 									{status === 'delivered' ? formatOrderDate(deliveryDate) : '-'}
 								</td>
-								<td class="status {statusColorMap[status]}">
-									<span class="status-text">{statusDisplayMap[status]}</span>
+								<td class="status {getStatusColor(status)}">
+									<span class="status-text">{statusTextMap[status]}</span>
 									<span class="status-icon">
 										<Icon size={16} strokeWidth={1.5} absoluteStrokeWidth />
 									</span>
@@ -327,18 +320,6 @@
 		border-bottom-left-radius: 2.4rem;
 	}
 
-	.warning {
-		color: var(--warning);
-	}
-
-	.success {
-		color: var(--success);
-	}
-
-	.error {
-		color: var(--error);
-	}
-
 	.status-icon {
 		display: none;
 	}
@@ -416,12 +397,6 @@
 		/* Disable sorting by table headers */
 		th {
 			pointer-events: none;
-		}
-
-		@keyframes spin {
-			100% {
-				transform: rotate(360deg);
-			}
 		}
 	}
 

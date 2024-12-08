@@ -11,9 +11,18 @@
 		open: boolean;
 		height?: number;
 		opacity?: number;
+		headerHeight?: number;
 		onclose?: () => void;
 	};
-	const { children, header, open, opacity = 1, height = 38.4, onclose }: ModalProps = $props();
+	let {
+		children,
+		header,
+		open,
+		opacity = 1,
+		height = 38.4,
+		headerHeight = $bindable(0),
+		onclose
+	}: ModalProps = $props();
 
 	$effect(() => {
 		const cards = document.getElementById('hero-cards');
@@ -32,6 +41,12 @@
 	});
 
 	const transitionDuration = 200;
+
+	const handleOverlayClick = (e: MouseEvent) => {
+		if (e.target === e.currentTarget) {
+			onclose?.();
+		}
+	};
 </script>
 
 <svelte:window on:keydown={(e) => e.key === 'Escape' && open && onclose?.()} />
@@ -39,23 +54,28 @@
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	{#if open}
-		<div class="overlay" onclick={onclose} transition:fade={{ duration: transitionDuration }}></div>
-		<!-- Since we are using Portal we can not pass custom css properties directly to component -->
-		<section
-			style:--modal-opacity={open ? opacity : 0}
-			style:--modal-height={`${height}rem`}
-			class="modal"
-			use:trapFocus
-			transition:scale={{ duration: transitionDuration, opacity: 0, start: 0.8 }}
+		<div
+			class="overlay"
+			onclick={handleOverlayClick}
+			transition:fade={{ duration: transitionDuration }}
 		>
-			<div class="box rounded-lg">
-				<header class="header">
-					{@render header()}
-					<button class="close" onclick={onclose}><X /></button>
-				</header>
-				<div class="body">{@render children()}</div>
-			</div>
-		</section>
+			<!-- Since we are using Portal we can not pass custom css properties directly to component -->
+			<section
+				style:--modal-opacity={open ? opacity : 0}
+				style:--modal-height={`${height}rem`}
+				class="modal"
+				use:trapFocus
+				transition:scale={{ duration: transitionDuration, opacity: 0, start: 0.8 }}
+			>
+				<div class="box rounded-lg">
+					<header class="header" bind:clientHeight={headerHeight}>
+						{@render header()}
+						<button class="close" onclick={onclose}><X /></button>
+					</header>
+					<div class="body">{@render children()}</div>
+				</div>
+			</section>
+		</div>
 	{/if}
 </Portal>
 
@@ -63,6 +83,8 @@
 	.overlay {
 		position: fixed;
 		inset: 0;
+		display: grid;
+		place-items: center;
 		background: var(--bg-primary-33);
 		backdrop-filter: blur(40px);
 		z-index: 99999;
@@ -72,17 +94,12 @@
 		--modal-padding: 2rem;
 		display: grid;
 		grid-template-rows: 1fr;
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		z-index: 99999;
 		width: 100%;
 		/* Add 4rem to account for padding */
 		max-width: 53.2rem;
 		padding-inline: var(--modal-padding);
-		min-height: var(--modal-height);
-		transition: min-height, var(--duration);
+		height: var(--modal-height);
+		transition: height, var(--duration);
 	}
 
 	.modal :global(.box) {
@@ -125,7 +142,6 @@
 	@media (max-width: 33.25rem) {
 		.modal {
 			max-width: 52.4rem;
-			min-height: calc(var(--modal-height) - 2rem);
 			--modal-padding: 1.6rem;
 		}
 	}

@@ -50,7 +50,7 @@
 <section
 	class="comments {!commentList.length ? 'no-comment' : ''} {form.isSubmitting ? 'submitting' : ''}"
 >
-	<h2 class="title">دیدگاه مشتریان</h2>
+	<h2 id="comments" class="title">دیدگاه مشتریان</h2>
 	<div class="content">
 		{#if commentList.length > 0}
 			<ul class="list">
@@ -81,6 +81,10 @@
 </section>
 
 <style>
+	#comments {
+		scroll-margin-top: 4.2rem;
+	}
+
 	.title {
 		font-size: 2.4rem;
 		font-weight: 700;
@@ -159,7 +163,8 @@
 		}
 
 		.title {
-			display: none;
+			font-size: 2rem;
+			text-align: center;
 		}
 	}
 </style>

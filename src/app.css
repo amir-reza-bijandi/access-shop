@@ -96,6 +96,26 @@ body {
 	min-height: 100vh;
 }
 
+/* Status colors */
+
+.warning {
+	color: var(--warning);
+}
+
+.success {
+	color: var(--success);
+}
+
+.error {
+	color: var(--error);
+}
+
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 /* Scrollbar */
 
 *::-webkit-scrollbar {
@@ -191,7 +211,7 @@ body {
 	}
 }
 
-/* Intro Animations */
+/* Intro animations */
 
 @keyframes intro-right {
 	0% {

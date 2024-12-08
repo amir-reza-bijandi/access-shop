@@ -3,13 +3,28 @@ type Lang = {
 	en: string;
 };
 
+type Voucher = {
+	code: string;
+};
+
+type Account = {
+	user?: string;
+	phone?: string;
+	email?: string;
+	pass: string;
+};
+
 type Product = {
+	id: number;
 	iconSrc: string;
 	name: Lang;
 	type: Lang;
 	period: Lang;
 	userLimit: Lang;
+	subscription: Voucher | Account;
 };
+
+export type OrderStatus = 'pending' | 'delivered' | 'canceled';
 
 export type Order = {
 	id: number;
@@ -17,13 +32,18 @@ export type Order = {
 	price: number;
 	submitDate: number;
 	deliveryDate: number;
-	status: 'pending' | 'delivered' | 'canceled';
+	status: OrderStatus;
 };
 
 export const orderList: Order[] = [
 	{
 		id: 40965369,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/chatgpt.svg',
 			name: { fa: 'چت‌ جی‌پی‌تی', en: 'ChatGPT' },
 			type: { fa: 'پایه + ۱۲۰ کردیت', en: 'Basic + 120 Credits' },
@@ -38,6 +58,11 @@ export const orderList: Order[] = [
 	{
 		id: 81763249,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/synthesia.svg',
 			name: { fa: 'سینتیژا', en: 'Synthesia' },
 			type: { fa: 'استارتر', en: 'Starter' },
@@ -52,6 +77,11 @@ export const orderList: Order[] = [
 	{
 		id: 51916694,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/heygen.svg',
 			name: { fa: 'هیژن', en: 'Heygen' },
 			type: { fa: 'کریتور', en: 'Creator' },
@@ -66,6 +96,11 @@ export const orderList: Order[] = [
 	{
 		id: 91879433,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/canva.svg',
 			name: { fa: 'کنوا', en: 'Canva' },
 			type: { fa: 'پرو', en: 'Pro' },
@@ -80,6 +115,11 @@ export const orderList: Order[] = [
 	{
 		id: 63822318,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/chatgpt.svg',
 			name: { fa: 'چت‌ جی‌پی‌تی', en: 'ChatGPT' },
 			type: { fa: 'پایه', en: 'Basic' },
@@ -94,6 +134,11 @@ export const orderList: Order[] = [
 	{
 		id: 71111071,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/synthesia.svg',
 			name: { fa: 'سینتیژا', en: 'Synthesia' },
 			type: { fa: 'استارتر', en: 'Starter' },
@@ -108,6 +153,11 @@ export const orderList: Order[] = [
 	{
 		id: 744885,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/heygen.svg',
 			name: { fa: 'هیژن', en: 'Heygen' },
 			type: { fa: 'کریتور', en: 'Creator' },
@@ -122,6 +172,11 @@ export const orderList: Order[] = [
 	{
 		id: 81691515,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/canva.svg',
 			name: { fa: 'کنوا', en: 'Canva' },
 			type: { fa: 'پرو', en: 'Pro' },
@@ -136,6 +191,11 @@ export const orderList: Order[] = [
 	{
 		id: 20839965,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/chatgpt.svg',
 			name: { fa: 'چت‌ جی‌پی‌تی', en: 'ChatGPT' },
 			type: { fa: 'پایه', en: 'Basic' },
@@ -150,6 +210,11 @@ export const orderList: Order[] = [
 	{
 		id: 50090772,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/synthesia.svg',
 			name: { fa: 'سینتیژا', en: 'Synthesia' },
 			type: { fa: 'استارتر', en: 'Starter' },
@@ -164,6 +229,11 @@ export const orderList: Order[] = [
 	{
 		id: 36661942,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/heygen.svg',
 			name: { fa: 'هیژن', en: 'Heygen' },
 			type: { fa: 'کریتور', en: 'Creator' },
@@ -178,6 +248,11 @@ export const orderList: Order[] = [
 	{
 		id: 36083025,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/canva.svg',
 			name: { fa: 'کنوا', en: 'Canva' },
 			type: { fa: 'پرو', en: 'Pro' },
@@ -192,6 +267,11 @@ export const orderList: Order[] = [
 	{
 		id: 74685461,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/chatgpt.svg',
 			name: { fa: 'چت‌ جی‌پی‌تی', en: 'ChatGPT' },
 			type: { fa: 'پایه', en: 'Basic' },
@@ -206,6 +286,11 @@ export const orderList: Order[] = [
 	{
 		id: 54356775,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/synthesia.svg',
 			name: { fa: 'سینتیژا', en: 'Synthesia' },
 			type: { fa: 'استارتر', en: 'Starter' },
@@ -220,6 +305,11 @@ export const orderList: Order[] = [
 	{
 		id: 83533679,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/heygen.svg',
 			name: { fa: 'هیژن', en: 'Heygen' },
 			type: { fa: 'کریتور', en: 'Creator' },
@@ -234,6 +324,11 @@ export const orderList: Order[] = [
 	{
 		id: 71591841,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/canva.svg',
 			name: { fa: 'کنوا', en: 'Canva' },
 			type: { fa: 'پرو', en: 'Pro' },
@@ -248,6 +343,11 @@ export const orderList: Order[] = [
 	{
 		id: 15179338,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/chatgpt.svg',
 			name: { fa: 'چت‌ جی‌پی‌تی', en: 'ChatGPT' },
 			type: { fa: 'پایه', en: 'Basic' },
@@ -262,6 +362,11 @@ export const orderList: Order[] = [
 	{
 		id: 54679980,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/synthesia.svg',
 			name: { fa: 'سینتیژا', en: 'Synthesia' },
 			type: { fa: 'استارتر', en: 'Starter' },
@@ -276,6 +381,11 @@ export const orderList: Order[] = [
 	{
 		id: 50834869,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/heygen.svg',
 			name: { fa: 'هیژن', en: 'Heygen' },
 			type: { fa: 'کریتور', en: 'Creator' },
@@ -290,6 +400,11 @@ export const orderList: Order[] = [
 	{
 		id: 19051994,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/canva.svg',
 			name: { fa: 'کنوا', en: 'Canva' },
 			type: { fa: 'پرو', en: 'Pro' },
@@ -304,6 +419,11 @@ export const orderList: Order[] = [
 	{
 		id: 49336542,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/chatgpt.svg',
 			name: { fa: 'چت‌ جی‌پی‌تی', en: 'ChatGPT' },
 			type: { fa: 'پایه', en: 'Basic' },
@@ -318,6 +438,11 @@ export const orderList: Order[] = [
 	{
 		id: 75643039,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/synthesia.svg',
 			name: { fa: 'سینتیژا', en: 'Synthesia' },
 			type: { fa: 'استارتر', en: 'Starter' },
@@ -332,6 +457,11 @@ export const orderList: Order[] = [
 	{
 		id: 75744367,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/heygen.svg',
 			name: { fa: 'هیژن', en: 'Heygen' },
 			type: { fa: 'کریتور', en: 'Creator' },
@@ -346,6 +476,11 @@ export const orderList: Order[] = [
 	{
 		id: 35201864,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/canva.svg',
 			name: { fa: 'کنوا', en: 'Canva' },
 			type: { fa: 'پرو', en: 'Pro' },
@@ -360,6 +495,11 @@ export const orderList: Order[] = [
 	{
 		id: 28044059,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/chatgpt.svg',
 			name: { fa: 'چت‌ جی‌پی‌تی', en: 'ChatGPT' },
 			type: { fa: 'پایه', en: 'Basic' },
@@ -374,6 +514,11 @@ export const orderList: Order[] = [
 	{
 		id: 49910998,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/synthesia.svg',
 			name: { fa: 'سینتیژا', en: 'Synthesia' },
 			type: { fa: 'استارتر', en: 'Starter' },
@@ -388,6 +533,11 @@ export const orderList: Order[] = [
 	{
 		id: 30906870,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/heygen.svg',
 			name: { fa: 'هیژن', en: 'Heygen' },
 			type: { fa: 'کریتور', en: 'Creator' },
@@ -402,6 +552,11 @@ export const orderList: Order[] = [
 	{
 		id: 16447300,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/canva.svg',
 			name: { fa: 'کنوا', en: 'Canva' },
 			type: { fa: 'پرو', en: 'Pro' },
@@ -416,6 +571,11 @@ export const orderList: Order[] = [
 	{
 		id: 79217830,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/chatgpt.svg',
 			name: { fa: 'چت‌ جی‌پی‌تی', en: 'ChatGPT' },
 			type: { fa: 'پایه', en: 'Basic' },
@@ -430,6 +590,11 @@ export const orderList: Order[] = [
 	{
 		id: 18755613,
 		product: {
+			id: 123,
+			subscription: {
+				user: 'yourusername',
+				pass: 'yourpassword'
+			},
 			iconSrc: '/icon/synthesia.svg',
 			name: { fa: 'سینتیژا', en: 'Synthesia' },
 			type: { fa: 'استارتر', en: 'Starter' },
