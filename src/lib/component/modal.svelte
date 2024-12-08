@@ -24,6 +24,9 @@
 		onclose
 	}: ModalProps = $props();
 
+	// svelte-ignore non_reactive_update
+	let closeButton: HTMLButtonElement | null;
+
 	$effect(() => {
 		const cards = document.getElementById('hero-cards');
 		if (open) {
@@ -31,6 +34,10 @@
 			if (cards) {
 				cards.classList.add('pause-animations');
 			}
+		}
+		// Fix focus trap focusing the close button
+		if (closeButton) {
+			closeButton.blur();
 		}
 		return () => {
 			document.documentElement.style.overflowY = 'auto';
@@ -70,7 +77,7 @@
 				<div class="box rounded-lg">
 					<header class="header" bind:clientHeight={headerHeight}>
 						{@render header()}
-						<button class="close" onclick={onclose}><X /></button>
+						<button class="close" onclick={onclose} bind:this={closeButton}><X /></button>
 					</header>
 					<div class="body">{@render children()}</div>
 				</div>
