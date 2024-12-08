@@ -99,7 +99,7 @@
 		max-width: 53.2rem;
 		padding-inline: var(--modal-padding);
 		height: var(--modal-height);
-		transition: height, var(--duration);
+		transition: height var(--duration);
 	}
 
 	.modal :global(.box) {
