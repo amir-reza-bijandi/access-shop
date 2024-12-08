@@ -27,8 +27,8 @@
 	setContext('checkout', checkoutContext);
 </script>
 
-<PageWrapper as="div">
-	<main class="main">
+<PageWrapper>
+	<div class="content-wrapper">
 		<div class="short-description-tablet">
 			<ShortDescription />
 		</div>
@@ -51,11 +51,11 @@
 		<div class="comments {!commentList.length ? 'no-comment' : ''}">
 			<Comments />
 		</div>
-	</main>
+	</div>
 </PageWrapper>
 
 <style>
-	.main {
+	.content-wrapper {
 		display: grid;
 		grid-template-columns: 1fr 32rem;
 		gap: 2rem;
@@ -110,7 +110,7 @@
 	}
 
 	@media (max-width: 48rem) {
-		.main {
+		.content-wrapper {
 			display: grid;
 			grid-template-columns: 1fr;
 			gap: 2rem;
