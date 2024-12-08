@@ -47,7 +47,9 @@
 </script>
 
 <div
-	class="content {authContext.error ? 'error' : ''} {authContext.isSubmiting ? 'submitting' : ''}"
+	class="content {authContext.error ? 'form-error' : ''} {authContext.isSubmiting
+		? 'submitting'
+		: ''}"
 	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly={{ x: -492, duration: 400, opacity: 0 }}
 >
@@ -125,7 +127,7 @@
 		flex: 1;
 	}
 
-	.content.error .error-container {
+	.content.form-error .error-container {
 		min-height: 5.4rem;
 	}
 

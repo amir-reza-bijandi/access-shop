@@ -79,7 +79,7 @@
 </script>
 
 <div
-	class="content {context.error ? 'error' : ''} {context.isSubmiting ? 'submitting' : ''}"
+	class="content {context.error ? 'form-error' : ''} {context.isSubmiting ? 'submitting' : ''}"
 	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly={{ x: -492, duration: 400, opacity: 0 }}
 	bind:this={containerElm}
@@ -219,7 +219,7 @@
 		color: var(--accent);
 	}
 
-	.content.error .error-container {
+	.content.form-error .error-container {
 		min-height: 5.6rem;
 	}
 
