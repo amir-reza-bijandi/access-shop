@@ -14,7 +14,7 @@
 	let orderContext: OrderContext = $state({
 		currentPageIndex: 0
 	});
-	let contentHeight = $state(44.4);
+	let contentHeight = $state(444);
 	let headerHeight = $state(96);
 
 	$inspect(contentHeight, headerHeight);
