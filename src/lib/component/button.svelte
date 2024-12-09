@@ -1,5 +1,9 @@
 <script lang="ts">
-	import type { HTMLButtonAttributes, HTMLAnchorAttributes } from 'svelte/elements';
+	import type {
+		HTMLButtonAttributes,
+		HTMLAnchorAttributes,
+		HTMLLabelAttributes
+	} from 'svelte/elements';
 	import { Icon as LucideIcon } from 'lucide-svelte';
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
 
@@ -10,6 +14,9 @@
 		| ({
 				as: 'a';
 		  } & HTMLAnchorAttributes)
+		| ({
+				as: 'label';
+		  } & HTMLLabelAttributes)
 	) & {
 		icon?: typeof LucideIcon;
 		variant?: 'fill' | 'outline';
