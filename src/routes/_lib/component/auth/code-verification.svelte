@@ -1,15 +1,17 @@
 <script lang="ts">
 	import type { FormEventHandler } from 'svelte/elements';
-	import type { AuthContext } from '../../type/auth';
+	import type { AuthInternalContext } from '../../type/auth';
 	import { fly } from 'svelte/transition';
 	import { getContext } from 'svelte';
 	import Button from '$lib/component/button.svelte';
 	import InputOtp from './input-otp.svelte';
 	import { MoveLeft } from 'lucide-svelte';
+	import type { AuthExternalContext } from '$lib/type/auth';
 
 	const INITIAL_TIMER = 10;
 
-	const context: AuthContext = getContext('auth');
+	const authInternalContext: AuthInternalContext = getContext('auth-internal');
+	const authExternalContext: AuthExternalContext = getContext('auth-external');
 	let inputValue = $state('');
 	let timer = $state(INITIAL_TIMER);
 	let containerElm: HTMLDivElement | null;
@@ -42,15 +44,22 @@
 	// Logic for submitting the form
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
-		context.setSubmit(true);
+		authInternalContext.setSubmit(true);
 		await new Promise((resolve) => setTimeout(resolve, 2000));
-		context.setSubmit(false);
-		context.setStep(2);
+		authInternalContext.setSubmit(false);
+		// Check current operation
+		if (authExternalContext.operation === 'auth') {
+			authInternalContext.setStep(2);
+		} else {
+			authExternalContext.operation = 'auth';
+			authExternalContext.phoneNumber = '';
+			authInternalContext.cancel();
+		}
 	};
 
 	// Remove error when user starts typing
 	const handleInput = () => {
-		context.setError(null);
+		authInternalContext.setError(null);
 	};
 
 	// Validate user input
@@ -58,28 +67,30 @@
 		const input = e.currentTarget;
 		e.preventDefault();
 		if (input.validity.patternMismatch) {
-			context.setError('لطفا تنها از اعداد استفاده کنید!');
+			authInternalContext.setError('لطفا تنها از اعداد استفاده کنید!');
 		}
 		if (input.validity.valueMissing) {
-			context.setError('کد تأیید کامل نیست!');
+			authInternalContext.setError('کد تأیید کامل نیست!');
 		}
 	};
 
 	const handleBack = () => {
-		context.setStep(0);
+		authInternalContext.setStep(0);
 	};
 
 	const handleResetTimer = async () => {
-		context.setSubmit(true);
+		authInternalContext.setSubmit(true);
 		await new Promise((resolve) => setTimeout(resolve, 1000));
-		context.setSubmit(false);
+		authInternalContext.setSubmit(false);
 		timer = INITIAL_TIMER;
 		focusInputOtp();
 	};
 </script>
 
 <div
-	class="content {context.error ? 'form-error' : ''} {context.isSubmiting ? 'submitting' : ''}"
+	class="content {authInternalContext.error ? 'form-error' : ''} {authInternalContext.isSubmiting
+		? 'submitting'
+		: ''}"
 	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly={{ x: -492, duration: 400, opacity: 0 }}
 	bind:this={containerElm}
@@ -92,7 +103,7 @@
 	</div>
 	<small class="description"
 		>کد تایید به شماره موبایل {'۰' +
-			Number(context.phoneNumber).toLocaleString('fa-IR', {
+			Number(authExternalContext.phoneNumber).toLocaleString('fa-IR', {
 				useGrouping: false
 			})} ارسال شد.</small
 	>
@@ -115,15 +126,15 @@
 			<button type="button" class="resend" onclick={handleResetTimer}>ارسال مجدد کد تأیید</button>
 		{/if}
 		<div class="error-container">
-			{#if context.error}
+			{#if authInternalContext.error}
 				<span transition:fly={{ duration: 200, opacity: 0, y: -10 }} class="error-message">
-					{context.error}
+					{authInternalContext.error}
 				</span>
 			{/if}
 		</div>
 		<div class="buttons">
 			<Button id="submit" type="submit">تأیید</Button>
-			<Button type="button" variant="outline" onclick={context.cancel}>انصراف</Button>
+			<Button type="button" variant="outline" onclick={authInternalContext.cancel}>انصراف</Button>
 		</div>
 	</form>
 </div>

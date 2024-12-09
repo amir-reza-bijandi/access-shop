@@ -4,13 +4,34 @@
 	import '../app.css';
 	import { setContext } from 'svelte';
 	import type { UserContext } from '$lib/type/user';
+	import Auth from './_lib/component/auth.svelte';
+	import type { AuthExternalContext } from '$lib/type/auth';
+
 	const { children } = $props();
+
 	const userContext: UserContext = $state({
 		isLoggedIn: false
 	});
 	setContext('user', userContext);
+
+	const authExternalContext: AuthExternalContext = $state({
+		operation: 'auth',
+		isAuthActive: false,
+		phoneNumber: '',
+		currentStep: 0
+	});
+	setContext('auth-external', authExternalContext);
+
+	const toggleAuth = () => {
+		authExternalContext.isAuthActive = !authExternalContext.isAuthActive;
+	};
 </script>
 
+<Auth
+	open={authExternalContext.isAuthActive}
+	onclose={toggleAuth}
+	step={authExternalContext.currentStep}
+/>
 <div class="app">
 	<Background />
 	<div class="container">

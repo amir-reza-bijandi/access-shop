@@ -3,25 +3,23 @@
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
 	import Button from '$lib/component/button.svelte';
 	import { ChevronDown, LogIn, LogOut, ShoppingCart, User } from 'lucide-svelte';
-	import Auth from './auth.svelte';
 	import { getContext } from 'svelte';
 	import type { UserContext } from '$lib/type/user';
+	import type { AuthExternalContext } from '$lib/type/auth';
 
 	const userContext: UserContext = getContext('user');
+	const authExternalContext: AuthExternalContext = getContext('auth-external');
 
 	let isMenuActive = $state(false);
-	let isAuthActive = $state(false);
-
 	function toggleMenu() {
 		isMenuActive = !isMenuActive;
 	}
 
-	function toggleAuth() {
-		isAuthActive = !isAuthActive;
+	function openAuth() {
+		authExternalContext.isAuthActive = true;
 	}
 </script>
 
-<Auth open={isAuthActive} onclose={toggleAuth} />
 <div class="account" use:detectOutsideClick={() => (isMenuActive = false)}>
 	{#if userContext.isLoggedIn}
 		<div class="box btn-box">
@@ -41,7 +39,7 @@
 				</div>
 				<ul class="list">
 					<li class="item">
-						<a href="/" class="link" onclick={toggleMenu}>
+						<a href="/account" class="link" onclick={toggleMenu}>
 							<User size={20} strokeWidth={1.5} absoluteStrokeWidth />
 							ویرایش حساب کاربری
 						</a>
@@ -62,13 +60,11 @@
 			</div>
 		</div>
 	{:else}
-		<Button class="login-btn-desktop" icon={LogIn} variant="outline" onclick={toggleAuth}
+		<Button class="login-btn-desktop" icon={LogIn} variant="outline" onclick={openAuth}
 			>ورود به حساب کاربری</Button
 		>
-		<button
-			class="login-btn-mobile"
-			use:rippleEffect={{ dynamicPositon: false }}
-			onclick={toggleAuth}><User /></button
+		<button class="login-btn-mobile" use:rippleEffect={{ dynamicPositon: false }} onclick={openAuth}
+			><User /></button
 		>
 	{/if}
 </div>

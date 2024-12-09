@@ -3,17 +3,19 @@
 	import Button from '$lib/component/button.svelte';
 	import Input from '$lib/component/input.svelte';
 	import { fly } from 'svelte/transition';
-	import type { AuthContext } from '../../type/auth';
+	import type { AuthInternalContext } from '../../type/auth';
 	import { getContext } from 'svelte';
+	import type { AuthExternalContext } from '$lib/type/auth';
 
-	const context: AuthContext = getContext('auth');
+	const authInternalContext: AuthInternalContext = getContext('auth-internal');
+	const authExternalContext: AuthExternalContext = getContext('auth-external');
 	let phoneNumber = $state('');
 	const validationPattern = '^(09|۰۹)[\\d۰-۹]{9}$';
 
 	// Logic for submitting the form
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
-		context.setSubmit(true);
+		authInternalContext.setSubmit(true);
 
 		// Remove focus from the input
 		const input = document.getElementById('phone-number-input');
@@ -22,14 +24,14 @@
 		}
 
 		await new Promise((resolve) => setTimeout(resolve, 2000));
-		context.setSubmit(false);
-		context.setPhoneNumber(phoneNumber);
-		context.setStep(1);
+		authInternalContext.setSubmit(false);
+		authExternalContext.phoneNumber = phoneNumber;
+		authInternalContext.setStep(1);
 	};
 
 	// Remove error when user starts typing
 	const handleInput = () => {
-		context.setError(null);
+		authInternalContext.setError(null);
 	};
 
 	// Validate user input
@@ -37,19 +39,21 @@
 		const input = e.currentTarget;
 		e.preventDefault();
 		if (input.validity.patternMismatch) {
-			context.setError('شمارهٔ موبایل صحیح نمی‌باشد!');
+			authInternalContext.setError('شمارهٔ موبایل صحیح نمی‌باشد!');
 		}
 		if (input.validity.valueMissing) {
-			context.setError('شمارهٔ موبایل برای ثبت نام الزامیست!');
+			authInternalContext.setError('شمارهٔ موبایل برای ثبت نام الزامیست!');
 		}
 		if (input.validity.tooShort) {
-			context.setError('شمارهٔ موبایل باید حداقل ۱۱ رقم باشد!');
+			authInternalContext.setError('شمارهٔ موبایل باید حداقل ۱۱ رقم باشد!');
 		}
 	};
 </script>
 
 <div
-	class="content {context.error ? 'form-error' : ''} {context.isSubmiting ? 'submitting' : ''}"
+	class="content {authInternalContext.error ? 'form-error' : ''} {authInternalContext.isSubmiting
+		? 'submitting'
+		: ''}"
 	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly={{ x: -492, duration: 400, opacity: 0 }}
 >
@@ -72,9 +76,9 @@
 		<Button class="submit" type="submit">ادامه</Button>
 	</form>
 	<div class="error-container">
-		{#if context.error}
+		{#if authInternalContext.error}
 			<span transition:fly={{ duration: 200, opacity: 0, y: -10 }} class="error-message">
-				{context.error}
+				{authInternalContext.error}
 			</span>
 		{/if}
 	</div>

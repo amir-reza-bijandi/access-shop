@@ -3,11 +3,11 @@
 	import Button from '$lib/component/button.svelte';
 	import Input from '$lib/component/input.svelte';
 	import { fly } from 'svelte/transition';
-	import type { AuthContext } from '../../type/auth';
+	import type { AuthInternalContext } from '../../type/auth';
 	import { getContext } from 'svelte';
 	import type { UserContext } from '$lib/type/user';
 
-	const authContext: AuthContext = getContext('auth');
+	const authContext: AuthInternalContext = getContext('auth-internal');
 	const userContext: UserContext = getContext('user');
 	let fullName = $state('');
 

@@ -1,15 +1,20 @@
 <script lang="ts">
 	import type { ModalProps } from '$lib/component/modal.svelte';
-	import type { AuthContext } from '../type/auth';
+	import type { AuthInternalContext } from '../type/auth';
 	import Logo from '$lib/component/logo.svelte';
 	import Modal from '$lib/component/modal.svelte';
 	import PhoneNumber from './auth/phone-number.svelte';
 	import CodeVerification from './auth/code-verification.svelte';
-	import { setContext } from 'svelte';
+	import { getContext, setContext } from 'svelte';
 	import FullName from './auth/full-name.svelte';
+	import type { AuthExternalContext } from '$lib/type/auth';
 
-	type AuthProps = Omit<ModalProps, 'children' | 'header'>;
-	const { open, onclose }: AuthProps = $props();
+	type AuthProps = Omit<ModalProps, 'children' | 'header'> & {
+		step: number;
+	};
+	const { open, onclose, step }: AuthProps = $props();
+
+	const authExternalContext: AuthExternalContext = getContext('auth-external');
 
 	type FormStep = {
 		index: number;
@@ -24,11 +29,11 @@
 		{ index: 2, modalHeight: { min: 38.4, max: 42.6 } }
 	];
 
-	let currentStep: FormStep = $state(formStepList[0]);
+	let currentStep: FormStep = $derived(formStepList[step]);
 
-	const authContext: AuthContext = $state({
+	const authContext: AuthInternalContext = $state({
 		setStep(index) {
-			currentStep = formStepList[index];
+			authExternalContext.currentStep = index;
 			authContext.setError(null);
 			authContext.setModalHeight('min');
 		},
@@ -47,9 +52,6 @@
 		setModalHeight(height) {
 			authContext.modalHeight = height;
 		},
-		setPhoneNumber(phoneNumber) {
-			authContext.phoneNumber = phoneNumber;
-		},
 		closeModal() {
 			onclose?.();
 		},
@@ -59,10 +61,9 @@
 		},
 		error: null,
 		isSubmiting: false,
-		modalHeight: 'min',
-		phoneNumber: ''
+		modalHeight: 'min'
 	});
-	setContext('auth', authContext);
+	setContext('auth-internal', authContext);
 
 	const handleClose = () => {
 		onclose?.();
