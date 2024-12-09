@@ -280,6 +280,10 @@
 		cursor: pointer;
 	}
 
+	th:is(:nth-child(1), :nth-child(2)) {
+		cursor: auto;
+	}
+
 	table.extra tbody tr:last-child :is(th, td) {
 		border-bottom: none;
 	}
