@@ -105,7 +105,6 @@
 							{@const Icon = getStatusIcon(status)}
 							<tr
 								onclick={() => handleOpenOrderDetails(order)}
-								use:rippleEffect
 								in:fly={{
 									y: -80,
 									opacity: 0,
@@ -313,6 +312,10 @@
 
 	tbody tr:hover {
 		background: var(--bg-secondary);
+	}
+
+	tbody tr:active {
+		background: var(--bg-tertiary);
 	}
 
 	table.extra tbody tr:last-child {
