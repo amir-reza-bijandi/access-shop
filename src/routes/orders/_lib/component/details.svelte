@@ -17,8 +17,6 @@
 	let contentHeight = $state(444);
 	let headerHeight = $state(96);
 
-	$inspect(contentHeight, headerHeight);
-
 	// svelte-ignore state_referenced_locally
 	setContext('order', orderContext);
 
