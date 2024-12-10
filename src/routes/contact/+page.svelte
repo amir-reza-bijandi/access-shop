@@ -83,7 +83,7 @@
 		<header class="page-description">
 			<div class="icon-box">
 				<Glow class="glow" />
-				<img class="support-icon" src="/icon/ui/headphone.svg" alt="" />
+				<img class="support-icon" src="/icon/ui/headphone.svg" alt="" width="160" height="160" />
 			</div>
 			<h1 class="title">
 				تماس با تیم اکسس شاپ
