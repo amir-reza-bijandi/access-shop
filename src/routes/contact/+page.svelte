@@ -328,6 +328,7 @@
 	.contact-info {
 		margin-top: 19.6rem;
 		margin-bottom: 12.8rem;
+		animation: intro-up 1s ease 400ms backwards;
 	}
 
 	.contact-info-heading {
