@@ -234,6 +234,7 @@
 					/>
 				</label>
 				<Button
+					class="submit-btn"
 					type="submit"
 					variant="outline"
 					icon={Smartphone}
@@ -301,7 +302,8 @@
 
 	.avatar-img {
 		width: 17.2rem;
-		height: 17.2rem;
+		aspect-ratio: 1 / 1;
+		height: auto;
 		border-radius: 50%;
 	}
 
@@ -309,6 +311,7 @@
 		display: flex;
 		gap: 1.2rem;
 		width: 100%;
+		align-items: end;
 	}
 
 	.phone-number-wrapper {
@@ -330,5 +333,60 @@
 
 	.content :global(.input) {
 		flex-grow: 1;
+	}
+
+	@media (max-width: 48rem) {
+		.content {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.avatar {
+			align-content: end;
+		}
+
+		.avatar-img {
+			width: 25.6rem;
+		}
+
+		.input-wrapper {
+			flex-direction: column;
+			align-items: start;
+		}
+	}
+
+	@media (max-width: 40rem) {
+		.content {
+			grid-template-columns: 1fr;
+		}
+
+		.avatar {
+			grid-template-columns: auto 1fr;
+		}
+
+		.avatar {
+			animation: intro-right 1s ease both;
+		}
+
+		.phone-number-wrapper {
+			grid-column: span 1;
+		}
+
+		.avatar-img {
+			width: 4.8rem;
+			height: 4.8rem;
+			border-radius: 50%;
+		}
+
+		.phone-number {
+			flex-direction: column;
+		}
+
+		.phone-number :global(.submit-btn) {
+			width: 100%;
+		}
+
+		.input-wrapper {
+			width: 100%;
+		}
 	}
 </style>
