@@ -44,7 +44,9 @@
 	>
 		<summary class="title" onclick={expand}>{title}<ChevronUp /></summary>
 		<div class="description" ontransitionend={collapse}>
-			<p>{@render children()}</p>
+			<div class="content">
+				<p class="text">{@render children()}</p>
+			</div>
 		</div>
 	</details>
 </div>
@@ -89,37 +91,33 @@
 	.accordion.expanded :global(svg) {
 		transform: rotate(180deg);
 	}
-	/*** TITLE ***/
 
-	/*** DESCRIPTION ***/
 	.description {
 		display: grid;
 		overflow: hidden;
-		/* Use grid to animate the hight */
 		grid-template-rows: 0fr;
 		transition: grid-template-rows var(--duration);
 		line-height: var(--line-height);
-	}
-
-	.description > p {
-		min-height: 0;
-		padding: 0;
-		opacity: 0;
-		transform: scale(0.75);
-		transition-property: padding, opacity, transform;
-		transition-duration: var(--duration);
 	}
 
 	.accordion.expanded .description {
 		grid-template-rows: 1fr;
 	}
 
-	.accordion.expanded .description > p {
+	.content {
+		min-height: 0;
+	}
+
+	.text {
+		transition-property: transform;
+		transition-duration: var(--duration);
+		transform: scale(0.8);
 		padding: 2.4rem;
-		opacity: 1;
+	}
+
+	.accordion.expanded .text {
 		transform: scale(1);
 	}
-	/*** DESCRIPTION ***/
 
 	/* Tablet */
 	@media (max-width: 56rem) {
