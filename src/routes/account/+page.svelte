@@ -227,7 +227,7 @@
 						required
 						maxlength={11}
 						minlength={11}
-						autocomplete="tel-national"
+						autocomplete="off"
 						oninput={handleClearPhoneNumberStatus}
 						oninvalid={handlePhoneNumberInvalid}
 						bind:value={phoneNumber}
