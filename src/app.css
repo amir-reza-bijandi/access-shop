@@ -81,11 +81,6 @@ body {
 	color: var(--fg-primary);
 }
 
-input:-webkit-autofill::selection {
-	-webkit-text-fill-color: var(--fg-primary);
-	color: var(--fg-primary);
-}
-
 html,
 body {
 	overflow-x: clip;

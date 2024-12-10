@@ -26,14 +26,4 @@
 		border-bottom-right-radius: 0.8rem;
 		border-bottom-left-radius: 0.8rem;
 	}
-
-	.switch-box-input:-webkit-autofill,
-	.switch-box-input:-webkit-autofill:hover,
-	.switch-box-input:-webkit-autofill:focus {
-		caret-color: hsl(var(--base-gray-100));
-		border: 1px solid transparent;
-		-webkit-text-fill-color: var(--accent);
-		-webkit-box-shadow: 0 0 0px 1000px transparent inset;
-		transition: background-color 5000s ease-in-out 0s;
-	}
 </style>
