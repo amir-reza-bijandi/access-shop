@@ -2,22 +2,33 @@
 	import type { FocusEventHandler, FormEventHandler } from 'svelte/elements';
 	import digitsToEnglish from '../utility/digits-to-english';
 	import persianToCalendars from '../utility/persian-to-calendars';
+	import type { BirthDate } from '$lib/data/user-info';
 
 	type InputDateProps = {
-		value?: number;
+		value?: BirthDate | null;
+		oninput?: () => void;
 	};
-	let { value = $bindable(0) }: InputDateProps = $props();
-
-	const date = new Date(value);
+	let {
+		value = $bindable({
+			day: 1,
+			month: 1,
+			year: 1
+		}),
+		oninput
+	}: InputDateProps = $props();
 
 	const intlOptions: Intl.NumberFormatOptions = {
 		useGrouping: false
 	};
 
 	const whiteList = ['روز', 'ماه', 'سال'];
-	let day = $state(value ? date.getDate().toLocaleString('fa-IR', intlOptions) : 'روز');
-	let month = $state(value ? date.getMonth().toLocaleString('fa-IR', intlOptions) : 'ماه');
-	let year = $state(value ? date.getFullYear().toLocaleString('fa-IR', intlOptions) : 'سال');
+	let day = $state(value ? value.day.toLocaleString('fa-IR', intlOptions).padStart(2, '۰') : 'روز');
+	let month = $state(
+		value ? value.month.toLocaleString('fa-IR', intlOptions).padStart(2, '۰') : 'ماه'
+	);
+	let year = $state(
+		value ? value.year.toLocaleString('fa-IR', intlOptions).padStart(2, '۰') : 'سال'
+	);
 
 	function validate(target: 'day' | 'month' | 'year', value: number) {
 		if (!value) return 1;
@@ -34,9 +45,13 @@
 
 		try {
 			const dateString = persianToCalendars(yearValue, monthValue, dayValue);
-			return new Date(dateString).getTime();
+			return {
+				day: dayValue,
+				month: monthValue,
+				year: yearValue
+			};
 		} catch (error) {
-			return 0;
+			return null;
 		}
 	});
 
@@ -77,6 +92,8 @@
 	};
 
 	const handleInput: FormEventHandler<HTMLSpanElement> = (e) => {
+		oninput?.();
+
 		// Check the value for numbers only
 		const value = e.currentTarget.textContent!;
 		const numberPattern = new RegExp('[0-9۰۱۲۳۴۵۶۷۸۹]*', 'g');

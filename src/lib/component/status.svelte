@@ -2,11 +2,12 @@
 	type StatusProps = {
 		type: 'error' | 'success' | null;
 		message: string | null;
+		class?: string;
 	};
-	const { message, type }: StatusProps = $props();
+	const { message, type, class: className }: StatusProps = $props();
 </script>
 
-<span class="status {type ? type : ''}"><span class="text">{message}</span></span>
+<span class:className class="status {type ? type : ''}"><span class="text">{message}</span></span>
 
 <style>
 	.status {

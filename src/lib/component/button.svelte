@@ -54,8 +54,13 @@
 		border-radius: 0.8rem;
 		border: 1px solid transparent;
 		outline: 0;
-		transition-property: background-color, border-color;
+		transition-property: background-color, border-color, opacity;
 		transition-duration: var(--duration);
+	}
+
+	.button:disabled {
+		opacity: 0.5;
+		pointer-events: none;
 	}
 
 	.fill {

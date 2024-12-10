@@ -5,24 +5,57 @@
 	import { Check, Smartphone, Upload } from 'lucide-svelte';
 	import { userInfo } from '$lib/data/user-info';
 	import InputDate from './_lib/component/input-date.svelte';
-	import type { ChangeEventHandler } from 'svelte/elements';
+	import type { ChangeEventHandler, FormEventHandler } from 'svelte/elements';
 	import type { AuthExternalContext } from '$lib/type/auth';
 	import { getContext } from 'svelte';
 	import digitsToEnglish from './_lib/utility/digits-to-english';
+	import Status from '$lib/component/status.svelte';
 
-	const fullNamePattern = '^[\u0600-\u06FF\s]+$';
+	type ProfileForm = {
+		status: 'error' | 'success' | null;
+		message: string | null;
+		isSubmitting: boolean;
+	};
+
+	type PhoneNumberForm = {
+		status: 'error' | 'success' | null;
+		message: string | null;
+	};
+
+	const fullNamePattern = '^[ء-ي\\u0600-\\u06FF\\s]+$';
 	const numberPattern = '[0-9۰۱۲۳۴۵۶۷۸۹]*';
 	const phoneNumberPattern = '^(09|۰۹)[\\d۰-۹]{9}$';
 
+	const initialPhoneNumber =
+		'۰' + userInfo.phoneNumber.toLocaleString('fa-IR', { useGrouping: false });
+	const initialCitizenId = userInfo.citizenId
+		? userInfo.citizenId.toLocaleString('fa-IR', { useGrouping: false })
+		: '';
+
+	// INPUT STATE
 	let fullName = $state(userInfo.fullName);
 	let birthDate = $state(userInfo.birthDate);
-	let phoneNumber = $state(
-		'۰' + Number(userInfo.phoneNumber).toLocaleString('fa-IR', { useGrouping: false })
-	);
-	let nationalCode = $state(
-		userInfo.nationalCode
-			? userInfo.nationalCode.toLocaleString('fa-IR', { useGrouping: false })
-			: ''
+	let citizenId = $state(initialCitizenId);
+	let phoneNumber = $state(initialPhoneNumber);
+
+	// FORM STATE
+	const profileForm = $state<ProfileForm>({
+		isSubmitting: false,
+		status: null,
+		message: ''
+	});
+
+	const phoneNumberForm = $state<PhoneNumberForm>({
+		status: null,
+		message: ''
+	});
+
+	let isProfileDataChanged = $derived(
+		userInfo.fullName !== fullName ||
+			userInfo.birthDate.year !== birthDate.year ||
+			userInfo.birthDate.month !== birthDate.month ||
+			userInfo.birthDate.day !== birthDate.day ||
+			initialCitizenId !== citizenId
 	);
 
 	let avatarForm = $state<HTMLFormElement | undefined>();
@@ -30,7 +63,15 @@
 
 	const authExternalContext: AuthExternalContext = getContext('auth-external');
 
-	const handleSubmitOnSelect: ChangeEventHandler<HTMLInputElement> = (e) => {
+	const handlePhoneNumberChange: FormEventHandler<HTMLFormElement> = (e) => {
+		e.preventDefault();
+		authExternalContext.isAuthActive = true;
+		authExternalContext.operation = 'change-phone-number';
+		authExternalContext.phoneNumber = digitsToEnglish(phoneNumber);
+		authExternalContext.currentStep = 1;
+	};
+
+	const handleSubmitOnFileSelect: ChangeEventHandler<HTMLInputElement> = (e) => {
 		if (avatarForm) {
 			const formData = new FormData(avatarForm);
 			const image = formData.get('image') as File;
@@ -40,16 +81,71 @@
 		}
 	};
 
-	const handleOpenAuth = () => {
-		authExternalContext.isAuthActive = true;
-		authExternalContext.operation = 'change-phone-number';
-		authExternalContext.phoneNumber = digitsToEnglish(phoneNumber);
-		authExternalContext.currentStep = 1;
+	const handleProfileSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+		e.preventDefault();
+		// Validate birth date
+		if (birthDate) {
+			profileForm.isSubmitting = true;
+			profileForm.status = null;
+			profileForm.message = '';
+			await new Promise((resolve) => setTimeout(resolve, 1000));
+			profileForm.isSubmitting = false;
+			profileForm.status = 'success';
+			profileForm.message = 'اطلاعات با موفقیت ذخیره شد';
+
+			setTimeout(() => {
+				profileForm.status = null;
+				profileForm.message = '';
+			}, 2000);
+		} else {
+			profileForm.status = 'error';
+			profileForm.message = 'تاریخ تولد معتبر نیست!';
+		}
+	};
+
+	const handleClearProfileStatus = () => {
+		profileForm.status = null;
+		profileForm.message = '';
+	};
+
+	const handleClearPhoneNumberStatus = () => {
+		phoneNumberForm.status = null;
+		phoneNumberForm.message = '';
+	};
+
+	const handleFullnameInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+		e.preventDefault();
+		if (e.currentTarget.validity.patternMismatch) {
+			profileForm.status = 'error';
+			profileForm.message = 'نام و نام خانوادگی باید فارسی باشد!';
+		} else if (e.currentTarget.validity.valueMissing) {
+			profileForm.status = 'error';
+			profileForm.message = 'نام و نام خانوادگی نمی‌تواند خالی باشد!';
+		}
+	};
+
+	const handleCitizenIdInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+		e.preventDefault();
+		if (e.currentTarget.validity.patternMismatch) {
+			profileForm.status = 'error';
+			profileForm.message = 'کد ملی باید عدد باشد!';
+		} else if (e.currentTarget.validity.valueMissing) {
+			profileForm.status = 'error';
+			profileForm.message = 'کد ملی نمی‌تواند خالی باشد!';
+		}
+	};
+
+	const handlePhoneNumberInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+		e.preventDefault();
+		if (e.currentTarget.validity.patternMismatch) {
+			phoneNumberForm.status = 'error';
+			phoneNumberForm.message = 'شماره موبایل معتبر نیست!';
+		}
 	};
 </script>
 
 <PageWrapper>
-	<main class="content">
+	<div class="content">
 		<!-- AVATAR -->
 		<form class="box rounded-lg avatar section" bind:this={avatarForm}>
 			<img class="avatar-img" src={avatarSrc} alt="تصویر پروفایل شما" />
@@ -59,77 +155,103 @@
 				name="image"
 				accept="image/*"
 				hidden
-				onchange={handleSubmitOnSelect}
+				onchange={handleSubmitOnFileSelect}
 			/>
 			<Button as="label" for="upload" class="upload-btn" variant="outline" icon={Upload}>
 				بارگذاری تصویر جدید
 			</Button>
 		</form>
 		<!-- PROFILE -->
-		<form class="box rounded-lg profile section">
-			<label class="input-wrapper">
-				<span class="label">نام و نام خانوادگی</span>
-				<Input
-					class="input"
-					placeholder="نام و نام خانوادگی خود را وارد کنید..."
-					inputmode="text"
-					pattern={fullNamePattern}
-					title="تنها استفاده از حروف فارسی مجاز است"
-					required
-					autocomplete="off"
-					bind:value={fullName}
-				/>
-			</label>
-			<label class="input-wrapper">
-				<span class="label">تاریخ تولد</span>
-				<InputDate bind:value={birthDate} />
-			</label>
-			<label class="input-wrapper">
-				<span class="label">کد ملی</span>
-				<Input
-					class="input"
-					placeholder="کد ملی خود را وارد کنید..."
-					inputmode="numeric"
-					pattern={numberPattern}
-					title="تنها استفاده از اعداد مجاز است"
-					required
-					maxlength={10}
-					minlength={10}
-					autocomplete="off"
-					bind:value={nationalCode}
-				/>
-			</label>
-			<Button class="submit-btn" variant="outline" icon={Check}>ثبت تغییرات</Button>
-		</form>
-		<!-- PHONE NUMBER -->
-		<div class="box rounded-lg phone-number section">
-			<label class="input-wrapper">
-				<span class="label">شمارهٔ همراه</span>
-				<Input
-					class="input"
-					placeholder="شمارهٔ موبایل خود را وارد کنید..."
-					inputmode="numeric"
-					pattern={phoneNumberPattern}
-					title="تنها استفاده از اعداد مجاز است"
-					required
-					maxlength={11}
-					minlength={11}
-					autocomplete="tel-national"
-					bind:value={phoneNumber}
-				/>
-			</label>
-			<Button variant="outline" icon={Smartphone} onclick={handleOpenAuth}
-				>تغییر شمارهٔ همراه</Button
-			>
+		<div class="box rounded-lg section profile-wrapper">
+			<form class:submit={profileForm.isSubmitting} class="profile" onsubmit={handleProfileSubmit}>
+				<label class="input-wrapper">
+					<span class="label">نام و نام خانوادگی</span>
+					<Input
+						name="fullName"
+						class="input"
+						placeholder="نام و نام خانوادگی خود را وارد کنید..."
+						inputmode="text"
+						pattern={fullNamePattern}
+						title="تنها استفاده از حروف فارسی مجاز است"
+						required
+						autocomplete="off"
+						oninput={handleClearProfileStatus}
+						oninvalid={handleFullnameInvalid}
+						bind:value={fullName}
+					/>
+				</label>
+				<label class="input-wrapper">
+					<span class="label">تاریخ تولد</span>
+					<InputDate bind:value={birthDate} oninput={handleClearProfileStatus} />
+				</label>
+				<label class="input-wrapper">
+					<span class="label">کد ملی</span>
+					<Input
+						name="citizenId"
+						class="input"
+						placeholder="کد ملی خود را وارد کنید..."
+						inputmode="numeric"
+						pattern={numberPattern}
+						title="تنها استفاده از اعداد مجاز است"
+						required
+						maxlength={9}
+						minlength={10}
+						autocomplete="off"
+						oninput={handleClearProfileStatus}
+						oninvalid={handleCitizenIdInvalid}
+						bind:value={citizenId}
+					/>
+				</label>
+				<Button
+					type="submit"
+					class="submit-btn"
+					variant="outline"
+					icon={Check}
+					disabled={!isProfileDataChanged}>ثبت تغییرات</Button
+				>
+			</form>
+			<Status class="status" message={profileForm.message} type={profileForm.status} />
 		</div>
-	</main>
+		<!-- PHONE NUMBER -->
+		<div class="box rounded-lg section phone-number-wrapper">
+			<form class="phone-number" onsubmit={handlePhoneNumberChange}>
+				<label class="input-wrapper">
+					<span class="label">شمارهٔ همراه</span>
+					<Input
+						class="input"
+						name="phoneNumber"
+						placeholder="شمارهٔ موبایل خود را وارد کنید..."
+						inputmode="numeric"
+						pattern={phoneNumberPattern}
+						title="تنها استفاده از اعداد مجاز است"
+						required
+						maxlength={11}
+						minlength={11}
+						autocomplete="tel-national"
+						oninput={handleClearPhoneNumberStatus}
+						oninvalid={handlePhoneNumberInvalid}
+						bind:value={phoneNumber}
+					/>
+				</label>
+				<Button
+					type="submit"
+					variant="outline"
+					icon={Smartphone}
+					disabled={initialPhoneNumber === phoneNumber || phoneNumber.length !== 11}
+				>
+					تغییر شمارهٔ همراه
+				</Button>
+			</form>
+			<Status message={phoneNumberForm.message} type={phoneNumberForm.status} />
+		</div>
+	</div>
 </PageWrapper>
 
 <style>
 	.content {
 		display: grid;
 		grid-template-columns: 1fr 2fr;
-		grid-template-rows: 28rem auto;
+		grid-template-rows: auto auto;
 		max-width: 76.8rem;
 		margin-inline: auto;
 		gap: 2rem;
@@ -139,14 +261,27 @@
 		padding: 2rem;
 	}
 
+	.submit {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
 	.profile {
 		display: grid;
 		gap: 1.6rem;
+		transition: opacity var(--duration);
+	}
+
+	.profile-wrapper {
 		animation: intro-left 1s ease backwards;
 	}
 
 	.profile :global(.submit-btn) {
 		width: 100%;
+	}
+
+	.profile :global(.status) {
+		margin-top: -2rem;
 	}
 
 	.profile .label {
@@ -157,7 +292,7 @@
 		display: grid;
 		gap: 2rem;
 		place-items: center;
-		animation: intro-right 1s ease 200ms backwards;
+		animation: intro-right 1s ease 100ms backwards;
 	}
 
 	.avatar :global(.upload-btn) {
@@ -174,8 +309,11 @@
 		display: flex;
 		gap: 1.2rem;
 		width: 100%;
+	}
+
+	.phone-number-wrapper {
 		grid-column: span 2;
-		animation: intro-up 1s ease 400ms backwards;
+		animation: intro-up 1s ease 200ms backwards;
 	}
 
 	.input-wrapper {
