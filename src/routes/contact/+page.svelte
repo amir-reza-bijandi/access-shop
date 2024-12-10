@@ -3,7 +3,79 @@
 	import Glow from '$lib/component/glow.svelte';
 	import Input from '$lib/component/input.svelte';
 	import PageWrapper from '$lib/component/page-wrapper.svelte';
+	import Status from '$lib/component/status.svelte';
 	import { SendHorizonal } from 'lucide-svelte';
+	import type { FormEventHandler } from 'svelte/elements';
+
+	const fullNamePattern = '^[ء-ي\\u0600-\\u06FF\\s]+$';
+	const phoneNumberPattern = '^(09|۰۹)[\\d۰-۹]{9}$';
+
+	type Form = {
+		status: 'error' | 'success' | null;
+		message: string;
+		isSubmitting: boolean;
+	};
+
+	const form: Form = $state({
+		status: null,
+		message: '',
+		isSubmitting: false
+	});
+
+	const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+		e.preventDefault();
+		form.isSubmitting = true;
+		form.status = null;
+		form.message = '';
+		setTimeout(() => {
+			form.isSubmitting = false;
+			form.status = 'success';
+			form.message = 'پیام شما با موفقیت ارسال شد';
+		}, 1000);
+	};
+
+	const handlePhoneNumberInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+		e.preventDefault();
+		if (e.currentTarget.validity.patternMismatch) {
+			form.status = 'error';
+			form.message = 'شماره موبایل معتبر نیست!';
+		} else if (e.currentTarget.validity.valueMissing) {
+			form.status = 'error';
+			form.message = 'شمارهٔ موبایل الزامیست!';
+		}
+	};
+
+	const handleFullNameInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+		e.preventDefault();
+		if (e.currentTarget.validity.valueMissing) {
+			form.status = 'error';
+			form.message = 'نام و نام خانوادگی الزامیست!';
+		} else if (e.currentTarget.validity.patternMismatch) {
+			form.status = 'error';
+			form.message = 'تنها استفاده از حروف فارسی مجاز است!';
+		}
+	};
+
+	const handleMessageInvalid: FormEventHandler<HTMLTextAreaElement> = (e) => {
+		e.preventDefault();
+		if (e.currentTarget.validity.valueMissing) {
+			form.status = 'error';
+			form.message = 'متن پیام الزامیست!';
+		}
+	};
+
+	const handleMessageTitleInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+		e.preventDefault();
+		if (e.currentTarget.validity.valueMissing) {
+			form.status = 'error';
+			form.message = 'عنوان پیام الزامیست!';
+		}
+	};
+
+	const handleClearStatus = () => {
+		form.status = null;
+		form.message = '';
+	};
 </script>
 
 <PageWrapper>
@@ -22,27 +94,67 @@
 				پشتیبانی اکسس شاپ آماده پاسخگویی به همه سوالات شما است.
 			</p>
 		</header>
-		<form class="form">
+		<form class="form {form.isSubmitting ? 'submit' : ''}" onsubmit={handleSubmit}>
 			<Glow class="glow" />
 			<div class="box rounded-lg">
-				<div class="form-body">
-					<label class="label">
-						شمارهٔ موبایل
-						<Input name="phoneNumber" placeholder="شمارهٔ موبایل خود را وارد کنید..." />
-					</label>
-					<label class="label">
-						نام و نام خانوادگی
-						<Input name="fullName" placeholder="نام و نام خانوادگی خود را وارد کنید..." />
-					</label>
-					<label class="label">
-						عنوان پیام
-						<Input name="title" placeholder="عنوان پیام را وارد کنید..." />
-					</label>
-					<label class="label">
-						عنوان پیام
-						<textarea class="message" name="message" placeholder="هر چه می‌خواهد دل تنگت بگو..."
-						></textarea>
-					</label>
+				<div class="form-body-wrapper">
+					<div class="form-body">
+						<label class="label">
+							شمارهٔ موبایل
+							<Input
+								name="phoneNumber"
+								placeholder="شمارهٔ موبایل خود را وارد کنید..."
+								inputmode="numeric"
+								pattern={phoneNumberPattern}
+								title="تنها استفاده از اعداد مجاز است"
+								required
+								maxlength={11}
+								minlength={11}
+								autocomplete="tel-national"
+								oninput={handleClearStatus}
+								oninvalid={handlePhoneNumberInvalid}
+							/>
+						</label>
+						<label class="label">
+							نام و نام خانوادگی
+							<Input
+								name="fullName"
+								class="input"
+								placeholder="نام و نام خانوادگی خود را وارد کنید..."
+								inputmode="text"
+								pattern={fullNamePattern}
+								title="تنها استفاده از حروف فارسی مجاز است"
+								required
+								autocomplete="name"
+								oninput={handleClearStatus}
+								oninvalid={handleFullNameInvalid}
+							/>
+						</label>
+						<label class="label">
+							عنوان پیام
+							<Input
+								name="title"
+								placeholder="عنوان پیام را وارد کنید..."
+								title="عنوان پیام الزامیست"
+								oninvalid={handleMessageTitleInvalid}
+								oninput={handleClearStatus}
+								required
+							/>
+						</label>
+						<label class="label">
+							متن پیام
+							<textarea
+								class="message"
+								name="message"
+								title="متن پیام الزامیست"
+								placeholder="هر چه می‌خواهد دل تنگت بگو..."
+								oninvalid={handleMessageInvalid}
+								oninput={handleClearStatus}
+								required
+							></textarea>
+						</label>
+					</div>
+					<Status class="status" message={form.message} type={form.status} />
 				</div>
 				<div class="form-footer">
 					<Button class="submit-btn" icon={SendHorizonal}>ارسال پیام</Button>
@@ -148,10 +260,23 @@
 		z-index: -1;
 	}
 
+	.form-body-wrapper {
+		margin: 2.4rem;
+	}
+
+	.form-body-wrapper,
+	.form-footer {
+		transition: opacity var(--duration);
+	}
+
+	.form.submit :is(.form-body-wrapper, .form-footer) {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
 	.form-body {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		padding: 2.4rem;
 		gap: 1.6rem;
 	}
 
