@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { FormEventHandler } from 'svelte/elements';
 	import Button from '$lib/component/button.svelte';
 	import Input from '$lib/component/input.svelte';
@@ -7,51 +8,50 @@
 	import { getContext } from 'svelte';
 	import type { UserContext } from '$lib/type/user';
 
-	const authContext: AuthInternalContext = getContext('auth-internal');
+	/* ---------------------------------- State --------------------------------- */
+	const authInternalContext: AuthInternalContext = getContext('auth-internal');
 	const userContext: UserContext = getContext('user');
 	let fullName = $state('');
 
-	// Logic for submitting the form
+	/* --------------------------------- Events --------------------------------- */
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
-		authContext.setSubmit(true);
+		authInternalContext.setSubmit(true);
 
-		// Remove focus from the input
 		const input = document.getElementById('full-name-input');
 		if (input) {
 			input.blur();
 		}
 
 		await new Promise((resolve) => setTimeout(resolve, 2000));
-		authContext.setSubmit(false);
-		authContext.closeModal();
+		authInternalContext.setSubmit(false);
+		authInternalContext.closeModal();
 		userContext.isLoggedIn = true;
 	};
 
-	// Remove error when user starts typing
 	const handleInput = () => {
-		authContext.setError(null);
+		authInternalContext.setError(null);
 	};
 
-	// Validate user input
 	const handleInvalid: FormEventHandler<HTMLInputElement> = (e) => {
 		const input = e.currentTarget;
 		e.preventDefault();
 		if (input.validity.valueMissing) {
-			authContext.setError('نام و نام خانوادگی برای تکمیل ثبت نام الزامیست!');
+			authInternalContext.setError('نام و نام خانوادگی برای تکمیل ثبت نام الزامیست!');
 		}
 		if (input.validity.patternMismatch) {
-			authContext.setError('تنها استفاده از حروف فارسی مجاز است!');
+			authInternalContext.setError('تنها استفاده از حروف فارسی مجاز است!');
 		}
 	};
 </script>
 
 <div
-	class="content {authContext.error ? 'form-error' : ''} {authContext.isSubmiting
+	class="content {authInternalContext.error ? 'form-error' : ''} {authInternalContext.isSubmiting
 		? 'submitting'
 		: ''}"
 	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly={{ x: -492, duration: 400, opacity: 0 }}
+	bind:clientHeight={authInternalContext.contentHeight}
 >
 	<h2 class="title">نام و نام خانوادگی</h2>
 	<form class="form" onsubmit={handleSubmit}>
@@ -69,13 +69,13 @@
 		/>
 		<div class="buttons">
 			<Button id="submit" type="submit">تکمیل ثبت‌نام</Button>
-			<Button type="button" variant="outline" onclick={authContext.cancel}>انصراف</Button>
+			<Button type="button" variant="outline" onclick={authInternalContext.cancel}>انصراف</Button>
 		</div>
 	</form>
 	<div class="error-container">
-		{#if authContext.error}
+		{#if authInternalContext.error}
 			<span transition:fly={{ duration: 200, opacity: 0, y: -10 }} class="error-message">
-				{authContext.error}
+				{authInternalContext.error}
 			</span>
 		{/if}
 	</div>
@@ -90,11 +90,10 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		justify-content: end;
 		width: 100%;
 		padding: var(--modal-padding);
 		transition: opacity var(--duration);
-		height: 100%;
+		min-height: 27.2rem;
 	}
 
 	.content.submitting {
@@ -108,6 +107,7 @@
 	.title {
 		font-size: 2.4rem;
 		font-weight: 700;
+		margin-top: 4.4rem;
 		margin-bottom: 2.4rem;
 	}
 
@@ -150,5 +150,11 @@
 
 	.highlight {
 		color: var(--accent);
+	}
+
+	@media (max-width: 28rem) {
+		.title {
+			margin-top: 3.4rem;
+		}
 	}
 </style>

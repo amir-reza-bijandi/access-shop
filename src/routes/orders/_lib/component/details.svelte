@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Modal, { type ModalProps } from '$lib/component/modal.svelte';
 	import { setContext } from 'svelte';
 	import { type Order } from '../data/orders';
@@ -6,27 +7,35 @@
 	import SubscriptionDetails from './subscription-details.svelte';
 	import type { OrderContext } from '../type/order';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type DetailsProps = Omit<ModalProps, 'children' | 'header'> & {
 		order: Order;
 	};
 	const { order, open, onclose }: DetailsProps = $props();
 
+	/* ---------------------------------- State --------------------------------- */
 	let orderContext: OrderContext = $state({
-		currentPageIndex: 0
+		currentOrder: order,
+		currentPageIndex: 0,
+		contentHeight: 444
 	});
-	let contentHeight = $state(444);
 	let headerHeight = $state(96);
 
-	// svelte-ignore state_referenced_locally
 	setContext('order', orderContext);
 
+	/* --------------------------------- Events --------------------------------- */
 	const handleClose = () => {
 		orderContext.currentPageIndex = 0;
 		onclose?.();
 	};
 </script>
 
-<Modal {open} onclose={handleClose} bind:headerHeight height={(contentHeight + headerHeight) / 10}>
+<Modal
+	{open}
+	onclose={handleClose}
+	bind:headerHeight
+	--height={(orderContext.contentHeight + headerHeight) / 10 + 'rem'}
+>
 	{#snippet header()}
 		{@const product = order.product}
 		<div class="header-wrapper">
@@ -45,9 +54,9 @@
 		</div>
 	{/snippet}
 	{#if orderContext.currentPageIndex === 0}
-		<OrderDetails {order} bind:height={contentHeight} />
+		<OrderDetails />
 	{:else if orderContext.currentPageIndex === 1}
-		<SubscriptionDetails {order} bind:height={contentHeight} />
+		<SubscriptionDetails />
 	{/if}
 </Modal>
 
@@ -71,6 +80,7 @@
 		direction: ltr;
 	}
 
+	/* 544px */
 	@media (max-width: 34rem) {
 		.header-wrapper > * {
 			display: none;

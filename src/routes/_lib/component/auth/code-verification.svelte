@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { FormEventHandler } from 'svelte/elements';
 	import type { AuthInternalContext } from '../../type/auth';
 	import { fly } from 'svelte/transition';
@@ -8,14 +9,17 @@
 	import { MoveLeft } from 'lucide-svelte';
 	import type { AuthExternalContext } from '$lib/type/auth';
 
+	/* -------------------------------- Constants ------------------------------- */
 	const INITIAL_TIMER = 10;
 
+	/* ---------------------------------- State --------------------------------- */
+	let timer = $state(INITIAL_TIMER);
+	let inputValue = $state('');
 	const authInternalContext: AuthInternalContext = getContext('auth-internal');
 	const authExternalContext: AuthExternalContext = getContext('auth-external');
-	let inputValue = $state('');
-	let timer = $state(INITIAL_TIMER);
-	let containerElm: HTMLDivElement | null;
 
+	/* --------------------------------- Effect --------------------------------- */
+	let containerElm: HTMLDivElement | undefined;
 	function startTimer() {
 		return setInterval(() => timer > 0 && (timer -= 1), 1000);
 	}
@@ -25,12 +29,11 @@
 			containerElm.querySelectorAll('input')[0].focus();
 		}
 	}
-	// Focus the InputOtp component
+
 	$effect(() => {
 		focusInputOtp();
 	});
 
-	// Timer
 	$effect(() => {
 		let id = 0;
 		if (timer > 0 && !id) {
@@ -41,13 +44,13 @@
 		return () => clearInterval(id);
 	});
 
-	// Logic for submitting the form
+	/* --------------------------------- Events --------------------------------- */
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
 		authInternalContext.setSubmit(true);
 		await new Promise((resolve) => setTimeout(resolve, 2000));
 		authInternalContext.setSubmit(false);
-		// Check current operation
+
 		if (authExternalContext.operation === 'auth') {
 			authInternalContext.setStep(2);
 		} else {
@@ -57,12 +60,10 @@
 		}
 	};
 
-	// Remove error when user starts typing
 	const handleInput = () => {
 		authInternalContext.setError(null);
 	};
 
-	// Validate user input
 	const handleInvalid: FormEventHandler<HTMLInputElement> = (e) => {
 		const input = e.currentTarget;
 		e.preventDefault();
@@ -93,6 +94,7 @@
 		: ''}"
 	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly={{ x: -492, duration: 400, opacity: 0 }}
+	bind:clientHeight={authInternalContext.contentHeight}
 	bind:this={containerElm}
 >
 	<div class="header">
@@ -143,11 +145,10 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		justify-content: end;
 		padding: var(--modal-padding);
 		transition: opacity var(--duration);
 		width: 100%;
-		height: 100%;
+		min-height: 27.9rem;
 	}
 
 	.content.submitting {
@@ -165,6 +166,7 @@
 	}
 
 	.header {
+		margin-top: 4.1rem;
 		margin-bottom: 2.4rem;
 		display: flex;
 		justify-content: space-between;
@@ -244,5 +246,12 @@
 
 	.error-message {
 		color: var(--error);
+	}
+
+	/* 448px */
+	@media (max-width: 28rem) {
+		.header {
+			margin-top: 1.1rem;
+		}
 	}
 </style>

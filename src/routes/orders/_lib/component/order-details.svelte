@@ -1,6 +1,7 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import { getContext } from 'svelte';
-	import type { Order, OrderStatus } from '../data/orders';
+	import type { OrderStatus } from '../data/orders';
 	import getStatusColor from '../utility/get-status-color';
 	import type { OrderContext } from '../type/order';
 	import getStatusIcon from '../utility/get-status-icon';
@@ -9,28 +10,26 @@
 	import { fly } from 'svelte/transition';
 	import { Icon as LucideIcon } from 'lucide-svelte';
 
-	type OrderDetailsProps = {
-		order: Order;
-		height: number;
-	};
-	let { order, height = $bindable(0) }: OrderDetailsProps = $props();
-
-	const statusTextMap: Record<OrderStatus, string> = {
+	/* -------------------------------- Constants ------------------------------- */
+	const STATUS_TEXT_MAP: Record<OrderStatus, string> = {
 		pending: 'سفارش در حال انجام می‌باشد',
 		delivered: 'سفارش انجام شد',
 		canceled: 'سفارش لغو شد'
 	};
 
-	const statusDescriptionMap: Record<OrderStatus, string> = {
+	const STATUS_DESCRIPTION_MAP: Record<OrderStatus, string> = {
 		pending: 'لطفا صبور باشید',
 		delivered: 'می‌توانید اشتراک خود را از پایین صفحه مشاهده کنید',
 		canceled: 'برای پیگیری با پشتیبانی تماس بگیرید'
 	};
 
-	const orderContext: OrderContext = getContext('order');
+	/* ---------------------------------- State --------------------------------- */
+	const context: OrderContext = getContext('order');
+	const order = $derived(context.currentOrder);
 
+	/* --------------------------------- Evnets --------------------------------- */
 	const handleGoToSubscription = () => {
-		orderContext.currentPageIndex = 1;
+		context.currentPageIndex = 1;
 	};
 </script>
 
@@ -42,15 +41,15 @@
 	class="content"
 	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 401 }}
 	out:fly={{ x: -492, duration: 400, opacity: 0 }}
-	bind:clientHeight={height}
+	bind:clientHeight={context.contentHeight}
 >
 	<section class="status {getStatusColor(order.status)}">
 		<h3 class="status-heading">
-			<span class="status-icon">{@render icon(getStatusIcon(order.status))}</span>{statusTextMap[
+			<span class="status-icon">{@render icon(getStatusIcon(order.status))}</span>{STATUS_TEXT_MAP[
 				order.status
 			]}
 		</h3>
-		<p class="status-description">{statusDescriptionMap[order.status]}</p>
+		<p class="status-description">{STATUS_DESCRIPTION_MAP[order.status]}</p>
 	</section>
 	<div class="product-details">
 		اشتراک {order.product.period.fa} - {order.product.name.fa} - {order.product.type.fa}
@@ -178,6 +177,7 @@
 		width: 100%;
 	}
 
+	/* 544px */
 	@media (max-width: 34rem) {
 		.content {
 			grid-template-rows: 1fr auto auto;
@@ -212,6 +212,7 @@
 		}
 	}
 
+	/* 480px */
 	@media (max-width: 30rem) {
 		.content {
 			height: 50rem;

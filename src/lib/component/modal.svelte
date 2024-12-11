@@ -1,33 +1,31 @@
 <script lang="ts">
-	import { X } from 'lucide-svelte';
-	import Portal from 'svelte-portal';
+	/* --------------------------------- Imports -------------------------------- */
 	import type { Snippet } from 'svelte';
+	import { X } from 'lucide-svelte';
 	import { trapFocus } from 'trap-focus-svelte';
 	import { fade, scale } from 'svelte/transition';
 
+	/* ---------------------------------- Props --------------------------------- */
 	export type ModalProps = {
 		children: Snippet;
 		header: Snippet;
 		open: boolean;
-		height?: number;
-		opacity?: number;
+		'--height'?: string;
+		'--opacity'?: number;
 		headerHeight?: number;
 		onclose?: () => void;
 	};
-	let {
-		children,
-		header,
-		open,
-		opacity = 1,
-		height = 38.4,
-		headerHeight = $bindable(0),
-		onclose
-	}: ModalProps = $props();
+	let { children, header, open, headerHeight = $bindable(0), onclose }: ModalProps = $props();
 
-	// svelte-ignore non_reactive_update
-	let closeButton: HTMLButtonElement | null;
+	/* -------------------------------- Constants ------------------------------- */
+	const TRANSITION_DURATION = 200;
 
+	/* ---------------------------------- State --------------------------------- */
+	let closeButton: HTMLButtonElement | undefined = $state();
+
+	/* --------------------------------- Effect --------------------------------- */
 	$effect(() => {
+		// Pause hero cards animation while modal is open
 		const cards = document.getElementById('hero-cards');
 		if (open) {
 			document.documentElement.style.overflowY = 'hidden';
@@ -47,9 +45,8 @@
 		};
 	});
 
-	const transitionDuration = 200;
-
-	const handleOverlayClick = (e: MouseEvent) => {
+	/* --------------------------------- Events --------------------------------- */
+	const handleCloseModal = (e: MouseEvent) => {
 		if (e.target === e.currentTarget) {
 			onclose?.();
 		}
@@ -57,34 +54,27 @@
 </script>
 
 <svelte:window on:keydown={(e) => e.key === 'Escape' && open && onclose?.()} />
-<Portal target="body">
-	<!-- svelte-ignore a11y_click_events_have_key_events -->
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	{#if open}
-		<div
-			class="overlay"
-			onclick={handleOverlayClick}
-			transition:fade={{ duration: transitionDuration }}
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+{#if open}
+	<div
+		class="overlay"
+		onclick={handleCloseModal}
+		transition:fade={{ duration: TRANSITION_DURATION }}
+	>
+		<section
+			class="modal box rounded-lg"
+			use:trapFocus
+			transition:scale={{ duration: TRANSITION_DURATION, opacity: 0, start: 0.8 }}
 		>
-			<!-- Since we are using Portal we can not pass custom css properties directly to component -->
-			<section
-				style:--modal-opacity={open ? opacity : 0}
-				style:--modal-height={`${height}rem`}
-				class="modal"
-				use:trapFocus
-				transition:scale={{ duration: transitionDuration, opacity: 0, start: 0.8 }}
-			>
-				<div class="box rounded-lg">
-					<header class="header" bind:clientHeight={headerHeight}>
-						{@render header()}
-						<button class="close" onclick={onclose} bind:this={closeButton}><X /></button>
-					</header>
-					<div class="body">{@render children()}</div>
-				</div>
-			</section>
-		</div>
-	{/if}
-</Portal>
+			<header class="header" bind:clientHeight={headerHeight}>
+				{@render header()}
+				<button class="close" onclick={onclose} bind:this={closeButton}><X /></button>
+			</header>
+			<div class="body">{@render children()}</div>
+		</section>
+	</div>
+{/if}
 
 <style>
 	.overlay {
@@ -100,36 +90,23 @@
 	.modal {
 		--modal-padding: 2rem;
 		display: grid;
-		grid-template-rows: 1fr;
+		grid-template-rows: auto 1fr;
 		width: 100%;
-		/* Add 4rem to account for padding */
-		max-width: 53.2rem;
-		padding-inline: var(--modal-padding);
-		height: var(--modal-height);
+		max-width: 49.2rem;
+		height: var(--height);
 		transition: height var(--duration);
-	}
-
-	.modal :global(.box) {
-		display: flex;
-		flex-direction: column;
 		overflow: hidden;
+		margin-inline: 2rem;
 	}
 
-	.modal :global(.box > *) {
+	.modal > * {
 		transition: opacity var(--duration);
-	}
-
-	.modal :global(.box > *) {
-		opacity: var(--modal-opacity);
+		opacity: var(--opacity);
 	}
 
 	.body {
 		position: relative;
 		flex: 1;
-	}
-
-	.modal :global(.box) {
-		background: var(--bg-primary);
 	}
 
 	.header {
@@ -145,10 +122,10 @@
 		color: inherit;
 	}
 
-	/* Mobile */
+	/* 532px */
 	@media (max-width: 33.25rem) {
 		.modal {
-			max-width: 52.4rem;
+			max-width: calc(100vw - 4rem);
 			--modal-padding: 1.6rem;
 		}
 	}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { FormEventHandler } from 'svelte/elements';
 	import Button from '$lib/component/button.svelte';
 	import Input from '$lib/component/input.svelte';
@@ -7,17 +8,19 @@
 	import { getContext } from 'svelte';
 	import type { AuthExternalContext } from '$lib/type/auth';
 
+	/* -------------------------------- Constants ------------------------------- */
+	const VALIDATION_PATTERN = '^(09|۰۹)[\\d۰-۹]{9}$';
+
+	/* ---------------------------------- State --------------------------------- */
+	let phoneNumber = $state('');
 	const authInternalContext: AuthInternalContext = getContext('auth-internal');
 	const authExternalContext: AuthExternalContext = getContext('auth-external');
-	let phoneNumber = $state('');
-	const validationPattern = '^(09|۰۹)[\\d۰-۹]{9}$';
 
-	// Logic for submitting the form
+	/* --------------------------------- Events --------------------------------- */
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
 		authInternalContext.setSubmit(true);
 
-		// Remove focus from the input
 		const input = document.getElementById('phone-number-input');
 		if (input) {
 			input.blur();
@@ -29,12 +32,10 @@
 		authInternalContext.setStep(1);
 	};
 
-	// Remove error when user starts typing
 	const handleInput = () => {
 		authInternalContext.setError(null);
 	};
 
-	// Validate user input
 	const handleInvalid: FormEventHandler<HTMLInputElement> = (e) => {
 		const input = e.currentTarget;
 		e.preventDefault();
@@ -56,6 +57,7 @@
 		: ''}"
 	in:fly={{ x: 492, duration: 400, opacity: 0, delay: 200 }}
 	out:fly={{ x: -492, duration: 400, opacity: 0 }}
+	bind:clientHeight={authInternalContext.contentHeight}
 >
 	<h2 class="title">ورود یا ثبت‌نام</h2>
 	<form class="form" onsubmit={handleSubmit}>
@@ -63,7 +65,7 @@
 			id="phone-number-input"
 			placeholder="شمارهٔ موبایل خود را وارد کنید..."
 			inputmode="numeric"
-			pattern={validationPattern}
+			pattern={VALIDATION_PATTERN}
 			title="تنها استفاده از اعداد مجاز است"
 			required
 			maxlength={11}
@@ -93,10 +95,9 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		justify-content: end;
 		padding: var(--modal-padding);
 		transition: opacity var(--duration);
-		height: 100%;
+		min-height: 27.2rem;
 	}
 
 	.content.submitting {
@@ -110,6 +111,7 @@
 	.title {
 		font-size: 2.4rem;
 		font-weight: 700;
+		margin-top: 4.4rem;
 		margin-bottom: 2.4rem;
 	}
 
@@ -142,5 +144,12 @@
 
 	.highlight {
 		color: var(--accent);
+	}
+
+	/* 448px */
+	@media (max-width: 28rem) {
+		.title {
+			margin-top: 3.4rem;
+		}
 	}
 </style>
