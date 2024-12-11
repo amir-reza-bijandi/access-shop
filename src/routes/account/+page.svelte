@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/component/button.svelte';
 	import Input from '$lib/component/input.svelte';
-	import PageWrapper from '$lib/component/page-wrapper.svelte';
+	import Page from '$lib/component/page.svelte';
 	import { Check, Smartphone, Upload } from 'lucide-svelte';
 	import { userInfo } from '$lib/data/user-info';
 	import InputDate from './_lib/component/input-date.svelte';
@@ -144,7 +144,7 @@
 	};
 </script>
 
-<PageWrapper>
+<Page>
 	<div class="content">
 		<!-- AVATAR -->
 		<form class="box rounded-lg avatar section" bind:this={avatarForm}>
@@ -246,7 +246,7 @@
 			<Status message={phoneNumberForm.message} type={phoneNumberForm.status} />
 		</div>
 	</div>
-</PageWrapper>
+</Page>
 
 <style>
 	.content {

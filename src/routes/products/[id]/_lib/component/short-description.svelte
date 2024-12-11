@@ -7,7 +7,7 @@
 
 <section class="short-description">
 	<header class="header">
-		<div class="box"><ProductIcon class="product-icon" src={imageSrc} /></div>
+		<div class="icon-wrapper box"><ProductIcon class="product-icon" src={imageSrc} /></div>
 		<div>
 			<h1 class="heading">خرید {nameFa} ({nameEn})</h1>
 			<span class="subheading">{slogan}</span>
@@ -24,7 +24,7 @@
 		margin-bottom: 1.6rem;
 	}
 
-	.box {
+	.icon-wrapper {
 		padding: 1.2rem;
 	}
 

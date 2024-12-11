@@ -1,13 +1,15 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import { BrainCircuit } from 'lucide-svelte';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type LogoProps = {
 		interactive?: boolean;
 	};
 	const { interactive = true }: LogoProps = $props();
 </script>
 
-<a class="logo {interactive ? 'interactive' : ''}" href="/">
+<a class="logo" class:interactive href="/">
 	<div class="icon"><BrainCircuit strokeWidth={2.5} /></div>
 	اکسس شاپ
 </a>

@@ -56,7 +56,7 @@
 			<ul class="list">
 				{#each commentList as comment (comment.id)}
 					<li>
-						<Comment data={comment} showProductIcon={false} size="small" viewAnimation={false} />
+						<Comment data={comment} variant="single-product" />
 					</li>
 				{/each}
 			</ul>

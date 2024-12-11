@@ -1,17 +1,13 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	type InputProps = HTMLInputAttributes & {
-		validateFeedback?: boolean;
-	};
-	let {
-		validateFeedback = false,
-		class: className,
-		value = $bindable(''),
-		...restOfProps
-	}: InputProps = $props();
+
+	/* ---------------------------------- Props --------------------------------- */
+	type InputProps = HTMLInputAttributes;
+	let { class: className, value = $bindable(''), ...restOfProps }: InputProps = $props();
 </script>
 
-<input class="input {className} {validateFeedback ? 'validate' : ''}" {...restOfProps} bind:value />
+<input class="input {className}" {...restOfProps} bind:value />
 
 <style>
 	.input {

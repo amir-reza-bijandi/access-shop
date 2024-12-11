@@ -36,7 +36,7 @@
 </script>
 
 <header>
-	<Glow class={'glow'} />
+	<Glow --size="102.4rem" --top="50%" --right="0" />
 	<div class="right-section">
 		<Navigation {routeList} />
 		<Logo />

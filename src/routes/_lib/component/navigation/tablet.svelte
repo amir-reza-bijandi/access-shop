@@ -23,13 +23,11 @@
 		<span class="btn-icon open"><Menu /></span>
 		<span class="btn-icon close"><X /></span>
 	</button>
-	<div class="box">
-		<ul class="list">
-			{#each routeList as route}
-				{@render item(route)}
-			{/each}
-		</ul>
-	</div>
+	<ul class="box list">
+		{#each routeList as route}
+			{@render item(route)}
+		{/each}
+	</ul>
 </nav>
 
 {#snippet item({ name, path }: NavigationRoute)}
@@ -80,7 +78,7 @@
 		transform: scale(0) rotate(-360deg);
 	}
 
-	.navigation :global(.box) {
+	.list {
 		position: absolute;
 		z-index: 9999;
 		opacity: 0;
@@ -93,19 +91,16 @@
 		transition-duration: var(--duration);
 		transform-origin: top right;
 		width: 28rem;
-	}
-
-	.navigation.active :global(.box) {
-		opacity: 1;
-		transform: translate(0, 0) scale(1);
-		pointer-events: all;
-	}
-
-	.list {
 		flex-direction: column;
 		gap: 0;
 		display: flex;
 		list-style: none;
+	}
+
+	.active .list {
+		opacity: 1;
+		transform: translate(0, 0) scale(1);
+		pointer-events: all;
 	}
 
 	.menu-icon {

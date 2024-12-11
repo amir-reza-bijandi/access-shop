@@ -1,33 +1,27 @@
 <script lang="ts">
+	/* ---------------------------------- Props --------------------------------- */
 	type PatternProps = {
 		class?: string;
-		visibility?: 'low' | 'high';
+		variant?: 'barely-visible' | 'highly-visible';
 	};
-	const { class: className, visibility = 'low' }: PatternProps = $props();
+	const { class: className, variant = 'barely-visible' }: PatternProps = $props();
 
-	const visibilityMap = {
-		low: 'visibility-low',
-		high: 'visibility-high'
-	};
+	/* ---------------------------------- State --------------------------------- */
+	let isImageLoaded = $state(false);
 
-	let imgElement: HTMLImageElement | null;
-
-	// Add intro animation when image is loaded
-	function handleLoad() {
-		if (imgElement) {
-			imgElement.classList.add('loaded');
-		}
+	/* --------------------------------- Events --------------------------------- */
+	function handleImageLoad() {
+		isImageLoaded = true;
 	}
 </script>
 
-<div class="pattern {visibilityMap[visibility]} {className}">
+<div class="pattern {variant} {className}">
 	<img
-		aria-hidden="true"
-		src="/image/pattern.svg"
-		alt="Background pattern with lines similar to a circuit board"
 		class="image"
-		bind:this={imgElement}
-		onload={handleLoad}
+		class:loaded={isImageLoaded}
+		src="/image/pattern.svg"
+		alt=""
+		onload={handleImageLoad}
 	/>
 </div>
 
@@ -47,16 +41,15 @@
 		transition-duration: 2s;
 	}
 
-	.visibility-low {
+	.barely-visible {
 		opacity: 0.03;
 	}
 
-	.visibility-high {
+	.highly-visible {
 		opacity: 0.05;
 	}
 
-	/* Animation */
-	.image:global(.loaded) {
+	.image.loaded {
 		opacity: 1;
 		transform: translateY(0);
 	}

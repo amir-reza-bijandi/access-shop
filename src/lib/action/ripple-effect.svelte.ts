@@ -1,7 +1,6 @@
 import type { Action } from 'svelte/action';
 
 type Params = {
-	// Ripple position is based on the current mouse position
 	dynamicPositon?: boolean;
 	sizeMultiplier?: number;
 };

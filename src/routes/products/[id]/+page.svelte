@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PageWrapper from '$lib/component/page-wrapper.svelte';
+	import Page from '$lib/component/page.svelte';
 	import Comments from './_lib/component/comments.svelte';
 	import FullDescription from './_lib/component/full-description.svelte';
 	import ProductBranding from './_lib/component/product-branding.svelte';
@@ -27,7 +27,7 @@
 	setContext('checkout', checkoutContext);
 </script>
 
-<PageWrapper>
+<Page>
 	<div class="content-wrapper">
 		<div class="short-description-tablet">
 			<ShortDescription />
@@ -52,7 +52,7 @@
 			<Comments />
 		</div>
 	</div>
-</PageWrapper>
+</Page>
 
 <style>
 	.content-wrapper {

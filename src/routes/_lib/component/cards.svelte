@@ -19,7 +19,7 @@
 </script>
 
 <div id="hero-cards" class="cards" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
-	<Glow class="container-glow" />
+	<Glow --size="76.8rem" --top="50%" --left="50%" />
 	<div class="wrapper">
 		{#each cardInfoList as cardInfo}
 			{@render card(cardInfo)}
@@ -45,11 +45,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-	}
-
-	.cards :global(.container-glow) {
-		position: absolute;
-		width: 768px;
 	}
 
 	.wrapper {

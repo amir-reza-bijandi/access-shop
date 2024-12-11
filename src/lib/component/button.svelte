@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type {
 		HTMLButtonAttributes,
 		HTMLAnchorAttributes,
@@ -7,6 +8,7 @@
 	import { Icon as LucideIcon } from 'lucide-svelte';
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type ButtonProps = (
 		| ({
 				as?: 'button';
@@ -21,7 +23,6 @@
 		icon?: typeof LucideIcon;
 		variant?: 'fill' | 'outline';
 	};
-
 	const {
 		as = 'button',
 		icon: Icon,
@@ -32,7 +33,7 @@
 	}: ButtonProps = $props();
 </script>
 
-<svelte:element this={as} class="button {variant} {className}" {...restOfProps} use:rippleEffect>
+<svelte:element this={as} class="btn {variant} {className}" {...restOfProps} use:rippleEffect>
 	{@render children?.()}
 	{#if Icon}
 		<Icon strokeWidth={1.5} size={20} absoluteStrokeWidth />
@@ -40,7 +41,7 @@
 </svelte:element>
 
 <style>
-	.button {
+	.btn {
 		--color: var(--accent);
 		width: fit-content;
 		cursor: pointer;
@@ -58,7 +59,7 @@
 		transition-duration: var(--duration);
 	}
 
-	.button:disabled {
+	.btn:disabled {
 		opacity: 0.5;
 		pointer-events: none;
 	}

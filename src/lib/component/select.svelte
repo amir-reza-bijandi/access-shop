@@ -1,10 +1,12 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import detectOutsideClick from '$lib/action/detect-outside-click.svelte';
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
 	import { Check, ChevronDown } from 'lucide-svelte';
 	import { fly } from 'svelte/transition';
 	import { Icon as LucidIcon } from 'lucide-svelte';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type Item = {
 		name: string;
 		value: number | string;
@@ -28,8 +30,10 @@
 		class: className
 	}: SelectProps = $props();
 
+	/* ---------------------------------- State --------------------------------- */
 	let isSelectActive = $state(false);
 
+	/* --------------------------------- Events --------------------------------- */
 	const handleSelect = (value: number | string) => {
 		currentValue = value;
 		isSelectActive = false;
@@ -41,9 +45,8 @@
 </script>
 
 <div
-	class="select {className} {isSelectActive ? 'active' : ''} {variant === 'compact'
-		? 'compact'
-		: ''}"
+	class="select {variant} {className}"
+	class:active={isSelectActive}
 	use:detectOutsideClick={() => (isSelectActive = false)}
 >
 	<button type="button" class="menu-btn" onclick={handleToggle} use:rippleEffect>
@@ -59,7 +62,8 @@
 	</button>
 	{#if isSelectActive}
 		<ul
-			class="menu {menuOrigin === 'left' ? 'left' : ''}"
+			class="menu"
+			class:left={menuOrigin === 'left'}
 			transition:fly={{ duration: 200, opacity: 0, y: 8 }}
 		>
 			{#each itemList as { name, value } (value)}

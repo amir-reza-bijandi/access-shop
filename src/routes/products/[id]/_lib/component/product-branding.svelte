@@ -7,8 +7,8 @@
 </script>
 
 <header class="box rounded-lg product-branding">
-	<Glow class="glow" />
-	<Pattern class="pattern" visibility="high" />
+	<Glow --size="88%" --left="50%" --top="0" />
+	<Pattern class="pattern" variant="highly-visible" />
 	<figure class="content">
 		<img class="icon" src={imageSrc} alt="{nameFa} لوگوی سرویس هوش مصنوعی" />
 		<figcaption class="name">
@@ -37,14 +37,6 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%) rotate(180deg);
-	}
-
-	.product-branding :global(.glow) {
-		position: absolute;
-		width: 88%;
-		top: 0;
-		left: 50%;
-		transform: translate(-50%, -50%);
 	}
 
 	.content {

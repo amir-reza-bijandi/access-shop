@@ -1,6 +1,8 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Glow from './glow.svelte';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type ProductIconProps = {
 		src: string;
 		class?: string;
@@ -9,7 +11,7 @@
 </script>
 
 <div class="product-icon {className}">
-	<Glow class="glow" />
+	<Glow --size="100%" --top="50%" --left="50%" />
 	<img class="icon" {src} alt="لوگوی یک سرویس هوش مصنوعی" />
 </div>
 
@@ -23,15 +25,6 @@
 		height: auto;
 		aspect-ratio: 1 / 1;
 		isolation: isolate;
-	}
-
-	.product-icon :global(.glow) {
-		position: absolute;
-		width: 100%;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		z-index: -1;
 	}
 
 	.icon {

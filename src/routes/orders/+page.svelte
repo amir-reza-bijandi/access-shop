@@ -1,9 +1,8 @@
 <script lang="ts">
-	import PageWrapper from '$lib/component/page-wrapper.svelte';
+	import Page from '$lib/component/page.svelte';
 	import { ArrowDownUp, ArrowDownWideNarrow, ArrowUp, LayoutGrid } from 'lucide-svelte';
 	import { orderList, type Order, type OrderStatus } from './_lib/data/orders';
 	import formatOrderDate from './_lib/utility/format-order-date';
-	import rippleEffect from '$lib/action/ripple-effect.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import Button from '$lib/component/button.svelte';
 	import Pagination from './_lib/component/pagination.svelte';
@@ -56,7 +55,7 @@
 </script>
 
 <Details order={selectedOrder} open={isOrderDetailsOpen} onclose={handleCloseOrderDetails} />
-<PageWrapper introAnimation>
+<Page introAnimation>
 	{#if orderList.length > 0}
 		<div class="sort-options">
 			<Select
@@ -85,7 +84,7 @@
 		</div>
 	{/if}
 	<div class="table-container">
-		<Glow class="glow" />
+		<Glow --size="102.4rem" --top="100%" --left="0" />
 		<div style:--per-page={PER_PAGE} class="table-wrapper box rounded-lg blur-low">
 			{#if orderList.length > 0}
 				<table class={currentOrderList.length >= PER_PAGE ? 'extra' : ''}>
@@ -157,7 +156,7 @@
 		</div>
 		<Pagination {currentPage} {totalPages} onPageChange={handlePageChange} />
 	</div>
-</PageWrapper>
+</Page>
 
 {#snippet tableHeader(label: string, className: string, sortType: SortType)}
 	<th class={className} onclick={() => handleSortChange(sortType)}>
@@ -201,15 +200,6 @@
 	.table-container {
 		position: relative;
 		text-align: center;
-	}
-
-	.table-container :global(.glow) {
-		position: absolute;
-		width: 120.4rem;
-		top: 100%;
-		left: 0%;
-		transform: translate(-50%, -50%);
-		pointer-events: none;
 	}
 
 	.no-order {

@@ -2,7 +2,7 @@
 	import Button from '$lib/component/button.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import Input from '$lib/component/input.svelte';
-	import PageWrapper from '$lib/component/page-wrapper.svelte';
+	import Page from '$lib/component/page.svelte';
 	import Status from '$lib/component/status.svelte';
 	import { SendHorizonal } from 'lucide-svelte';
 	import type { FormEventHandler } from 'svelte/elements';
@@ -78,11 +78,11 @@
 	};
 </script>
 
-<PageWrapper>
+<Page>
 	<div class="content">
 		<header class="page-description">
 			<div class="icon-box">
-				<Glow class="glow" />
+				<Glow --size="51.2rem" --top="50%" --left="50%" />
 				<img class="support-icon" src="/icon/ui/headphone.svg" alt="" width="160" height="160" />
 			</div>
 			<h1 class="title">
@@ -95,7 +95,7 @@
 			</p>
 		</header>
 		<form class="form {form.isSubmitting ? 'submit' : ''}" onsubmit={handleSubmit}>
-			<Glow class="glow" />
+			<Glow --size="102.4rem" --top="50%" --left="0" />
 			<div class="box rounded-lg">
 				<div class="form-body-wrapper">
 					<div class="form-body">
@@ -170,7 +170,7 @@
 				<span class="contact-info-subheading">همه‌روزه و ۲۴ ساعته پاسخگوی شما هستیم!</span>
 			</h2>
 			<div class="list-wrapper">
-				<Glow class="glow" />
+				<Glow --size="76.8rem" --top="50%" --left="50%" />
 				<ul class="contact-info-list">
 					<li class="box contact-info-item">
 						<img src="/icon/ui/phone.svg" alt="" />
@@ -192,7 +192,7 @@
 			</div>
 		</footer>
 	</div>
-</PageWrapper>
+</Page>
 
 <style>
 	.content {

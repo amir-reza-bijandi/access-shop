@@ -1,14 +1,9 @@
 <script lang="ts">
-	import PageWrapper from '$lib/component/page-wrapper.svelte';
-	import ProductGrid from '$lib/component/product-grid.svelte';
-	import { productInfoList } from '$lib/data/products';
+	import Page from '$lib/component/page.svelte';
+	import ProductList from '$lib/component/product-list.svelte';
+	import { productList } from '$lib/data/products';
 </script>
 
-<PageWrapper>
-	<ProductGrid
-		infoList={productInfoList}
-		showPattern={false}
-		introAnimation
-		viewAnimation={false}
-	/>
-</PageWrapper>
+<Page>
+	<ProductList itemList={productList} variant="products" />
+</Page>

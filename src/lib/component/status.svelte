@@ -7,7 +7,7 @@
 	const { message, type, class: className }: StatusProps = $props();
 </script>
 
-<span class:className class="status {type ? type : ''}"><span class="text">{message}</span></span>
+<span class="status {type} {className}"><span class="text">{message}</span></span>
 
 <style>
 	.status {

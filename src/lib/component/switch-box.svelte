@@ -1,7 +1,9 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { Snippet } from 'svelte';
 	import Switch, { type SwitchProps } from '$lib/component/switch.svelte';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type SwitchBoxProps = Pick<SwitchProps, 'label' | 'oninput' | 'active'> & {
 		children?: Snippet;
 		reverse?: boolean;
@@ -16,6 +18,7 @@
 		active = $bindable(false)
 	}: SwitchBoxProps = $props();
 
+	/* ---------------------------------- State --------------------------------- */
 	const activeClass = $derived.by(() => {
 		if (expandable) {
 			if (reverse) {

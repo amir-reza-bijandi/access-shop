@@ -1,8 +1,10 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { Snippet } from 'svelte';
 	import { inview } from 'svelte-inview';
 	import handleViewChange from '$lib/utility/handle-view-change';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type HeaderProps = {
 		text: Snippet | string;
 		description: Snippet | string;
@@ -44,14 +46,14 @@
 		font-size: 2rem;
 	}
 
-	/* Tablet */
+	/* 1152px */
 	@media (max-width: 72rem) {
 		.title {
 			margin-bottom: 3.2rem;
 		}
 	}
 
-	/* Mobile */
+	/* 512px */
 	@media (max-width: 32rem) {
 		.title {
 			margin-bottom: 2.4rem;

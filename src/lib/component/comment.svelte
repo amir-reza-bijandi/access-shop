@@ -1,60 +1,53 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import ProductIcon from './product-icon.svelte';
 	import formatCommentDate from '$lib/utility/format-comment-date';
 	import { inview } from 'svelte-inview';
 	import handleViewChange from '$lib/utility/handle-view-change';
 	import type { Comment } from '$lib/data/comments';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type CommentProps = {
 		data: Comment;
-		showProductIcon?: boolean;
-		size?: 'small' | 'large';
-		viewAnimation?: boolean;
-		lineClamp?: boolean;
+		variant: 'home' | 'single-product';
 	};
-	const {
-		data,
-		showProductIcon = true,
-		size = 'large',
-		viewAnimation = true,
-		lineClamp = false
-	}: CommentProps = $props();
-	const { name, text, date, iconSrc, avatarSrc } = data;
+	const { data, variant }: CommentProps = $props();
+	const { fullName, text, date, iconSrc, avatarSrc } = data;
 </script>
 
 <div
-	class="comment {size === 'small' ? 'small' : ''}"
+	class="comment"
+	class:small={variant === 'single-product'}
 	use:inview
-	oninview_change={viewAnimation ? (e) => handleViewChange(e.detail) : undefined}
+	oninview_change={variant === 'home' ? (e) => handleViewChange(e.detail) : undefined}
 >
 	<article class="content box rounded-lg">
+		<!-- HEADER -->
 		<header class="header">
 			<div class="info">
-				<img class="avatar" src={avatarSrc} alt="عکس پروفایل {name}" />
+				<img class="avatar" src={avatarSrc} alt="عکس پروفایل {fullName}" />
 				<div>
-					<address class="name">{name}</address>
+					<address class="full-name">{fullName}</address>
 					<time class="date" datetime={new Date(date).toISOString()}>
 						{formatCommentDate(date)}
 					</time>
 				</div>
 			</div>
-			{#if showProductIcon}
+			{#if variant === 'home'}
 				<ProductIcon class="icon" src={iconSrc} />
 			{/if}
 		</header>
-		<p class="text {lineClamp ? 'line-clamp' : ''}">{text}</p>
+		<!-- BODY -->
+		<p class="text" class:line-clamp={variant === 'home'}>{text}</p>
 	</article>
 </div>
 
 <style>
-	.box {
-		height: 100%;
-	}
-
 	.content {
 		padding: 2.4rem;
 		display: flex;
 		flex-direction: column;
+		height: 100%;
 	}
 
 	.header {
@@ -74,7 +67,7 @@
 		gap: 0.8rem;
 	}
 
-	.name {
+	.full-name {
 		font-size: 2rem;
 		font-weight: 700;
 		font-style: normal;
@@ -85,11 +78,11 @@
 		-moz-line-clamp: 1;
 		line-clamp: 1;
 		overflow: hidden;
-		/* Prevent the hidden part of the text from leaking out */
+		/* Prevent the hidden text from being visible */
 		line-height: 1.2;
 	}
 
-	.small .name {
+	.small .full-name {
 		font-size: 1.6rem;
 	}
 

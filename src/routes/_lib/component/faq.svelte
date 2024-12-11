@@ -21,7 +21,7 @@
 		{/snippet}
 	</Title>
 	<div class="wrapper">
-		<Glow class="container-glow" />
+		<Glow --size="76.8rem" --top="50%" --left="50%" />
 		{#each faqList as { question, answer }, index}
 			<div class="accordion" use:inview oninview_change={(e) => handleViewChange(e.detail)}>
 				<Accordion title={question} {...index === 0 ? { open: true } : {}}>{answer}</Accordion>
@@ -47,15 +47,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.6rem;
-	}
-
-	.wrapper :global(.container-glow) {
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		width: 76.8rem;
-		z-index: -1;
 	}
 
 	.title-text {

@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<section class="description">
-				<Glow class="glow" />
+				<Glow --top="50%" --left="50%" />
 				<h3 class="title">{formatPlanTypeName(selectedType)}</h3>
 				<p class="body">{selectedType.description}</p>
 			</section>

@@ -11,9 +11,9 @@
 		description="یادتون نره شما هم تجربه‌تون رو باهمون به اشتراک بذارین!"
 	/>
 	<div class="wrapper">
-		<Glow class="container-glow" />
+		<Glow --size="76.8rem" --top="50%" --left="50%" />
 		{#each commentList as comment (comment.id)}
-			<Comment data={comment} lineClamp={true} />
+			<Comment data={comment} variant="home" />
 		{/each}
 	</div>
 </section>

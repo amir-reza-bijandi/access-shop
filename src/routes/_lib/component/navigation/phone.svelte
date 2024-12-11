@@ -9,7 +9,7 @@
 </script>
 
 <nav class="navigation">
-	<div class="box rounded-sm blur-low">
+	<div class="content box rounded-sm blur-low">
 		<ul class="list">
 			{#each routeList as route}
 				{@render item(route)}
@@ -34,7 +34,7 @@
 		z-index: 9999;
 	}
 
-	.navigation :global(.box) {
+	.content {
 		padding: 1.6rem;
 	}
 

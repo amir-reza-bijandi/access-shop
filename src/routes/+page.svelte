@@ -1,13 +1,14 @@
 <script lang="ts">
+	import ProductList from '$lib/component/product-list.svelte';
 	import Faq from './_lib/component/faq.svelte';
 	import Hero from './_lib/component/hero.svelte';
-	import Products from './_lib/component/products.svelte';
 	import Testimonial from './_lib/component/testimonial.svelte';
+	import { productList } from '$lib/data/products';
 </script>
 
 <Hero />
 <div class="wrapper">
-	<Products />
+	<ProductList itemList={productList} variant="home" />
 	<Testimonial />
 	<Faq />
 </div>
@@ -21,14 +22,14 @@
 		margin-block: var(--spacing);
 	}
 
-	/* Tablet */
+	/* 1152px */
 	@media (max-width: 72rem) {
 		.wrapper {
 			--spacing: 12.8rem;
 		}
 	}
 
-	/* Mobile */
+	/* 512px */
 	@media (max-width: 32rem) {
 		.wrapper {
 			--spacing: 6.4rem;

@@ -1,40 +1,42 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import handleViewChange from '$lib/utility/handle-view-change';
 	import { ShoppingBasket } from 'lucide-svelte';
 	import { inview } from 'svelte-inview';
 	import Button from './button.svelte';
 	import Pattern from './pattern.svelte';
-	import type { ProductInfo } from '$lib/data/products';
+	import type { Product } from '$lib/data/products';
 	import ProductIcon from './product-icon.svelte';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type ProductProps = {
-		info: ProductInfo;
-		showPattern?: boolean;
-		viewAnimation?: boolean;
+		data: Product;
+		variant: 'home' | 'products';
+		'--animation-index'?: number;
+		'--animation-name'?: string;
 	};
-
-	const { info, showPattern = true, viewAnimation = true }: ProductProps = $props();
-	const { id, nameFa, nameEn, description, imageSrc, deliveryTime, startingPrice } = info;
+	const { data, variant }: ProductProps = $props();
+	const { id, nameFa, nameEn, description, imageSrc, deliveryTime, startingPrice } = data;
 </script>
 
 <div
 	class="product"
 	use:inview
-	oninview_change={(e) => viewAnimation && handleViewChange(e.detail)}
+	oninview_change={(e) => variant === 'home' && handleViewChange(e.detail)}
 >
 	<div class="box rounded-lg">
 		<article class="content">
 			<!-- BODY -->
 			<div class="body">
-				{#if showPattern}
-					<Pattern class="pattern" visibility="high" />
+				{#if variant === 'home'}
+					<Pattern class="pattern" variant="highly-visible" />
 				{/if}
 				<figure class="image">
 					<ProductIcon src={imageSrc} class="icon" />
 				</figure>
 				<div>
-					<h3 class="title">خرید {nameFa} <span class="subtitle">({nameEn})</span></h3>
-					<p class="description">{description}</p>
+					<h3 class="heading">خرید {nameFa} <span class="subheading">({nameEn})</span></h3>
+					<p class="text">{description}</p>
 				</div>
 			</div>
 			<!-- FOOTER -->
@@ -48,9 +50,9 @@
 						)} دقیقه
 					</span>
 				</small>
-				<Button class="submit-order" as="a" href="/products/{id}" icon={ShoppingBasket}
-					>ثبت سفارش</Button
-				>
+				<Button class="submit-order" as="a" href="/products/{id}" icon={ShoppingBasket}>
+					ثبت سفارش
+				</Button>
 			</footer>
 		</article>
 	</div>
@@ -63,10 +65,6 @@
 		animation-duration: 1s;
 		animation-timing-function: ease;
 		animation-fill-mode: backwards;
-	}
-
-	.product :global(.box) {
-		height: 100%;
 	}
 
 	.content {
@@ -117,7 +115,7 @@
 		width: var(--icon-size);
 	}
 
-	.title {
+	.heading {
 		display: flex;
 		align-items: center;
 		gap: 0.6rem;
@@ -126,15 +124,15 @@
 		margin-bottom: 1.2rem;
 	}
 
-	.subtitle {
+	.subheading {
 		font-size: 1.6rem;
 	}
 
-	.description {
+	.text {
 		line-height: var(--line-height);
 	}
 
-	/* Laptop */
+	/* 1152px */
 	@media (max-width: 72rem) {
 		.footer {
 			flex-direction: column;
@@ -146,7 +144,7 @@
 		}
 	}
 
-	/* Tablet */
+	/* 1088px */
 	@media (max-width: 68rem) {
 		.image {
 			position: absolute;
@@ -166,6 +164,7 @@
 		}
 	}
 
+	/* 896px */
 	@media (max-width: 56rem) {
 		.image {
 			position: static;
@@ -186,6 +185,7 @@
 		}
 	}
 
+	/* 640px */
 	@media (max-width: 40rem) {
 		.footer {
 			flex-direction: column;
@@ -196,6 +196,7 @@
 		}
 	}
 
+	/* 608px */
 	@media (max-width: 38rem) {
 		.image {
 			position: absolute;
@@ -210,8 +211,9 @@
 		}
 	}
 
+	/* 512px */
 	@media (min-width: 32rem) {
-		.description {
+		.text {
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 5;
@@ -221,7 +223,7 @@
 		}
 	}
 
-	/* Mobile */
+	/* 512px */
 	@media (max-width: 32rem) {
 		.body {
 			flex-direction: column;
@@ -229,11 +231,11 @@
 			padding: 1.6rem;
 		}
 
-		.description {
+		.text {
 			text-align: center;
 		}
 
-		.title {
+		.heading {
 			justify-content: center;
 		}
 
