@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Button from '$lib/component/button.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import Input from '$lib/component/input.svelte';
@@ -7,9 +8,11 @@
 	import { SendHorizonal } from 'lucide-svelte';
 	import type { FormEventHandler } from 'svelte/elements';
 
-	const fullNamePattern = '^[ء-ي\\u0600-\\u06FF\\s]+$';
-	const phoneNumberPattern = '^(09|۰۹)[\\d۰-۹]{9}$';
+	/* -------------------------------- Constants ------------------------------- */
+	const FULL_NAME_PATTERN = '^[ء-ي\\u0600-\\u06FF\\s]+$';
+	const PHONE_NUMBER_PATTERN = '^(09|۰۹)[\\d۰-۹]{9}$';
 
+	/* ---------------------------------- State --------------------------------- */
 	type Form = {
 		status: 'error' | 'success' | null;
 		message: string;
@@ -22,6 +25,7 @@
 		isSubmitting: false
 	});
 
+	/* --------------------------------- Events --------------------------------- */
 	const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault();
 		form.isSubmitting = true;
@@ -80,10 +84,11 @@
 
 <Page>
 	<div class="content">
+		<!-- Header -->
 		<header class="page-description">
 			<div class="icon-box">
 				<Glow --size="51.2rem" --top="50%" --left="50%" />
-				<img class="support-icon" src="/icon/ui/headphone.svg" alt="" width="160" height="160" />
+				<img class="support-icon" src="/icon/ui/headphone.svg" alt="" />
 			</div>
 			<h1 class="title">
 				تماس با تیم اکسس شاپ
@@ -94,6 +99,7 @@
 				پشتیبانی اکسس شاپ آماده پاسخگویی به همه سوالات شما است.
 			</p>
 		</header>
+		<!-- Form -->
 		<form class="form {form.isSubmitting ? 'submit' : ''}" onsubmit={handleSubmit}>
 			<Glow --size="102.4rem" --top="50%" --left="0" />
 			<div class="box rounded-lg">
@@ -105,7 +111,7 @@
 								name="phoneNumber"
 								placeholder="شمارهٔ موبایل خود را وارد کنید..."
 								inputmode="numeric"
-								pattern={phoneNumberPattern}
+								pattern={PHONE_NUMBER_PATTERN}
 								title="تنها استفاده از اعداد مجاز است"
 								required
 								maxlength={11}
@@ -122,7 +128,7 @@
 								class="input"
 								placeholder="نام و نام خانوادگی خود را وارد کنید..."
 								inputmode="text"
-								pattern={fullNamePattern}
+								pattern={FULL_NAME_PATTERN}
 								title="تنها استفاده از حروف فارسی مجاز است"
 								required
 								autocomplete="name"
@@ -164,6 +170,7 @@
 				</div>
 			</div>
 		</form>
+		<!-- Contact Info -->
 		<footer class="contact-info">
 			<h2 class="contact-info-heading">
 				اطلاعات تماس
@@ -205,11 +212,22 @@
 		justify-items: center;
 		margin-top: 14.8rem;
 		margin-bottom: 6.4rem;
+		animation: scale 1s ease backwards;
+	}
+
+	@keyframes scale {
+		0% {
+			opacity: 0;
+			transform: scale(0.9);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
 	}
 
 	.icon-box {
 		position: relative;
-		animation: intro-down 1s ease backwards;
 	}
 
 	.icon-box :global(.glow) {
@@ -223,6 +241,8 @@
 
 	.support-icon {
 		margin-bottom: 3.2rem;
+		width: 16rem;
+		height: 16rem;
 	}
 
 	.title {
@@ -232,7 +252,6 @@
 		font-weight: 800;
 		gap: 1.2rem;
 		margin-bottom: 3.2rem;
-		animation: intro-right 1s ease 100ms backwards;
 	}
 
 	.subtitle {
@@ -243,12 +262,11 @@
 		max-width: 60rem;
 		text-align: center;
 		line-height: var(--line-height);
-		animation: intro-left 1s ease 200ms backwards;
 	}
 
 	.form {
 		position: relative;
-		animation: intro-up 1s ease 300ms backwards;
+		animation: intro-up 1s ease backwards;
 	}
 
 	.form :global(.glow) {
