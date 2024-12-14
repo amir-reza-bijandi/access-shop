@@ -24,21 +24,21 @@
 	const authInternalContext = $state<AuthInternalContext>({
 		setStep(index) {
 			authExternalContext.currentStep = index;
-			this.setError(null);
+			authInternalContext.setError(null);
 		},
 		setError(error) {
-			this.error = error;
+			authInternalContext.error = error;
 		},
 		setSubmit(isSubmiting) {
-			this.isSubmiting = isSubmiting;
-			this.setError(null);
+			authInternalContext.isSubmiting = isSubmiting;
+			authInternalContext.setError(null);
 		},
 		closeModal() {
 			onclose?.();
 		},
 		reset() {
-			this.closeModal();
-			this.setStep(0);
+			authInternalContext.closeModal();
+			authInternalContext.setStep(0);
 		},
 		error: null,
 		isSubmiting: false,
