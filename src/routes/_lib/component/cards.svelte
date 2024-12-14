@@ -85,8 +85,8 @@
 		z-index: 2;
 	}
 
-	.card:nth-child(2) .image {
-		animation: showcase-center 6s ease infinite;
+	.card:nth-child(2) :global(.image) {
+		animation: showcase-center-large 6s ease infinite;
 		transform-origin: center center;
 	}
 
@@ -125,7 +125,7 @@
 		}
 	}
 
-	@keyframes showcase-center {
+	@keyframes showcase-center-large {
 		10% {
 			transform: rotate(720deg);
 		}
@@ -234,6 +234,11 @@
 			animation: showcase-left-small 6s ease infinite;
 		}
 
+		.card:nth-child(2) :global(.image) {
+			animation: showcase-center-small 6s ease infinite;
+			transform-origin: center center;
+		}
+
 		/* Mobile animations */
 		@keyframes showcase-right-small {
 			10% {
@@ -266,6 +271,15 @@
 			}
 			100% {
 				transform: rotate(-15deg) translate(0.6rem, 2.2rem);
+			}
+		}
+
+		@keyframes showcase-center-small {
+			10% {
+				transform: rotate(720deg);
+			}
+			40% {
+				transform: rotate(720deg);
 			}
 		}
 	}
