@@ -3,7 +3,7 @@ export type AuthInternalContext = {
 	setError: (error: string | null) => void;
 	setSubmit: (isSubmiting: boolean) => void;
 	closeModal: () => void;
-	cancel: () => void;
+	reset: () => void;
 	error: string | null;
 	isSubmiting: boolean;
 	contentHeight: number;

@@ -23,24 +23,24 @@
 	const CurrentStep = $derived(STEPS[step]);
 	let headerHeight = $state(80);
 	const authExternalContext: AuthExternalContext = getContext('auth-external');
-	const authInternalContext: AuthInternalContext = $state({
+	const authInternalContext = $state<AuthInternalContext>({
 		setStep(index) {
 			authExternalContext.currentStep = index;
-			authInternalContext.setError(null);
+			this.setError(null);
 		},
 		setError(error) {
-			authInternalContext.error = error;
+			this.error = error;
 		},
 		setSubmit(isSubmiting) {
-			authInternalContext.isSubmiting = isSubmiting;
-			authInternalContext.setError(null);
+			this.isSubmiting = isSubmiting;
+			this.setError(null);
 		},
 		closeModal() {
 			onclose?.();
 		},
-		cancel() {
-			authInternalContext.closeModal();
-			authInternalContext.setStep(0);
+		reset() {
+			this.closeModal();
+			this.setStep(0);
 		},
 		error: null,
 		isSubmiting: false,

@@ -28,7 +28,7 @@
 
 		await new Promise((resolve) => setTimeout(resolve, 2000));
 		authInternalContext.setSubmit(false);
-		authExternalContext.phoneNumber = phoneNumber;
+		authExternalContext.setPhoneNumber(phoneNumber);
 		authInternalContext.setStep(1);
 	};
 

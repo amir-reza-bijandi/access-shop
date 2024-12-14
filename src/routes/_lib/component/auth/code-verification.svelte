@@ -9,20 +9,13 @@
 	import { MoveLeft } from 'lucide-svelte';
 	import type { AuthExternalContext } from '$lib/type/auth';
 
-	/* -------------------------------- Constants ------------------------------- */
-	const INITIAL_TIMER = 10;
-
 	/* ---------------------------------- State --------------------------------- */
-	let timer = $state(INITIAL_TIMER);
 	let inputValue = $state('');
 	const authInternalContext: AuthInternalContext = getContext('auth-internal');
 	const authExternalContext: AuthExternalContext = getContext('auth-external');
 
 	/* --------------------------------- Effect --------------------------------- */
 	let containerElm: HTMLDivElement | undefined;
-	function startTimer() {
-		return setInterval(() => timer > 0 && (timer -= 1), 1000);
-	}
 
 	function focusInputOtp() {
 		if (containerElm) {
@@ -32,16 +25,7 @@
 
 	$effect(() => {
 		focusInputOtp();
-	});
-
-	$effect(() => {
-		let id = 0;
-		if (timer > 0 && !id) {
-			id = startTimer();
-		} else {
-			clearInterval(id);
-		}
-		return () => clearInterval(id);
+		authExternalContext.startCodeTimer();
 	});
 
 	/* --------------------------------- Events --------------------------------- */
@@ -55,8 +39,8 @@
 			authInternalContext.setStep(2);
 		} else {
 			authExternalContext.operation = 'auth';
-			authExternalContext.phoneNumber = '';
-			authInternalContext.cancel();
+			authExternalContext.currentPhoneNumber = '';
+			authInternalContext.reset();
 		}
 	};
 
@@ -83,7 +67,7 @@
 		authInternalContext.setSubmit(true);
 		await new Promise((resolve) => setTimeout(resolve, 1000));
 		authInternalContext.setSubmit(false);
-		timer = INITIAL_TIMER;
+		authExternalContext.resetCodeTimer();
 		focusInputOtp();
 	};
 </script>
@@ -105,7 +89,7 @@
 	</div>
 	<small class="description"
 		>کد تایید به شماره موبایل {'۰' +
-			Number(authExternalContext.phoneNumber).toLocaleString('fa-IR', {
+			Number(authExternalContext.currentPhoneNumber).toLocaleString('fa-IR', {
 				useGrouping: false
 			})} ارسال شد.</small
 	>
@@ -116,10 +100,10 @@
 			oninput={handleInput}
 			oninvalid={handleInvalid}
 		/>
-		{#if timer > 0}
+		{#if authExternalContext.codeTimer > 0}
 			<small class="timer"
 				>ارسال مجدد کد تأیید تا <span class="timer-remain"
-					>{timer.toLocaleString('fa-IR', {
+					>{authExternalContext.codeTimer.toLocaleString('fa-IR', {
 						useGrouping: false
 					})}</span
 				> ثانیه دیگر</small
@@ -136,7 +120,7 @@
 		</div>
 		<div class="buttons">
 			<Button id="submit" type="submit">تأیید</Button>
-			<Button type="button" variant="outline" onclick={authInternalContext.cancel}>انصراف</Button>
+			<Button type="button" variant="outline" onclick={authInternalContext.reset}>انصراف</Button>
 		</div>
 	</form>
 </div>

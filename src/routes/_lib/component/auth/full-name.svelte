@@ -69,7 +69,7 @@
 		/>
 		<div class="buttons">
 			<Button id="submit" type="submit">تکمیل ثبت‌نام</Button>
-			<Button type="button" variant="outline" onclick={authInternalContext.cancel}>انصراف</Button>
+			<Button type="button" variant="outline" onclick={authInternalContext.reset}>انصراف</Button>
 		</div>
 	</form>
 	<div class="error-container">

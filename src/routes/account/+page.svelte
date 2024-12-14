@@ -67,7 +67,7 @@
 		e.preventDefault();
 		authExternalContext.isAuthActive = true;
 		authExternalContext.operation = 'change-phone-number';
-		authExternalContext.phoneNumber = digitsToEnglish(phoneNumber);
+		authExternalContext.setPhoneNumber(digitsToEnglish(phoneNumber));
 		authExternalContext.currentStep = 1;
 	};
 
