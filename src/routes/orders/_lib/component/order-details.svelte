@@ -1,14 +1,20 @@
 <script lang="ts">
 	/* --------------------------------- Imports -------------------------------- */
 	import { getContext } from 'svelte';
-	import type { OrderStatus } from '../data/orders';
+	import type { Order, OrderStatus } from '../data/orders';
 	import getStatusColor from '../utility/get-status-color';
-	import type { OrderContext } from '../type/order';
+	import type { DetailsContext } from '../type/order';
 	import getStatusIcon from '../utility/get-status-icon';
 	import formatOrderDate from '../utility/format-order-date';
 	import Button from '$lib/component/button.svelte';
 	import { fly } from 'svelte/transition';
 	import { Icon as LucideIcon } from 'lucide-svelte';
+
+	/* ---------------------------------- Props --------------------------------- */
+	type OrderDetailsProps = {
+		order: Order;
+	};
+	const { order }: OrderDetailsProps = $props();
 
 	/* -------------------------------- Constants ------------------------------- */
 	const STATUS_TEXT_MAP: Record<OrderStatus, string> = {
@@ -24,10 +30,9 @@
 	};
 
 	/* ---------------------------------- State --------------------------------- */
-	const context: OrderContext = getContext('order');
-	const order = $derived(context.currentOrder);
+	const context: DetailsContext = getContext('order');
 
-	/* --------------------------------- Evnets --------------------------------- */
+	/* --------------------------------- Events --------------------------------- */
 	const handleGoToSubscription = () => {
 		context.currentPageIndex = 1;
 	};

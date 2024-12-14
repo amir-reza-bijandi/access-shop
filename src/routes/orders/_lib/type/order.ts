@@ -1,7 +1,4 @@
-import type { Order } from '../data/orders';
-
-export type OrderContext = {
-	currentOrder: Order;
+export type DetailsContext = {
 	currentPageIndex: number;
 	contentHeight: number;
 };

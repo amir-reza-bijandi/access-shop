@@ -4,11 +4,18 @@
 	import Input from '$lib/component/input.svelte';
 	import Button from '$lib/component/button.svelte';
 	import { getContext } from 'svelte';
-	import type { OrderContext } from '../type/order';
+	import type { DetailsContext } from '../type/order';
 	import type { MouseEventHandler } from 'svelte/elements';
+	import type { Order } from '../data/orders';
+
+	/* ---------------------------------- Props --------------------------------- */
+	type SubscriptionDetailsProps = {
+		order: Order;
+	};
+	const { order }: SubscriptionDetailsProps = $props();
 
 	/* ---------------------------------- State --------------------------------- */
-	const context: OrderContext = getContext('order');
+	const context: DetailsContext = getContext('order');
 
 	/* --------------------------------- Events --------------------------------- */
 	const handleGoToOrder = () => {
@@ -32,17 +39,13 @@
 	</h3>
 
 	<div class="subscription-details">
-		{#if 'code' in context.currentOrder.product.subscription}
+		{#if 'code' in order.product.subscription}
 			<label class="label">
 				کد اشتراک
-				<Input
-					readonly
-					value={context.currentOrder.product.subscription.code}
-					onclick={handleSelectAll}
-				/>
+				<Input readonly value={order.product.subscription.code} onclick={handleSelectAll} />
 			</label>
 		{:else}
-			{@const subscription = context.currentOrder.product.subscription}
+			{@const subscription = order.product.subscription}
 			<label class="label">
 				{#if 'username' in subscription}
 					نام کاربری

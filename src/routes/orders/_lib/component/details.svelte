@@ -5,7 +5,7 @@
 	import { type Order } from '../data/orders';
 	import OrderDetails from './order-details.svelte';
 	import SubscriptionDetails from './subscription-details.svelte';
-	import type { OrderContext } from '../type/order';
+	import type { DetailsContext } from '../type/order';
 
 	/* ---------------------------------- Props --------------------------------- */
 	type DetailsProps = Omit<ModalProps, 'children' | 'header'> & {
@@ -14,8 +14,7 @@
 	const { order, open, onclose }: DetailsProps = $props();
 
 	/* ---------------------------------- State --------------------------------- */
-	let orderContext: OrderContext = $state({
-		currentOrder: order,
+	let orderContext: DetailsContext = $state({
 		currentPageIndex: 0,
 		contentHeight: 444
 	});
@@ -54,9 +53,9 @@
 		</div>
 	{/snippet}
 	{#if orderContext.currentPageIndex === 0}
-		<OrderDetails />
+		<OrderDetails {order} />
 	{:else if orderContext.currentPageIndex === 1}
-		<SubscriptionDetails />
+		<SubscriptionDetails {order} />
 	{/if}
 </Modal>
 
