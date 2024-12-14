@@ -1,18 +1,20 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import { Check, Menu, X } from 'lucide-svelte';
 	import type { NavigationProps, NavigationRoute } from '../../type/navigation';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
 	import detectOutsideClick from '$lib/action/detect-outside-click.svelte';
 
+	/* ---------------------------------- State --------------------------------- */
 	const currentPath = $derived($navigating ? $navigating.to?.url.pathname : $page.url.pathname);
 	let isMenuActive = $state(false);
+	const { routeList }: NavigationProps = getContext('navigationProps');
 
+	/* --------------------------------- Events --------------------------------- */
 	function toggleMenu() {
 		isMenuActive = !isMenuActive;
 	}
-
-	const { routeList }: NavigationProps = getContext('navigationProps');
 </script>
 
 <nav
@@ -157,6 +159,7 @@
 		content: unset;
 	}
 
+	/* 1152px & 512px */
 	@media (max-width: 72rem) and (min-width: 32rem) {
 		.navigation {
 			display: block;

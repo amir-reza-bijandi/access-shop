@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Button from '$lib/component/button.svelte';
 	import Comment from '$lib/component/comment.svelte';
 	import type { FormEventHandler, EventHandler } from 'svelte/elements';
@@ -7,6 +8,7 @@
 	import type { UserContext } from '$lib/type/user';
 	import { getContext } from 'svelte';
 
+	/* ---------------------------------- State --------------------------------- */
 	type Form = {
 		status: 'error' | 'success' | null;
 		message: string | null;

@@ -1,9 +1,11 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { FocusEventHandler, FormEventHandler } from 'svelte/elements';
 	import digitsToEnglish from '../utility/digits-to-english';
 	import persianToCalendars from '../utility/persian-to-calendars';
 	import type { BirthDate } from '$lib/data/user-info';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type InputDateProps = {
 		value?: BirthDate | null;
 		oninput?: () => void;
@@ -17,17 +19,21 @@
 		oninput
 	}: InputDateProps = $props();
 
-	const intlOptions: Intl.NumberFormatOptions = {
+	/* -------------------------------- Constants ------------------------------- */
+	const INTL_OPTIONS: Intl.NumberFormatOptions = {
 		useGrouping: false
 	};
+	const VALUE_WHITE_LIST = ['روز', 'ماه', 'سال'];
 
-	const whiteList = ['روز', 'ماه', 'سال'];
-	let day = $state(value ? value.day.toLocaleString('fa-IR', intlOptions).padStart(2, '۰') : 'روز');
+	/* ---------------------------------- State --------------------------------- */
+	let day = $state(
+		value ? value.day.toLocaleString('fa-IR', INTL_OPTIONS).padStart(2, '۰') : 'روز'
+	);
 	let month = $state(
-		value ? value.month.toLocaleString('fa-IR', intlOptions).padStart(2, '۰') : 'ماه'
+		value ? value.month.toLocaleString('fa-IR', INTL_OPTIONS).padStart(2, '۰') : 'ماه'
 	);
 	let year = $state(
-		value ? value.year.toLocaleString('fa-IR', intlOptions).padStart(2, '۰') : 'سال'
+		value ? value.year.toLocaleString('fa-IR', INTL_OPTIONS).padStart(2, '۰') : 'سال'
 	);
 
 	function validate(target: 'day' | 'month' | 'year', value: number) {
@@ -55,10 +61,12 @@
 		}
 	});
 
+	/* --------------------------------- Effect --------------------------------- */
 	$effect(() => {
 		value = dateValue;
 	});
 
+	/* --------------------------------- Events --------------------------------- */
 	const handleSelectAll: FocusEventHandler<HTMLSpanElement> = (e) => {
 		// Select every character inside subinputs
 		const selection = window.getSelection();
@@ -70,7 +78,7 @@
 
 	const handleBlur: FocusEventHandler<HTMLSpanElement> = (e) => {
 		// Remove zero characters
-		if (whiteList.every((x) => x !== e.currentTarget.textContent)) {
+		if (VALUE_WHITE_LIST.every((x) => x !== e.currentTarget.textContent)) {
 			let value = String(Number(digitsToEnglish(e.currentTarget.textContent!)));
 			const maxLength = Number(e.currentTarget.dataset.length);
 
@@ -82,11 +90,11 @@
 			// Pad with zeros
 			if (value.length < maxLength) {
 				e.currentTarget.textContent = Number(value)
-					.toLocaleString('fa-IR', intlOptions)
+					.toLocaleString('fa-IR', INTL_OPTIONS)
 					.padStart(maxLength, '۰');
 			} else {
 				// Format the value
-				e.currentTarget.textContent = Number(value).toLocaleString('fa-IR', intlOptions);
+				e.currentTarget.textContent = Number(value).toLocaleString('fa-IR', INTL_OPTIONS);
 			}
 		}
 	};
@@ -122,8 +130,8 @@
 		// Check if value is valid
 		const max = Number(e.currentTarget.dataset.max);
 		if (max) {
-			if (+Number(textContent).toLocaleString('en-US', intlOptions) > max) {
-				e.currentTarget.textContent = max.toLocaleString('fa-IR', intlOptions);
+			if (+Number(textContent).toLocaleString('en-US', INTL_OPTIONS) > max) {
+				e.currentTarget.textContent = max.toLocaleString('fa-IR', INTL_OPTIONS);
 			}
 		}
 	};

@@ -1,12 +1,14 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Glow from '$lib/component/glow.svelte';
 	import Logo from '$lib/component/logo.svelte';
 	import Navigation from './navigation.svelte';
 	import type { NavigationRoute } from '../type/navigation';
-	import { House, Newspaper, Phone, Scale, ShoppingBag, User } from 'lucide-svelte';
+	import { House, Newspaper, Phone, Scale, ShoppingBag } from 'lucide-svelte';
 	import UserAccount from './account.svelte';
 
-	const routeList: NavigationRoute[] = [
+	/* -------------------------------- Constants ------------------------------- */
+	const ROUTE_LIST: NavigationRoute[] = [
 		{
 			name: 'صحفهٔ اصلی',
 			path: '/',
@@ -38,7 +40,7 @@
 <header>
 	<Glow --size="102.4rem" --top="50%" --right="0" />
 	<div class="right-section">
-		<Navigation {routeList} />
+		<Navigation routeList={ROUTE_LIST} />
 		<Logo />
 	</div>
 	<UserAccount />
@@ -66,6 +68,7 @@
 		gap: 1.2rem;
 	}
 
+	/* 1152px */
 	@media (min-width: 72rem) {
 		.right-section {
 			/* Prevent navigation from causing padding */

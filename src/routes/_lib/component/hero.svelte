@@ -1,9 +1,11 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Button from '$lib/component/button.svelte';
 	import { fade } from 'svelte/transition';
 	import Cards from './cards.svelte';
 	import { ArrowDown, ChevronsDown } from 'lucide-svelte';
 
+	/* ---------------------------------- State --------------------------------- */
 	let scrollY = $state(0);
 </script>
 
@@ -50,7 +52,6 @@
 		animation: section-intro 1s ease;
 	}
 
-	/* Intro animation */
 	@keyframes section-intro {
 		0% {
 			transform: translateX(6.4rem);
@@ -86,7 +87,7 @@
 		display: none;
 	}
 
-	/* Desktop with a certain height */
+	/* 1152px & 960px */
 	@media (min-width: 72rem) and (max-height: 60rem) {
 		.hero {
 			margin-block: 0;
@@ -118,7 +119,7 @@
 		}
 	}
 
-	/* Tablet */
+	/* 1152px */
 	@media (max-width: 72rem) {
 		.hero {
 			flex-direction: column;
@@ -136,13 +137,14 @@
 		}
 	}
 
-	/* Mobile */
+	/* 576px */
 	@media (max-width: 36rem) {
 		.title {
 			font-size: 2.8rem;
 		}
 	}
 
+	/* 512px */
 	@media (max-width: 32rem) {
 		.title {
 			font-size: 2.4rem;
@@ -152,7 +154,6 @@
 			font-size: 2rem;
 		}
 
-		/* Intro animation */
 		@keyframes section-intro {
 			0% {
 				transform: translateY(6.4rem);

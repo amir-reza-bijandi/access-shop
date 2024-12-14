@@ -81,14 +81,14 @@
 		}
 	}
 
-	/* Laptop */
+	/* 1280px */
 	@media (max-width: 80rem) {
 		.faq {
 			gap: 4.8rem;
 		}
 	}
 
-	/* Tablet */
+	/* 896px */
 	@media (max-width: 56rem) {
 		.faq {
 			flex-direction: column;
@@ -116,7 +116,7 @@
 		}
 	}
 
-	/* Mobile */
+	/* 512px */
 	@media (max-width: 32rem) {
 		.faq :global(.section-title) {
 			margin-bottom: 2.4rem;

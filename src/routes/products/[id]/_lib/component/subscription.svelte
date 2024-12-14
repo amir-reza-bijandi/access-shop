@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Glow from '$lib/component/glow.svelte';
 	import Select from '$lib/component/select.svelte';
 	import formatPlanTypeName from '../utility/format-plan-type-name';
@@ -7,6 +8,8 @@
 	import type { CheckoutContext } from '../type/checkout';
 
 	const { plan } = singleProduct;
+
+	/* ---------------------------------- State --------------------------------- */
 	const context: CheckoutContext = getContext('checkout');
 
 	const planTypeList = plan.typeList.map((type) => ({

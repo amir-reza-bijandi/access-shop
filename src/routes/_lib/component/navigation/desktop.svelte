@@ -1,10 +1,11 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { NavigationProps, NavigationRoute } from '../../type/navigation';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
 
+	/* ---------------------------------- State --------------------------------- */
 	const currentPath = $derived($navigating ? $navigating.to?.url.pathname : $page.url.pathname);
-
 	const { routeList }: NavigationProps = getContext('navigationProps');
 </script>
 
@@ -78,6 +79,7 @@
 		opacity: 1;
 	}
 
+	/* 1152px */
 	@media (min-width: 72rem) {
 		.navigation {
 			display: block;

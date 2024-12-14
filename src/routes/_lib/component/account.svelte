@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import detectOutsideClick from '$lib/action/detect-outside-click.svelte';
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
 	import Button from '$lib/component/button.svelte';
@@ -7,10 +8,12 @@
 	import type { UserContext } from '$lib/type/user';
 	import type { AuthExternalContext } from '$lib/type/auth';
 
+	/* ---------------------------------- State --------------------------------- */
 	const userContext: UserContext = getContext('user');
 	const authExternalContext: AuthExternalContext = getContext('auth-external');
-
 	let isMenuActive = $state(false);
+
+	/* --------------------------------- Events --------------------------------- */
 	function toggleMenu() {
 		isMenuActive = !isMenuActive;
 	}
@@ -25,6 +28,7 @@
 
 <div class="account" use:detectOutsideClick={() => (isMenuActive = false)}>
 	{#if userContext.isLoggedIn}
+		<!-- Button -->
 		<div class="box btn-box">
 			<button class="btn" use:rippleEffect onclick={toggleMenu}>
 				<span class="icon {isMenuActive ? 'active' : ''}">
@@ -34,6 +38,7 @@
 				<img class="avatar" src="/image/avatar/1.png" alt="عکس پروفایل شما" />
 			</button>
 		</div>
+		<!-- Menu -->
 		<div class="box menu-box {isMenuActive ? 'active' : ''}">
 			<div>
 				<div class="header">
@@ -63,12 +68,16 @@
 			</div>
 		</div>
 	{:else}
-		<Button class="login-btn-desktop" icon={LogIn} variant="outline" onclick={openAuth}
-			>ورود به حساب کاربری</Button
+		<Button class="login-btn-desktop" icon={LogIn} variant="outline" onclick={openAuth}>
+			ورود به حساب کاربری
+		</Button>
+		<button
+			class="login-btn-mobile"
+			use:rippleEffect={{ dynamicPositon: false }}
+			onclick={openAuth}
 		>
-		<button class="login-btn-mobile" use:rippleEffect={{ dynamicPositon: false }} onclick={openAuth}
-			><User /></button
-		>
+			<User />
+		</button>
 	{/if}
 </div>
 
@@ -217,13 +226,14 @@
 		border-radius: 0.8rem;
 	}
 
+	/* 1330px */
 	@media (max-width: 83.125rem) {
 		.account :global(.menu-box) {
 			left: -0.8rem;
 		}
 	}
 
-	/* Mobile */
+	/* 512px */
 	@media (max-width: 32rem) {
 		.account :global(.login-btn-desktop) {
 			display: none;

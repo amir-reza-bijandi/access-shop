@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Page from '$lib/component/page.svelte';
 	import { ArrowDownUp, ArrowDownWideNarrow, ArrowUp, LayoutGrid } from 'lucide-svelte';
 	import { orderList, type Order, type OrderStatus } from './_lib/data/orders';
@@ -16,8 +17,10 @@
 	import getStatusColor from './_lib/utility/get-status-color';
 	import getStatusIcon from './_lib/utility/get-status-icon';
 
+	/* -------------------------------- Constants ------------------------------- */
 	const PER_PAGE = 8;
 
+	/* ---------------------------------- State --------------------------------- */
 	type Sort = {
 		type: SortType;
 		direction: SortDirection;
@@ -41,6 +44,8 @@
 		delivered: 'انجام شده',
 		canceled: 'لغو شده'
 	};
+
+	/* --------------------------------- Events --------------------------------- */
 
 	const handlePageChange = (page: number) => (currentPage = page);
 	const handleSortChange = (type: SortType) => {

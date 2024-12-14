@@ -1,8 +1,10 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { Snippet } from 'svelte';
 	import type { MouseEventHandler, TransitionEventHandler } from 'svelte/elements';
 	import { ChevronUp } from 'lucide-svelte';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type AccordionProps = {
 		title: string;
 		children: Snippet;
@@ -10,10 +12,12 @@
 	};
 	const { title, children, open = false }: AccordionProps = $props();
 
+	/* ---------------------------------- State --------------------------------- */
 	let isOpen = $state(open);
+
+	/* --------------------------------- Events --------------------------------- */
 	let detailsElement: HTMLDetailsElement;
 
-	// Expand the accordion on click
 	const expand: MouseEventHandler<HTMLElement> = (e) => {
 		e.preventDefault();
 		detailsElement.classList.toggle('expanded');
@@ -22,7 +26,6 @@
 		}
 	};
 
-	// Collapse the accordion on transition end
 	const collapse: TransitionEventHandler<HTMLElement> = (e) => {
 		if (!detailsElement.classList.contains('expanded')) {
 			isOpen = false;
@@ -57,8 +60,6 @@
 		width: 100%;
 	}
 
-	/*** TITLE ***/
-
 	/* Hide the default chevron */
 	.title::-webkit-details-marker {
 		display: none;
@@ -76,7 +77,6 @@
 		transition: border calc(var(--duration) * 2);
 		user-select: none;
 
-		/* Hide the default chevron */
 		list-style: none;
 	}
 
@@ -119,7 +119,7 @@
 		transform: scale(1);
 	}
 
-	/* Tablet */
+	/* 896px */
 	@media (max-width: 56rem) {
 		.title {
 			font-size: 1.8rem;
@@ -127,7 +127,7 @@
 		}
 	}
 
-	/* Mobile */
+	/* 512px */
 	@media (max-width: 32rem) {
 		.title {
 			font-size: 1.6rem;

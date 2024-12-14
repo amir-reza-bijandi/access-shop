@@ -10,8 +10,6 @@
 	import FullName from './auth/full-name.svelte';
 	import type { AuthExternalContext } from '$lib/type/auth';
 
-	/* -------------------------------- Constants ------------------------------- */
-
 	/* ---------------------------------- Props --------------------------------- */
 	type AuthProps = Omit<ModalProps, 'children' | 'header'> & {
 		step: number;

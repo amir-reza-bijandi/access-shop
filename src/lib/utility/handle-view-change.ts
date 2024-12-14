@@ -1,4 +1,3 @@
-// Add or remove class to element based on inView status
 export default function handleViewChange({
 	inView,
 	node,

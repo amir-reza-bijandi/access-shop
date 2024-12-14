@@ -1,8 +1,10 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import rippleEffect from '$lib/action/ripple-effect.svelte';
 	import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-svelte';
 	import { fly } from 'svelte/transition';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type PaginationProps = {
 		currentPage: number;
 		totalPages: number;
@@ -10,8 +12,10 @@
 	};
 	const { currentPage, totalPages, onPageChange }: PaginationProps = $props();
 
+	/* ---------------------------------- State --------------------------------- */
 	let prevPage = $state<number>(0);
 
+	/* --------------------------------- Events --------------------------------- */
 	const handlePageChange = (page: number) => {
 		prevPage = currentPage;
 		onPageChange(page);

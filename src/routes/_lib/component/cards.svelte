@@ -1,9 +1,11 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import ProductIcon from '$lib/component/product-icon.svelte';
 	import Glow from '$lib/component/glow.svelte';
 	import { cardInfoList, type CardInfo } from '../data/hero-cards';
 	import { inview } from 'svelte-inview';
 
+	/* --------------------------------- Events --------------------------------- */
 	function handleViewChange({ node, inView }: ObserverEventDetails) {
 		const cards = node.querySelectorAll<HTMLElement>('.card');
 		if (inView) {
@@ -56,7 +58,6 @@
 		animation: cards-intro 1s ease;
 	}
 
-	/* Intro animation */
 	@keyframes cards-intro {
 		0% {
 			transform: scale(0.9) translateY(6.4rem);
@@ -66,25 +67,25 @@
 		}
 	}
 
-	.wrapper :global(.card) {
+	.card {
 		position: relative;
 	}
 
-	.wrapper :global(.card:first-child) {
+	.card:first-child {
 		transform: rotate(15deg) translate(-0.6rem, 4.2rem);
 		animation: showcase-right-large 6s ease infinite;
 	}
 
-	.wrapper :global(.card:last-child) {
+	.card:last-child {
 		transform: rotate(-15deg) translate(0.6rem, 4.2rem);
 		animation: showcase-left-large 6s ease infinite;
 	}
 
-	.wrapper :global(.card:nth-child(2)) {
+	.card:nth-child(2) {
 		z-index: 2;
 	}
 
-	.wrapper :global(.card:nth-child(2) .image) {
+	.card:nth-child(2) .image {
 		animation: showcase-center 6s ease infinite;
 		transform-origin: center center;
 	}
@@ -183,9 +184,8 @@
 		font-size: 2rem;
 	}
 
-	/* Mobile */
+	/* 576px */
 	@media (max-width: 36rem) {
-		/* Intro animation */
 		@keyframes cards-intro {
 			0% {
 				transform: scale(0.9) translateY(-6.4rem);

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
+
 	type SwitchBoxInput = HTMLInputAttributes;
 	let { class: className, value = $bindable(''), ...restOfProps }: SwitchBoxInput = $props();
 </script>

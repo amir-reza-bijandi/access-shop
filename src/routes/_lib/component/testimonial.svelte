@@ -35,6 +35,7 @@
 		z-index: -1;
 	}
 
+	/* 512px */
 	@media (max-width: 32rem) {
 		.wrapper {
 			grid-template-columns: repeat(auto-fit, minmax(34.4rem, 1fr));

@@ -1,10 +1,11 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import type { NavigationProps, NavigationRoute } from '../../type/navigation';
 	import { getContext } from 'svelte';
 	import { page, navigating } from '$app/stores';
 
+	/* ---------------------------------- State --------------------------------- */
 	const currentPath = $derived($navigating ? $navigating.to?.url.pathname : $page.url.pathname);
-
 	const { routeList }: NavigationProps = getContext('navigationProps');
 </script>
 
@@ -69,6 +70,7 @@
 		transform: scale(1);
 	}
 
+	/* 512px */
 	@media (max-width: 32rem) {
 		.navigation {
 			display: block;

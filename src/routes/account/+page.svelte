@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Button from '$lib/component/button.svelte';
 	import Input from '$lib/component/input.svelte';
 	import Page from '$lib/component/page.svelte';
@@ -11,6 +12,12 @@
 	import digitsToEnglish from './_lib/utility/digits-to-english';
 	import Status from '$lib/component/status.svelte';
 
+	/* -------------------------------- Constants ------------------------------- */
+	const FULL_NAME_PATTERN = '^[ء-ي\\u0600-\\u06FF\\s]+$';
+	const NUMBER_PATTERN = '[0-9۰۱۲۳۴۵۶۷۸۹]*';
+	const PHONE_NUMBER_PATTERN = '^(09|۰۹)[\\d۰-۹]{9}$';
+
+	/* ---------------------------------- State --------------------------------- */
 	type ProfileForm = {
 		status: 'error' | 'success' | null;
 		message: string | null;
@@ -22,23 +29,17 @@
 		message: string | null;
 	};
 
-	const fullNamePattern = '^[ء-ي\\u0600-\\u06FF\\s]+$';
-	const numberPattern = '[0-9۰۱۲۳۴۵۶۷۸۹]*';
-	const phoneNumberPattern = '^(09|۰۹)[\\d۰-۹]{9}$';
-
 	const initialPhoneNumber =
 		'۰' + userInfo.phoneNumber.toLocaleString('fa-IR', { useGrouping: false });
 	const initialCitizenId = userInfo.citizenId
 		? userInfo.citizenId.toLocaleString('fa-IR', { useGrouping: false })
 		: '';
 
-	// INPUT STATE
 	let fullName = $state(userInfo.fullName);
 	let birthDate = $state(userInfo.birthDate);
 	let citizenId = $state(initialCitizenId);
 	let phoneNumber = $state(initialPhoneNumber);
 
-	// FORM STATE
 	const profileForm = $state<ProfileForm>({
 		isSubmitting: false,
 		status: null,
@@ -63,6 +64,7 @@
 
 	const authExternalContext: AuthExternalContext = getContext('auth-external');
 
+	/* --------------------------------- Events --------------------------------- */
 	const handlePhoneNumberChange: FormEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault();
 		authExternalContext.isAuthActive = true;
@@ -171,7 +173,7 @@
 						class="input"
 						placeholder="نام و نام خانوادگی خود را وارد کنید..."
 						inputmode="text"
-						pattern={fullNamePattern}
+						pattern={FULL_NAME_PATTERN}
 						title="تنها استفاده از حروف فارسی مجاز است"
 						required
 						autocomplete="off"
@@ -191,7 +193,7 @@
 						class="input"
 						placeholder="کد ملی خود را وارد کنید..."
 						inputmode="numeric"
-						pattern={numberPattern}
+						pattern={NUMBER_PATTERN}
 						title="تنها استفاده از اعداد مجاز است"
 						required
 						maxlength={9}
@@ -222,7 +224,7 @@
 						name="phoneNumber"
 						placeholder="شمارهٔ موبایل خود را وارد کنید..."
 						inputmode="numeric"
-						pattern={phoneNumberPattern}
+						pattern={PHONE_NUMBER_PATTERN}
 						title="تنها استفاده از اعداد مجاز است"
 						required
 						maxlength={11}

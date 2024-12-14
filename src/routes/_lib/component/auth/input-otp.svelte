@@ -1,7 +1,9 @@
 <script lang="ts">
+	/* --------------------------------- Imports -------------------------------- */
 	import Input from '$lib/component/input.svelte';
 	import type { FocusEventHandler, FormEventHandler, KeyboardEventHandler } from 'svelte/elements';
 
+	/* ---------------------------------- Props --------------------------------- */
 	type InputOtpProps = {
 		value?: string;
 		digits?: number;
@@ -16,6 +18,8 @@
 		oninput,
 		oninvalid
 	}: InputOtpProps = $props();
+
+	/* --------------------------------- Events --------------------------------- */
 	let valueArray = Array(digits).fill('');
 	let inputOtp: HTMLDivElement | null;
 
@@ -27,11 +31,9 @@
 		e: Event & { currentTarget: EventTarget & HTMLInputElement },
 		index: number
 	) => {
-		// Update the value
 		valueArray[index] = e.currentTarget.value;
 		value = valueArray.join('');
 
-		// Call the oninput event
 		oninput?.(e);
 
 		// Move focus to the next input
@@ -147,7 +149,7 @@
 		}
 	}
 
-	/* Mobile */
+	/* 576px */
 	@media (max-width: 36rem) {
 		.input-otp {
 			gap: 0.8rem;
@@ -160,6 +162,7 @@
 		}
 	}
 
+	/* 448px */
 	@media (max-width: 28rem) {
 		.input-otp :global(.input) {
 			width: 4.5rem;
