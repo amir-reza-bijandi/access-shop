@@ -11,7 +11,6 @@
 	import type { AuthExternalContext } from '$lib/type/auth';
 
 	/* -------------------------------- Constants ------------------------------- */
-	const STEPS = [PhoneNumber, CodeVerification, FullName];
 
 	/* ---------------------------------- Props --------------------------------- */
 	type AuthProps = Omit<ModalProps, 'children' | 'header'> & {
@@ -20,7 +19,6 @@
 	const { open, onclose, step }: AuthProps = $props();
 
 	/* ---------------------------------- State --------------------------------- */
-	const CurrentStep = $derived(STEPS[step]);
 	let headerHeight = $state(80);
 	const authExternalContext: AuthExternalContext = getContext('auth-external');
 	const authInternalContext = $state<AuthInternalContext>({
@@ -66,7 +64,13 @@
 		<Logo interactive={false} />
 	{/snippet}
 	<div class="wrapper">
-		<CurrentStep />
+		{#if step === 0}
+			<PhoneNumber />
+		{:else if step === 1}
+			<CodeVerification />
+		{:else if step === 2}
+			<FullName />
+		{/if}
 	</div>
 </Modal>
 
