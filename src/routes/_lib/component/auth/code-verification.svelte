@@ -8,6 +8,7 @@
 	import InputOtp from './input-otp.svelte';
 	import { MoveLeft } from 'lucide-svelte';
 	import type { AuthExternalContext } from '$lib/type/auth';
+	import Page from '$lib/component/page.svelte';
 
 	/* ---------------------------------- State --------------------------------- */
 	let inputValue = $state('');
@@ -60,7 +61,11 @@
 	};
 
 	const handleBack = () => {
-		authInternalContext.setStep(0);
+		if (authExternalContext.operation === 'change-phone-number') {
+			authInternalContext.closeModal();
+		} else {
+			authInternalContext.setStep(0);
+		}
 	};
 
 	const handleResetTimer = async () => {

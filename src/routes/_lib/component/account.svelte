@@ -16,6 +16,9 @@
 	}
 
 	function openAuth() {
+		authExternalContext.currentStep = 0;
+		authExternalContext.currentPhoneNumber = '';
+		authExternalContext.operation = 'auth';
 		authExternalContext.isAuthActive = true;
 	}
 </script>
